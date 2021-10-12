@@ -1,6 +1,1099 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>MySQL安装教程</title>
+    <url>/2021/09/28/00-MySQL%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/</url>
+    <content><![CDATA[<h1 id="MySQL安装教程"><a href="#MySQL安装教程" class="headerlink" title="MySQL安装教程"></a>MySQL安装教程</h1><h2 id="win10-mysql8"><a href="#win10-mysql8" class="headerlink" title="win10 mysql8"></a>win10 mysql8</h2><h3 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h3><p><a href="https://dev.mysql.com/downloads/mysql/">https://dev.mysql.com/downloads/mysql/</a></p>
+<h3 id="文件配置"><a href="#文件配置" class="headerlink" title="文件配置"></a>文件配置</h3><p>解压后,在与bin目录平级的文件夹下建立一个叫做<code>my.ini</code>的文件。</p>
+<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="section">[mysqld]</span></span><br><span class="line"><span class="comment"># 设置3306端口</span></span><br><span class="line"><span class="attr">port</span>=<span class="number">3306</span></span><br><span class="line"><span class="comment"># 设置mysql的安装目录</span></span><br><span class="line"><span class="attr">basedir</span>=D:\environment\mysql8   <span class="comment"># 切记此处一定要用双斜杠\\，单斜杠我这里会出错，不过看别人的教程，有的是单斜杠。自己尝试吧</span></span><br><span class="line"><span class="comment"># 设置mysql数据库的数据的存放目录</span></span><br><span class="line"><span class="attr">datadir</span>=D:\environment\mysql8\\Data   <span class="comment"># 此处同上</span></span><br><span class="line"><span class="comment"># 允许最大连接数</span></span><br><span class="line"><span class="attr">max_connections</span>=<span class="number">200</span></span><br><span class="line"><span class="comment"># 允许连接失败的次数。这是为了防止有人从该主机试图攻击数据库系统</span></span><br><span class="line"><span class="attr">max_connect_errors</span>=<span class="number">10</span></span><br><span class="line"><span class="comment"># 服务端使用的字符集默认为UTF8</span></span><br><span class="line"><span class="attr">character-set-server</span>=utf8</span><br><span class="line"><span class="comment"># 创建新表时将使用的默认存储引擎</span></span><br><span class="line"><span class="attr">default-storage-engine</span>=INNODB</span><br><span class="line"><span class="comment"># 默认使用“mysql_native_password”插件认证</span></span><br><span class="line"><span class="attr">default_authentication_plugin</span>=mysql_native_password</span><br><span class="line"><span class="section">[mysql]</span></span><br><span class="line"><span class="comment"># 设置mysql客户端默认字符集</span></span><br><span class="line"><span class="attr">default-character-set</span>=utf8</span><br><span class="line"><span class="section">[client]</span></span><br><span class="line"><span class="comment"># 设置mysql客户端连接服务端时默认使用的端口</span></span><br><span class="line"><span class="attr">port</span>=<span class="number">3306</span></span><br><span class="line"><span class="attr">default-character-set</span>=utf8</span><br></pre></td></tr></table></figure>
+
+<h3 id="服务启动"><a href="#服务启动" class="headerlink" title="服务启动"></a>服务启动</h3><p>管理员模式打开命令框进入当前文件夹,以此输入下面指令：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#初始化数据库</span><br><span class="line">mysqld --initialize --console</span><br><span class="line">#安装</span><br><span class="line">mysqld install</span><br><span class="line">#启动服务</span><br><span class="line">net start mysql</span><br><span class="line">#停止服务</span><br><span class="line">net stop mysql</span><br><span class="line"># 登录</span><br><span class="line">mysql -uroot -p</span><br><span class="line">注意此处密码是初始化的时候获得的密码,输入后</span><br><span class="line"># 更改密码</span><br><span class="line">ALTER USER &#x27;root&#x27;@&#x27;localhost&#x27; IDENTIFIED WITH mysql_native_password BY &#x27;新密码&#x27;; </span><br><span class="line"># 退出</span><br><span class="line">quit</span><br></pre></td></tr></table></figure>
+
+<h3 id="遇到问题"><a href="#遇到问题" class="headerlink" title="遇到问题"></a>遇到问题</h3><h4 id="服务已经存在"><a href="#服务已经存在" class="headerlink" title="服务已经存在"></a>服务已经存在</h4><p>The service already exists</p>
+<p>表示服务已经存在，之前已经安装过mysql并且没有删除干净使用命令<code>sc delete mysql</code>，删除该mysql.</p>
+<p><code>sc query mysql</code>可以查看MySQL服务。</p>
+<h4 id="忘记密码"><a href="#忘记密码" class="headerlink" title="忘记密码"></a>忘记密码</h4><p>ERROR 1045 (28000): Access denied for user ‘root‘@’localhost’ (using password: YES)。</p>
+<p>或者是</p>
+<p>ERROR 1045 (28000): Access denied for user ‘root‘@’localhost’ (using password: NO)。</p>
+<p>忘记密码不要紧方法一：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">删掉初始化的 datadir 目录，再执行一遍初始化命令，又会重新生成的。</span><br></pre></td></tr></table></figure>
+
+<p>方法二:强制性修改密码</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">https://dev.mysql.com/doc/refman/8.0/en/data-directory-initialization-mysqld.html</span><br></pre></td></tr></table></figure>
+
+<h3 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h3><p>以我的举例子：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">系统变量</span><br><span class="line">名称：MYSQL_HOME 内容为D:\environment\mysql8</span><br><span class="line">Path中加入</span><br><span class="line">%MYSQL_HOME%\bin</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>SQL</category>
+      </categories>
+      <tags>
+        <tag>SQL</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>SQL查询</title>
+    <url>/2021/10/02/03-SQL%E6%95%B0%E6%8D%AE%E6%9F%A5%E8%AF%A2/</url>
+    <content><![CDATA[<h1 id="SQL查询"><a href="#SQL查询" class="headerlink" title="SQL查询"></a>SQL查询</h1><h2 id="简单查询"><a href="#简单查询" class="headerlink" title="简单查询"></a>简单查询</h2><p>我们可以通过<code>*</code>来查询数据库所有的字段，也可以通过字段名并用<code>,</code>分隔的方式来查询需要的字段。</p>
+<p><code>from</code>后跟我们需要查询的数据表。</p>
+<p>在数据库的操作中，我习惯性的把关键字进行大写，把数据库名/表名/列名/字段名进行小写，当然我们也可以用下边的符号,具体可以看例子，但是注意此处不能使用单引号，单引号默认指的是字符串。</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment">--查询指定字段</span></span><br><span class="line"><span class="keyword">SELECT</span> product_id,`name`,`quantity_in_stock`,`unit_price`</span><br><span class="line"><span class="keyword">FROM</span> `products`;</span><br><span class="line"><span class="comment">--查询所有结果</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> </span><br><span class="line"><span class="keyword">FROM</span> `products`;</span><br></pre></td></tr></table></figure>
+
+<h2 id="数据运算"><a href="#数据运算" class="headerlink" title="数据运算"></a>数据运算</h2><p>在查询的时候我们也支持一些简单的数据运算<code>+,-,*,/,%</code>分别对应加减乘除取模运算,当然和数学运行一样我们可以<code>()</code>来提高它的运算等级。</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> `name`,unit_price,unit_price<span class="operator">+</span><span class="number">2</span>,unit_price<span class="number">-2</span>,unit_price<span class="operator">*</span><span class="number">2</span>,unit_price<span class="operator">/</span><span class="number">2</span>,unit_price<span class="operator">%</span><span class="number">2</span></span><br><span class="line"><span class="keyword">FROM</span> `products`;</span><br></pre></td></tr></table></figure>
+
+<p>得到的结果,我取其中一行放在下边：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">4.65 6.65 2.65 9.30 2.325000 0.65</span><br></pre></td></tr></table></figure>
+
+<h2 id="查询结果筛选"><a href="#查询结果筛选" class="headerlink" title="查询结果筛选"></a>查询结果筛选</h2><h4 id="DISTINCT"><a href="#DISTINCT" class="headerlink" title="DISTINCT"></a>DISTINCT</h4><p>再有计数之后我们会有一个新的需求，比如我们想要知道不同价格物品种类总数时，我们需要把相同价格的物品进行去重，我们就需要用到<code>DISTINCT</code>关键字。</p>
+<p>同时注意：<code>DISTINCT</code>关键字只能用于开头。</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span> unit_price,`name`</span><br><span class="line"><span class="keyword">FROM</span> `products`;</span><br></pre></td></tr></table></figure>
+
+<h4 id="AS"><a href="#AS" class="headerlink" title="AS"></a>AS</h4><p>我们在COUNT时发现它的字段名为<code>COUNT(unit_price)</code>这是很不舒服的，我们需要一个能够代表该行特点的字段名称，我们就需要用到as</p>
+<p>有时候我们可能需要更改某个字段的字段名,这个时候我们就需要用到<code>as</code>关键词,当然我们也可以不使用。</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> `name` <span class="keyword">AS</span> `姓名`,unit_price 价格，unit_price <span class="string">&#x27;价格&#x27;</span></span><br><span class="line"><span class="keyword">FROM</span> `products`;</span><br></pre></td></tr></table></figure>
+
+<p>我们有这两种方式来改变字段名，如果不用as记得加空格哦。</p>
+<p>同时注意：别名是可以加单引号的。</p>
+<p>对以上三个关键字同时使用:</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span> <span class="built_in">COUNT</span>(unit_price) <span class="keyword">AS</span> <span class="string">&#x27;不同价格商品的种类数量&#x27;</span>,`name`</span><br><span class="line"><span class="keyword">FROM</span> `products`;</span><br></pre></td></tr></table></figure>
+
+<p>这也说明对于同一个字段，可以有多个不同的关键字来进行修饰。</p>
+<h4 id="TOP"><a href="#TOP" class="headerlink" title="TOP"></a>TOP</h4><p>top并不是所有的数据库都支持事实上常用的MySQL并不支持<code>TOP</code>关键字。该关键字在SQL Server中被支持。</p>
+<p>查询数据库中前三条数据：</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> TOP <span class="number">3</span> <span class="operator">*</span> </span><br><span class="line"><span class="keyword">FROM</span> products;</span><br></pre></td></tr></table></figure>
+
+<p>查询数据库中前百分之三的数据：</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> TOP <span class="number">3</span> <span class="keyword">PERCENT</span> <span class="operator">*</span> </span><br><span class="line"><span class="keyword">FROM</span> products;</span><br></pre></td></tr></table></figure>
+
+<h3 id="条件关键词"><a href="#条件关键词" class="headerlink" title="条件关键词"></a>条件关键词</h3><h4 id="WHERE"><a href="#WHERE" class="headerlink" title="WHERE"></a>WHERE</h4><p>条件都放在<code>where</code>关键词后。当然也有特殊情况，后边我们回学到<code>HAVING</code>,如果我们的条件是分组后的必须用<code>HAVING</code>关键词。</p>
+<h4 id="比较运算符"><a href="#比较运算符" class="headerlink" title="比较运算符"></a>比较运算符</h4><p>一说到条件，那么比较运算应该是最常见的，比如获取价格在某一个区间内的商品。</p>
+<p>常见的比较运算符包括<code>&gt;,&lt;,=,&gt;=,&lt;=,!=,&lt;&gt;</code>，分别表示大于，小于，等于，大于等于，小于等于，后两个都表示为不等于。</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> `name`,unit_price <span class="keyword">FROM</span> `products` <span class="keyword">WHERE</span> unit_price<span class="operator">&gt;</span><span class="number">4</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> `name`,unit_price <span class="keyword">FROM</span> `products` <span class="keyword">WHERE</span> unit_price<span class="operator">&gt;=</span><span class="number">4</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> `name`,unit_price <span class="keyword">FROM</span> `products` <span class="keyword">WHERE</span> unit_price<span class="operator">&lt;</span><span class="number">4</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> `name`,unit_price <span class="keyword">FROM</span> `products` <span class="keyword">WHERE</span> unit_price<span class="operator">&lt;=</span><span class="number">4</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> `name`,unit_price <span class="keyword">FROM</span> `products` <span class="keyword">WHERE</span> unit_price<span class="operator">=</span><span class="number">4</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> `name`,unit_price <span class="keyword">FROM</span> `products` <span class="keyword">WHERE</span> unit_price<span class="operator">!=</span><span class="number">4</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> `name`,unit_price <span class="keyword">FROM</span> `products` <span class="keyword">WHERE</span> unit_price<span class="operator">&lt;&gt;</span><span class="number">4</span>;</span><br></pre></td></tr></table></figure>
+
+<h4 id="AND"><a href="#AND" class="headerlink" title="AND"></a>AND</h4><p>我们可能有多个条件同时满足的情况比如价格小于4或者大于3的物品。而这些不同的条件都需要<code>and</code>关键词来连接。</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> `name`,unit_price </span><br><span class="line"><span class="keyword">FROM</span> `products` </span><br><span class="line"><span class="keyword">WHERE</span> unit_price<span class="operator">&lt;</span><span class="number">4</span></span><br><span class="line"><span class="keyword">AND</span> unit_price<span class="operator">&gt;</span><span class="number">3</span>;</span><br></pre></td></tr></table></figure>
+
+<h4 id="OR"><a href="#OR" class="headerlink" title="OR"></a>OR</h4><p>我们可能有多个条件仅需满足这些条件中的一部分即可，比如价格大于4或者小于3的物品。而这些条件就可以用<code>or</code>关键词来修饰。</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> `name`,unit_price </span><br><span class="line"><span class="keyword">FROM</span> `products` </span><br><span class="line"><span class="keyword">WHERE</span> unit_price<span class="operator">&gt;</span><span class="number">4</span></span><br><span class="line"><span class="keyword">OR</span> unit_price<span class="operator">&lt;</span><span class="number">3</span>;</span><br></pre></td></tr></table></figure>
+
+<h4 id="NOT"><a href="#NOT" class="headerlink" title="NOT"></a>NOT</h4><p>我们有时候对于满足一些条件的数据字段是不想要查询的就需要通过<code>NOT</code>关键字来过滤这些结果。</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> `name`,unit_price </span><br><span class="line"><span class="keyword">FROM</span> `products` </span><br><span class="line"><span class="keyword">WHERE</span> </span><br><span class="line"><span class="keyword">NOT</span> unit_price<span class="operator">&gt;</span><span class="number">4</span></span><br><span class="line"><span class="keyword">OR</span> unit_price<span class="operator">&lt;</span><span class="number">3</span>;</span><br></pre></td></tr></table></figure>
+
+<p>当然 <code>NOT</code>的内部也可以写其他的东西比如: </p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> `name`,unit_price </span><br><span class="line"><span class="keyword">FROM</span> `products` </span><br><span class="line"><span class="keyword">WHERE</span> </span><br><span class="line"><span class="keyword">NOT</span> (unit_price<span class="operator">&gt;</span><span class="number">4</span></span><br><span class="line"><span class="keyword">OR</span> unit_price<span class="operator">&lt;</span><span class="number">3</span>);</span><br></pre></td></tr></table></figure>
+
+<h4 id="BETWEEN"><a href="#BETWEEN" class="headerlink" title="BETWEEN"></a>BETWEEN</h4><p>我们在定义一个区间范围内的条件时使用<code>AND/OR+比较运算符</code>的方式略微有些麻烦。</p>
+<p><code>BETWEEN AND</code>可以帮我们减少麻烦。</p>
+<p>注意:<code>BETWEEN AND</code>区间两侧都是闭区间。</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> `name`,unit_price </span><br><span class="line"><span class="keyword">FROM</span> `products` </span><br><span class="line"><span class="keyword">WHERE</span> </span><br><span class="line">unit_price <span class="keyword">BETWEEN</span> <span class="number">1</span> <span class="keyword">AND</span> <span class="number">4</span>;</span><br></pre></td></tr></table></figure>
+
+<h4 id="IN"><a href="#IN" class="headerlink" title="IN"></a>IN</h4><p>我们在遇到一个符合<code>OR</code>关键词的场景时，字符串或者数字的操作往往有些许麻烦：</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> `name`,unit_price </span><br><span class="line"><span class="keyword">FROM</span> `products` </span><br><span class="line"><span class="keyword">WHERE</span> unit_price <span class="operator">=</span> <span class="number">1</span> <span class="keyword">OR</span> unit_price <span class="operator">=</span> <span class="number">3</span> <span class="keyword">OR</span> unit_price <span class="operator">=</span> <span class="number">4</span>;</span><br></pre></td></tr></table></figure>
+
+<p>此时<code>IN</code>关键词应该可以帮你减轻一些负担，并且使代码变得优雅起来。</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> `name`,unit_price </span><br><span class="line"><span class="keyword">FROM</span> `products` </span><br><span class="line"><span class="keyword">WHERE</span> </span><br><span class="line">unit_price <span class="keyword">IN</span> (<span class="number">1</span>,<span class="number">3</span>,<span class="number">4</span>);</span><br></pre></td></tr></table></figure>
+
+<p>当然<code>IN</code>关键词还支持字符的操作。只是字符需要加上单引号。</p>
+<h4 id="LIKE"><a href="#LIKE" class="headerlink" title="LIKE"></a>LIKE</h4><p>我们有时候需要查询复合一个特定条件的字符串比如：姓张的用户名单或是名字中含有糖的食物又或者姓张并且只有两个字的名字。</p>
+<p><code>LIKE</code>关键字使我们可以非常容易的做到。与<code>LIKE</code>关键词一起使用的有<code>%</code>,<code>_</code>两个符号<code>%</code>代表多个字符,<code>_</code>代表一个字符可以同时使用。</p>
+<p>查询带有字符<code>o</code>的名字：</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> `name`,unit_price </span><br><span class="line"><span class="keyword">FROM</span> `products` </span><br><span class="line"><span class="keyword">WHERE</span> </span><br><span class="line">`name` <span class="keyword">LIKE</span> <span class="string">&#x27;%o%&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>查询开头为<code>o</code>或者结尾为<code>O</code>的名字：</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> `name`,unit_price </span><br><span class="line"><span class="keyword">FROM</span> `products` </span><br><span class="line"><span class="keyword">WHERE</span> </span><br><span class="line">`name` <span class="keyword">LIKE</span> <span class="string">&#x27;%o&#x27;</span></span><br><span class="line"><span class="keyword">OR</span> `name` <span class="keyword">LIKE</span> <span class="string">&#x27;o%&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>查询符合倒数第二个字符为<code>p</code>的字段:</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> `name`,unit_price </span><br><span class="line"><span class="keyword">FROM</span> `products` </span><br><span class="line"><span class="keyword">WHERE</span> </span><br><span class="line">`name` <span class="keyword">LIKE</span> <span class="string">&#x27;%p_&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<h4 id="REGEXP"><a href="#REGEXP" class="headerlink" title="REGEXP"></a>REGEXP</h4><p>正则表达式在处理字符串的过程中可能更加合适。</p>
+<p>查询符合名字中带有字符<code>o</code>的名字：</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> `name`,unit_price </span><br><span class="line"><span class="keyword">FROM</span> `products` </span><br><span class="line"><span class="keyword">WHERE</span> </span><br><span class="line">`name` REGEXP <span class="string">&#x27;o&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>查询符合名字开头是字符<code>o</code>的名字：</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> `name`,unit_price </span><br><span class="line"><span class="keyword">FROM</span> `products` </span><br><span class="line"><span class="keyword">WHERE</span> </span><br><span class="line">`name` REGEXP <span class="string">&#x27;^o&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>查询符合名字结尾是字符<code>o</code>的名字：</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> `name`,unit_price </span><br><span class="line"><span class="keyword">FROM</span> `products` </span><br><span class="line"><span class="keyword">WHERE</span> </span><br><span class="line">`name` REGEXP <span class="string">&#x27;o$&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>查询符合名字中带有字符<code>o</code>或者字符<code>p</code>的名字：</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> `name`,unit_price </span><br><span class="line"><span class="keyword">FROM</span> `products` </span><br><span class="line"><span class="keyword">WHERE</span> </span><br><span class="line">`name` REGEXP <span class="string">&#x27;o|p&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>查询符合名字中以字符<code>p</code>开头或者字符<code>e</code>结尾的名字：</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> `name`,unit_price </span><br><span class="line"><span class="keyword">FROM</span> `products` </span><br><span class="line"><span class="keyword">WHERE</span> </span><br><span class="line">`name` REGEXP <span class="string">&#x27;^P|e$&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>查询符合名字中带有字符<code>o</code>并且该字符前边是<code>P/F</code>两个字符中的一个的名字：</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> `name`,unit_price </span><br><span class="line"><span class="keyword">FROM</span> `products` </span><br><span class="line"><span class="keyword">WHERE</span> </span><br><span class="line">`name` REGEXP <span class="string">&#x27;[PF]o&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>查询符合名字中带有字符<code>o</code>并且该字符前边是<code>A-G</code>字符中的一个的名字：</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> `name`,unit_price </span><br><span class="line"><span class="keyword">FROM</span> `products` </span><br><span class="line"><span class="keyword">WHERE</span> </span><br><span class="line">`name` REGEXP <span class="string">&#x27;[A-Z]o&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<h4 id="IS-NULL"><a href="#IS-NULL" class="headerlink" title="IS NULL"></a>IS NULL</h4><p>有时候我们需要查询没有标记价格(该字段为空)的物品,此时用到<code>IS NULL</code>关键词</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> `name`</span><br><span class="line"><span class="keyword">FROM</span> `products` </span><br><span class="line"><span class="keyword">WHERE</span> </span><br><span class="line">unit_price <span class="keyword">IS</span> <span class="keyword">NULL</span>;</span><br></pre></td></tr></table></figure>
+
+<h4 id="ORDER-BY"><a href="#ORDER-BY" class="headerlink" title="ORDER BY"></a>ORDER BY</h4><p>有时候我们需要对查询到的数据进行排序,此时需要用到<code>ORDER BY</code>关键词。</p>
+<p><code>ASC</code>：表示升序排列；<code>DESC</code>：表示降序排列；</p>
+<p>将查询到的数据按价格降序排列：</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> `name`,unit_price</span><br><span class="line"><span class="keyword">FROM</span> `products` </span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> unit_price <span class="keyword">DESC</span>;</span><br></pre></td></tr></table></figure>
+
+<p>同时，我们可以通过多个字段进行排序：</p>
+<p>先按照价格进行排序，后根据名字进行排序(相同价格的物品按名字排序)</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> `name`,unit_price</span><br><span class="line"><span class="keyword">FROM</span> `products` </span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> unit_price,`name`;</span><br></pre></td></tr></table></figure>
+
+<p>我们还可以简化写法：</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> `name`,unit_price</span><br><span class="line"><span class="keyword">FROM</span> `products` </span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> <span class="number">1</span>,<span class="number">2</span>;</span><br></pre></td></tr></table></figure>
+
+<p>此处的<code>1</code>代表我们查询的第一个字段，<code>2</code>代表我们查询的第二个字段。</p>
+<p>需要注意：MySQL区别于其他数据库的地方在于，我们可以根据任何一个该数据表的字段进行排序。</p>
+<p>比如我们虽然没有查询购买日期，但是我们可以根据他排序后进行查找。</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> `name`,unit_price</span><br><span class="line"><span class="keyword">FROM</span> `products` </span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> buy_date <span class="keyword">DESC</span>;</span><br></pre></td></tr></table></figure>
+
+<h4 id="LIMIT"><a href="#LIMIT" class="headerlink" title="LIMIT"></a>LIMIT</h4><p>有时候我们需要查询前几条数据，就需要用到<code>LIMIT</code>关键字：</p>
+<p>查询前五条数据：</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> `name`,unit_price</span><br><span class="line"><span class="keyword">FROM</span> `products` </span><br><span class="line">LIMIT <span class="number">5</span>;</span><br></pre></td></tr></table></figure>
+
+<p>我们在做数据分页的时候希望有一个偏移量：</p>
+<p>跳过前三行，查询两行。</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> product_id,`name`,unit_price</span><br><span class="line"><span class="keyword">FROM</span> `products` </span><br><span class="line">LIMIT <span class="number">3</span>,<span class="number">2</span>;</span><br></pre></td></tr></table></figure>
+
+<p>^开头 |不同分割  $结尾 []任意匹配 [a-f]for</p>
+<h2 id="子查询"><a href="#子查询" class="headerlink" title="子查询"></a>子查询</h2><p>我们有时候需要进行，3号客户最大发票数额更大的发票，可以进行多个的嵌套查询。</p>
+<h4 id="ALL"><a href="#ALL" class="headerlink" title="ALL"></a>ALL</h4><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span></span><br><span class="line"><span class="keyword">FROM</span> invoices i</span><br><span class="line"><span class="keyword">WHERE</span> invoice_total<span class="operator">&gt;</span>(</span><br><span class="line">  <span class="keyword">SELECT</span> <span class="built_in">MAX</span>(i.invoice_total)</span><br><span class="line">  <span class="keyword">FROM</span> invoices i</span><br><span class="line"><span class="keyword">WHERE</span> i.client_id<span class="operator">=</span><span class="number">3</span>);</span><br></pre></td></tr></table></figure>
+
+<p>正常的子查询如上所述，我们也可以采用下面的方法，<code>ALL</code>关键词表示该字段数据必须满足<code>ALL</code>后边括号内的所有条件比如<code>invoice_total</code>必须大于查询到的所有的值，也就是大于最大值了。</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span></span><br><span class="line"><span class="keyword">FROM</span> invoices i</span><br><span class="line"><span class="keyword">WHERE</span> invoice_total<span class="operator">&gt;</span><span class="keyword">ALL</span>(</span><br><span class="line">  <span class="keyword">SELECT</span> i.invoice_total</span><br><span class="line">  <span class="keyword">FROM</span> invoices i</span><br><span class="line"><span class="keyword">WHERE</span> i.client_id<span class="operator">=</span><span class="number">3</span>);</span><br></pre></td></tr></table></figure>
+
+<h4 id="ANY-SOME"><a href="#ANY-SOME" class="headerlink" title="ANY/SOME"></a>ANY/SOME</h4><p>表示满足其中一个条件即可。</p>
+<p>比如下面表示我们找到与三号客户有过一样发票值的人即可。</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span></span><br><span class="line"><span class="keyword">FROM</span> invoices i</span><br><span class="line"><span class="keyword">WHERE</span> invoice_total<span class="operator">=</span><span class="keyword">ANY</span>(</span><br><span class="line">  <span class="keyword">SELECT</span> i.invoice_total</span><br><span class="line">  <span class="keyword">FROM</span> invoices i</span><br><span class="line"><span class="keyword">WHERE</span> i.client_id<span class="operator">=</span><span class="number">3</span>);</span><br></pre></td></tr></table></figure>
+
+<h2 id="连接查询"><a href="#连接查询" class="headerlink" title="连接查询"></a>连接查询</h2><h3 id="内连接"><a href="#内连接" class="headerlink" title="内连接"></a>内连接</h3><p>内连接：我们在查询某个表数据的时候，往往还需要查询与该表相关的表的数据。比如：我们查询订单系统，订单系统中包含了物品的id，购买数量。</p>
+<p>他的作用是: 我们<code>FROM</code>关键词后的数据表的每一行在<code>JOIN</code>关键词的表中的每一行进行条件匹配，两张表都匹配的才会显示。</p>
+<p>此时如果我们需要查询总价就需要从商品表获取价格以及商品名称，看下面例子：</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> oi.order_id,p.name,oi.quantity,p.unit_price</span><br><span class="line"><span class="keyword">FROM</span> order_items oi</span><br><span class="line"><span class="keyword">INNER</span> <span class="keyword">JOIN</span> products p</span><br><span class="line"><span class="keyword">ON</span> oi.product_id<span class="operator">=</span>p.product_id;</span><br></pre></td></tr></table></figure>
+
+<p>此时是对<code>order_items</code>的每一行在<code>products</code>中进行条件匹配。</p>
+<p>需要注意：内连接的默认排序是按照 连接进来的表排序的，比如上述例子按照products的查询顺序排序。</p>
+<p><code>INNER JOIN</code>关键字在做内连接时可以简写为<code>JOIN</code>。</p>
+<h4 id="USING"><a href="#USING" class="headerlink" title="USING"></a>USING</h4><p>我们在做连接的时候，看上一个例子<code>ON</code>关键词后边跟了条件，这样看上去其实很麻烦，我们可以用<code>USING</code>关键词来简化写法。但是要保证连接的两个表中都有该字段。</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> o.customer_id,c.customer_id</span><br><span class="line"><span class="keyword">FROM</span> orders o</span><br><span class="line"><span class="keyword">JOIN</span> customers c</span><br><span class="line">  <span class="keyword">USING</span>(customer_id);</span><br></pre></td></tr></table></figure>
+
+<h3 id="跨数据库表连接"><a href="#跨数据库表连接" class="headerlink" title="跨数据库表连接"></a>跨数据库表连接</h3><p>我们在实际开发过程中，不可能仅仅对一个数据库进行操作，多个数据库之间的操作才是正常的。</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> oi.order_id,p.name,oi.quantity,p.unit_price</span><br><span class="line"><span class="keyword">FROM</span> order_items oi</span><br><span class="line"><span class="keyword">INNER</span> <span class="keyword">JOIN</span> sql_inventory.products p</span><br><span class="line"><span class="keyword">ON</span> oi.product_id<span class="operator">=</span>p.product_id;</span><br></pre></td></tr></table></figure>
+
+<p>注意上述例子默认使用的数据库为<code>order_items</code>，连接的数据库是<code>sql_inventory</code>。</p>
+<h3 id="自连接"><a href="#自连接" class="headerlink" title="自连接"></a>自连接</h3><p>我们有时候在员工表中，需要得到他们的上下级从属关系，自连接可以很容易做到这一点。</p>
+<p>需要注意自连接需要对每一个表起别名，同时通过别名来获取表数据。</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> e.first_name,m.first_name</span><br><span class="line"><span class="keyword">FROM</span> employees e</span><br><span class="line"><span class="keyword">INNER</span> <span class="keyword">JOIN</span> employees m</span><br><span class="line"><span class="keyword">ON</span> e.reports_to<span class="operator">=</span>m.employee_id;</span><br></pre></td></tr></table></figure>
+
+<h3 id="多表内连接"><a href="#多表内连接" class="headerlink" title="多表内连接"></a>多表内连接</h3><p>我们需要有多个表进行查询工作，就可以采用多个<code>JOIN</code>关键词串联的方式来解决。</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> o.order_id,o.order_date,c.first_name,c.last_name,os.name <span class="keyword">AS</span> STATUS</span><br><span class="line"><span class="keyword">FROM</span> orders o</span><br><span class="line"><span class="keyword">JOIN</span> customers c</span><br><span class="line">  <span class="keyword">ON</span> o.customer_id<span class="operator">=</span>c.customer_id</span><br><span class="line"><span class="keyword">JOIN</span> order_statuses os</span><br><span class="line">  <span class="keyword">ON</span> o.status <span class="operator">=</span> os.order_status_id;</span><br></pre></td></tr></table></figure>
+
+<h3 id="复合条件内连接"><a href="#复合条件内连接" class="headerlink" title="复合条件内连接"></a>复合条件内连接</h3><p>我们有时候不仅仅需要符合一个条件，此时就需要用到<code>AND</code>关键词来复合我们的条件。</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span></span><br><span class="line"><span class="keyword">FROM</span> order_items oi</span><br><span class="line"><span class="keyword">JOIN</span> order_item_notes oin</span><br><span class="line">  <span class="keyword">ON</span> oi.order_id <span class="operator">=</span> oin.order_Id</span><br><span class="line">  <span class="keyword">AND</span> oi.product_id<span class="operator">=</span>oin.product_id;</span><br></pre></td></tr></table></figure>
+
+<h3 id="隐式内链接"><a href="#隐式内链接" class="headerlink" title="隐式内链接"></a>隐式内链接</h3><p>不建议使用，因为一旦没有加入<code>WHERE</code>关键词和条件，会导致交叉连接比如第一个表有5条数据，第二个表有10条数据，就会查出来<code>5*10=50</code>条数据。</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> oi.order_id,p.name,oi.quantity,p.unit_price</span><br><span class="line"><span class="keyword">FROM</span> order_items oi,products p</span><br><span class="line"><span class="keyword">WHERE</span> oi.product_id<span class="operator">=</span>p.product_id;</span><br></pre></td></tr></table></figure>
+
+<h3 id="左外连接"><a href="#左外连接" class="headerlink" title="左外连接"></a>左外连接</h3><p>我们有时候需要外连接比如在获取订单的时候，我们也希望把那些没有下单的人也查出来。</p>
+<p>左外连接表示：左表数据全有，右表中不符合条件的字段为<code>NULL</code>值。</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> c.customer_id,o.customer_id</span><br><span class="line"><span class="keyword">FROM</span> customers c</span><br><span class="line"><span class="keyword">LEFT</span> <span class="keyword">OUTER</span> <span class="keyword">JOIN</span> orders o</span><br><span class="line">  <span class="keyword">ON</span> c.customer_id<span class="operator">=</span>o.customer_id;</span><br></pre></td></tr></table></figure>
+
+<h3 id="右外连接"><a href="#右外连接" class="headerlink" title="右外连接"></a>右外连接</h3><p>当然我们也可以用右连接的方式来获取它。</p>
+<p>右外连接表示：右表数据全有，左表中不符合条件的字段为<code>NULL</code>值。</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> o.customer_id,c.customer_id</span><br><span class="line"><span class="keyword">FROM</span> orders o</span><br><span class="line"><span class="keyword">RIGHT</span> <span class="keyword">OUTER</span> <span class="keyword">JOIN</span> customers c</span><br><span class="line">  <span class="keyword">ON</span> c.customer_id<span class="operator">=</span>o.customer_id;</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意：</strong>与<code>INNER</code>关键词一样<code>OUTER</code>关键词是可以省略的。</p>
+<h3 id="自外连接"><a href="#自外连接" class="headerlink" title="自外连接"></a>自外连接</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> e.first_name,m.first_name</span><br><span class="line"><span class="keyword">FROM</span> employees e</span><br><span class="line"><span class="keyword">LEFT</span> <span class="keyword">JOIN</span> employees m</span><br><span class="line">     <span class="keyword">ON</span> e.reports_to<span class="operator">=</span>m.employee_id;</span><br></pre></td></tr></table></figure>
+
+<h3 id="多表外连接"><a href="#多表外连接" class="headerlink" title="多表外连接"></a>多表外连接</h3><p>与多表内连接类似：</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> o.customer_id,c.customer_id,s.name</span><br><span class="line"><span class="keyword">FROM</span> orders o</span><br><span class="line"><span class="keyword">LEFT</span> <span class="keyword">JOIN</span> customers c</span><br><span class="line">  <span class="keyword">ON</span> c.customer_id<span class="operator">=</span>o.customer_id</span><br><span class="line"><span class="keyword">LEFT</span> <span class="keyword">JOIN</span> shippers s</span><br><span class="line">  <span class="keyword">ON</span> o.shipper_id<span class="operator">=</span>s.shipper_id;</span><br></pre></td></tr></table></figure>
+
+<h3 id="自然连接"><a href="#自然连接" class="headerlink" title="自然连接"></a>自然连接</h3><p>数据引擎自己猜测该如何连接，不建议使用(随机性),(会对字段相同的列进行连接)</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> o.customer_id,c.first_name</span><br><span class="line"><span class="keyword">FROM</span> orders o</span><br><span class="line"><span class="keyword">NATURAL</span> <span class="keyword">JOIN</span> customers c;</span><br></pre></td></tr></table></figure>
+
+<p>类似于</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> o.customer_id,c.first_name</span><br><span class="line"><span class="keyword">FROM</span> orders o</span><br><span class="line"><span class="keyword">JOIN</span> customers c</span><br><span class="line">  <span class="keyword">USING</span>(customer_id);</span><br></pre></td></tr></table></figure>
+
+<h3 id="交叉连接"><a href="#交叉连接" class="headerlink" title="交叉连接"></a>交叉连接</h3><p>连接的两个表的每一行都会与另一个表中的每一行进行连接。</p>
+<p>他的用法我个人觉得是在型号表中可能会有所使用：</p>
+<p>比如我们有一个颜色表，一个大小表我们可以自由组合出所有的结果：</p>
+<p>显示的写法：</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span></span><br><span class="line"><span class="keyword">FROM</span> sizes s</span><br><span class="line"><span class="keyword">CROSS</span> <span class="keyword">JOIN</span> colors c;</span><br></pre></td></tr></table></figure>
+
+<p>其实我们在将隐式内连接的时候就有所描述，隐式的交叉连接：</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span></span><br><span class="line"><span class="keyword">FROM</span> sizes s,colors c;</span><br></pre></td></tr></table></figure>
+
+<h2 id="联合查询"><a href="#联合查询" class="headerlink" title="联合查询"></a>联合查询</h2><p>我们在进行订单查询的时候，我们想要把21年以后的订单定为活跃订单，21年以前的订单为存档订单，并把它联合到一个结果集<code>UNION</code>关键词可以帮助我们解决这个问题：</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> o.customer_id,o.order_date,<span class="string">&#x27;active&#x27;</span> <span class="keyword">AS</span> statue</span><br><span class="line"><span class="keyword">FROM</span> orders o</span><br><span class="line"><span class="keyword">WHERE</span> o.order_date <span class="operator">&gt;=</span> <span class="string">&#x27;2021-01-01&#x27;</span></span><br><span class="line"><span class="keyword">UNION</span></span><br><span class="line"><span class="keyword">SELECT</span> o.customer_id,o.order_date,<span class="string">&#x27;archive&#x27;</span> <span class="keyword">AS</span> statue</span><br><span class="line"><span class="keyword">FROM</span> orders o</span><br><span class="line"><span class="keyword">WHERE</span> o.order_date <span class="operator">&lt;</span> <span class="string">&#x27;2021-01-01&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>注意需要合并的字段数量必须一致。</p>
+<p>注意如果字段数量一样但是字段名不一样，但是数据类型一样也是会查询出来的比如：</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> o.customer_id,o.order_date,<span class="string">&#x27;active&#x27;</span> <span class="keyword">AS</span> statue</span><br><span class="line"><span class="keyword">FROM</span> orders o</span><br><span class="line"><span class="keyword">WHERE</span> o.order_date <span class="operator">&gt;=</span> <span class="string">&#x27;2019-01-01&#x27;</span></span><br><span class="line"><span class="keyword">UNION</span></span><br><span class="line"><span class="keyword">SELECT</span> o.customer_id,o.order_date,o.comments</span><br><span class="line"><span class="keyword">FROM</span> orders o</span><br><span class="line"><span class="keyword">WHERE</span> o.order_date <span class="operator">&lt;</span> <span class="string">&#x27;2019-01-01&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>当然字段数量一样，字段不一样且数据类型不一样是查不出来的。</p>
+<h2 id="聚合函数查询"><a href="#聚合函数查询" class="headerlink" title="聚合函数查询"></a>聚合函数查询</h2><h3 id="COUNT"><a href="#COUNT" class="headerlink" title="COUNT"></a>COUNT</h3><p>有的时候我们需要知道合乎我们查询条件的字段有多少个，此时我们就需要COUNT去计数。</p>
+<p>当然<code>COUNT</code>默认返回所有的非空字段数量;</p>
+<p>可以使用<code>COUNT(*)</code>获取该表的总列数;</p>
+<p>可以使用<code>DISTINCT</code>对结果集去重。</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> </span><br><span class="line"><span class="built_in">COUNT</span>(unit_price),</span><br><span class="line"><span class="built_in">COUNT</span>(<span class="keyword">DISTINCT</span> unit_price),</span><br><span class="line"><span class="built_in">COUNT</span>(<span class="operator">*</span>)</span><br><span class="line"><span class="keyword">FROM</span> products;</span><br></pre></td></tr></table></figure>
+
+<h3 id="MAX-MIN-AVG-SUM"><a href="#MAX-MIN-AVG-SUM" class="headerlink" title="MAX/MIN/AVG/SUM"></a>MAX/MIN/AVG/SUM</h3><p>以上三个分别表示最大值，最小值，平均值和总和。</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> </span><br><span class="line"><span class="built_in">MAX</span>(unit_price),</span><br><span class="line"><span class="built_in">MIN</span>(unit_price),</span><br><span class="line"><span class="built_in">AVG</span>(unit_price),</span><br><span class="line"><span class="built_in">SUM</span>(unit_price)</span><br><span class="line"><span class="keyword">FROM</span> products;</span><br></pre></td></tr></table></figure>
+
+<h3 id="GROUP-BY"><a href="#GROUP-BY" class="headerlink" title="GROUP BY"></a>GROUP BY</h3><p>我们有时也需要获取每一个用户花了多少钱，这个时候我们可以用<code>GROUP BY</code>来进行分组操作。</p>
+<p>我们甚至还可以给他进行排序。</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> </span><br><span class="line">NAME,</span><br><span class="line"><span class="built_in">SUM</span>(unit_price) <span class="keyword">AS</span> sum_price</span><br><span class="line"><span class="keyword">FROM</span> products</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> NAME</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> sum_price <span class="keyword">DESC</span>;</span><br></pre></td></tr></table></figure>
+
+<p><code>GROUP BY</code>必须放在<code>ORDER BY</code>的前边，不能放在<code>ORDER BY</code>的后边。</p>
+<p>我们也可以根据多个字段进行分组：</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> </span><br><span class="line">NAME,</span><br><span class="line"><span class="built_in">SUM</span>(unit_price)<span class="keyword">AS</span> sum_price</span><br><span class="line"><span class="keyword">FROM</span> products</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> NAME,unit_price;</span><br></pre></td></tr></table></figure>
+
+<h3 id="HAVING"><a href="#HAVING" class="headerlink" title="HAVING"></a>HAVING</h3><p>有时候需要在分组后对数据进行筛选，<code>HAVING</code>能够很好的帮助我们。</p>
+<p><code>HAVING</code>关键词也支持<code>AND/OR</code>等关键词来进行复合查询。</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> </span><br><span class="line">NAME,</span><br><span class="line"><span class="built_in">SUM</span>(unit_price)<span class="keyword">AS</span> sum_price</span><br><span class="line"><span class="keyword">FROM</span> products</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> NAME</span><br><span class="line"><span class="keyword">HAVING</span> sum_price<span class="operator">&gt;</span><span class="number">3</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="WITH-ROLLUP"><a href="#WITH-ROLLUP" class="headerlink" title="WITH ROLLUP"></a>WITH ROLLUP</h3><p>作用是把值全部加起来，来获取汇总值（我们可以很容易得到各省的产值与总产量）。</p>
+<p>仅仅在MySQL中被支持。仅仅用于聚合值的列。</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> </span><br><span class="line">product_id,</span><br><span class="line">NAME,</span><br><span class="line"><span class="built_in">SUM</span>(unit_price) <span class="keyword">AS</span> sum_price</span><br><span class="line"><span class="keyword">FROM</span> products</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> NAME <span class="keyword">WITH</span> <span class="keyword">ROLLUP</span>;</span><br></pre></td></tr></table></figure>
+
+<p>上述例子中只有<code>sum_price</code>的列被全部求和了，也就是说我们除了获取了分组以后的和还获得了总和。</p>
+<h2 id="查询练习"><a href="#查询练习" class="headerlink" title="查询练习"></a>查询练习</h2><h3 id="比生菜更贵的产品"><a href="#比生菜更贵的产品" class="headerlink" title="比生菜更贵的产品"></a>比生菜更贵的产品</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span></span><br><span class="line"><span class="keyword">FROM</span> products</span><br><span class="line"><span class="keyword">WHERE</span> unit_price<span class="operator">&gt;</span> (</span><br><span class="line">  <span class="keyword">SELECT</span> unit_price </span><br><span class="line">  <span class="keyword">FROM</span> products</span><br><span class="line">  <span class="keyword">WHERE</span> NAME <span class="operator">=</span> <span class="string">&#x27;Lettuce - Romaine, Heart&#x27;</span></span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<h3 id="比平均工资高的雇员"><a href="#比平均工资高的雇员" class="headerlink" title="比平均工资高的雇员"></a>比平均工资高的雇员</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span></span><br><span class="line"><span class="keyword">FROM</span> employees</span><br><span class="line"><span class="keyword">WHERE</span> salary <span class="operator">&gt;</span>(</span><br><span class="line"><span class="keyword">SELECT</span> <span class="built_in">AVG</span>(salary)</span><br><span class="line"><span class="keyword">FROM</span> employees);</span><br></pre></td></tr></table></figure>
+
+<h3 id="没有被下单的商品"><a href="#没有被下单的商品" class="headerlink" title="没有被下单的商品"></a>没有被下单的商品</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span></span><br><span class="line"><span class="keyword">FROM</span> products</span><br><span class="line"><span class="keyword">WHERE</span> product_id <span class="keyword">NOT</span> <span class="keyword">IN</span>(</span><br><span class="line"> <span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span> product_id</span><br><span class="line"> <span class="keyword">FROM</span> order_items</span><br><span class="line"> );</span><br></pre></td></tr></table></figure>
+
+<h3 id="没有发票的客户"><a href="#没有发票的客户" class="headerlink" title="没有发票的客户"></a>没有发票的客户</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span></span><br><span class="line"><span class="keyword">FROM</span> clients</span><br><span class="line"><span class="keyword">WHERE</span> client_id <span class="keyword">NOT</span> <span class="keyword">IN</span>(</span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span> client_id</span><br><span class="line"><span class="keyword">FROM</span>  invoices);</span><br></pre></td></tr></table></figure>
+
+<p>如果我们不用子查询的话，我们应该怎么做呢？</p>
+<p>连接查询你值得拥有！！！</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span></span><br><span class="line"><span class="keyword">FROM</span> clients c</span><br><span class="line"><span class="keyword">LEFT</span> <span class="keyword">JOIN</span> invoices i</span><br><span class="line"><span class="keyword">ON</span> c.client_id<span class="operator">=</span>i.client_id</span><br><span class="line"><span class="keyword">WHERE</span> i.invoice_id <span class="keyword">IS</span> <span class="keyword">NULL</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="查询购买了生菜的客户编号与姓名"><a href="#查询购买了生菜的客户编号与姓名" class="headerlink" title="查询购买了生菜的客户编号与姓名"></a>查询购买了生菜的客户编号与姓名</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> c.customer_id,c.first_name,c.last_name</span><br><span class="line"><span class="keyword">FROM</span> customers c</span><br><span class="line"><span class="keyword">WHERE</span> c.customer_id <span class="keyword">IN</span> (</span><br><span class="line">  <span class="keyword">SELECT</span> o.customer_id</span><br><span class="line">  <span class="keyword">FROM</span> orders o</span><br><span class="line">  <span class="keyword">WHERE</span> o.order_id <span class="keyword">IN</span>(</span><br><span class="line">    <span class="keyword">SELECT</span> order_id </span><br><span class="line">    <span class="keyword">FROM</span> order_items oi</span><br><span class="line">    <span class="keyword">WHERE</span> oi.product_id <span class="operator">=</span> (</span><br><span class="line">      <span class="keyword">SELECT</span> p.product_id</span><br><span class="line">      <span class="keyword">FROM</span> products p</span><br><span class="line">      <span class="keyword">WHERE</span> NAME <span class="operator">=</span> <span class="string">&#x27;Lettuce - Romaine, Heart&#x27;</span></span><br><span class="line">    )</span><br><span class="line">  )</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<p>此处再看连接查询：</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span> c.customer_id,c.first_name,c.last_name</span><br><span class="line"><span class="keyword">FROM</span> customers c</span><br><span class="line"><span class="keyword">LEFT</span> <span class="keyword">JOIN</span> orders o <span class="keyword">USING</span>(customer_id)</span><br><span class="line"><span class="keyword">LEFT</span> <span class="keyword">JOIN</span> order_items oi <span class="keyword">USING</span>(order_id)</span><br><span class="line"><span class="keyword">LEFT</span> <span class="keyword">JOIN</span> products p <span class="keyword">USING</span>(product_id)</span><br><span class="line"><span class="keyword">WHERE</span> p.name<span class="operator">=</span><span class="string">&#x27;Lettuce - Romaine, Heart&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>连接查询的写作思想在于时刻记得你要查什么，什么表可以得到它，然后去连接吧！</p>
+<h3 id="比自己部门平均工资高的员工"><a href="#比自己部门平均工资高的员工" class="headerlink" title="比自己部门平均工资高的员工"></a>比自己部门平均工资高的员工</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span></span><br><span class="line"><span class="keyword">FROM</span> employees e</span><br><span class="line"><span class="keyword">WHERE</span> salary <span class="operator">&gt;</span>(</span><br><span class="line">	<span class="keyword">SELECT</span> <span class="built_in">AVG</span>(salary)</span><br><span class="line">	<span class="keyword">FROM</span> employees</span><br><span class="line">	<span class="keyword">WHERE</span> e.office_id<span class="operator">=</span>office_id</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<p>看上表，在查询过程中，进入<code>employees</code>表然后对表中的数据进行平均值的求取，随后每一行都会进行一次平均值的求取这种方式叫做相关子查询，这种查询方式慢并且比较占内存，但是使用却很广泛。</p>
+<h3 id="每个客户高于自己发票平均值的发票"><a href="#每个客户高于自己发票平均值的发票" class="headerlink" title="每个客户高于自己发票平均值的发票"></a>每个客户高于自己发票平均值的发票</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> client_id</span><br><span class="line"><span class="keyword">FROM</span> invoices i</span><br><span class="line"><span class="keyword">WHERE</span> invoice_total<span class="operator">&gt;</span>(</span><br><span class="line">  <span class="keyword">SELECT</span> <span class="built_in">AVG</span>(invoice_total)</span><br><span class="line">  <span class="keyword">FROM</span> invoices</span><br><span class="line">  <span class="keyword">WHERE</span> i.client_id<span class="operator">=</span>client_id</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<h3 id="得到所有有发票的客户信息"><a href="#得到所有有发票的客户信息" class="headerlink" title="得到所有有发票的客户信息"></a>得到所有有发票的客户信息</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span></span><br><span class="line"><span class="keyword">FROM</span> clients</span><br><span class="line"><span class="keyword">WHERE</span> client_id <span class="keyword">IN</span>(</span><br><span class="line">  <span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span> client_id</span><br><span class="line">  <span class="keyword">FROM</span> invoices</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<p>同时我们也可以通过连接来获取。</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span> client_id</span><br><span class="line"><span class="keyword">FROM</span> clients c</span><br><span class="line"><span class="keyword">INNER</span> <span class="keyword">JOIN</span> invoices <span class="keyword">USING</span>(client_id);</span><br></pre></td></tr></table></figure>
+
+<p>让我们再来一个方法：</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span> client_id</span><br><span class="line"><span class="keyword">FROM</span> clients c</span><br><span class="line"><span class="keyword">WHERE</span> <span class="keyword">EXISTS</span>(</span><br><span class="line">  <span class="keyword">SELECT</span> client_id</span><br><span class="line">  <span class="keyword">FROM</span> invoices</span><br><span class="line">  <span class="keyword">WHERE</span> client_id<span class="operator">=</span>c.client_id</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<p><code>EXISTS</code>的意义在于当我们的表数据有很多的情况下，<code>IN</code>关键词的效率自然是不如<code>EXISTS</code>。</p>
+<h3 id="从来没有下过单的商品"><a href="#从来没有下过单的商品" class="headerlink" title="从来没有下过单的商品"></a>从来没有下过单的商品</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span></span><br><span class="line"><span class="keyword">FROM</span> products p</span><br><span class="line"><span class="keyword">WHERE</span> <span class="keyword">NOT</span> <span class="keyword">EXISTS</span>(</span><br><span class="line">  <span class="keyword">SELECT</span> <span class="operator">*</span></span><br><span class="line">  <span class="keyword">FROM</span> order_items</span><br><span class="line">  <span class="keyword">WHERE</span> p.product_id<span class="operator">=</span>product_id</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<h3 id="发票数额以及每一列都有平均额度"><a href="#发票数额以及每一列都有平均额度" class="headerlink" title="发票数额以及每一列都有平均额度"></a>发票数额以及每一列都有平均额度</h3><p><code>AVG</code>关键词只能查询到一行也就是该行的平均额度，此处就需要在<code>SELECT</code>关键词后边加入我们的子查询结果。</p>
+<p>并且如果我们在一条查询语句中写过了查询那么我们可以直接通过<code>SELECT</code>获取他。</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> invoice_id,invoice_total,(</span><br><span class="line">	<span class="keyword">SELECT</span> <span class="built_in">AVG</span>(invoice_total) <span class="keyword">FROM</span> invoices) <span class="keyword">AS</span> invoice_total_avg,</span><br><span class="line">	invoice_total<span class="operator">-</span>(<span class="keyword">SELECT</span> invoice_total_avg) <span class="keyword">AS</span> invoice_total_cz</span><br><span class="line"><span class="keyword">FROM</span> invoices;</span><br></pre></td></tr></table></figure>
+
+<h3 id="FROM中的查询"><a href="#FROM中的查询" class="headerlink" title="FROM中的查询"></a>FROM中的查询</h3><p>注意必须要起一个别名。</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> invoice_total_avg,invoice_total_cz</span><br><span class="line"><span class="keyword">FROM</span> </span><br><span class="line">(<span class="keyword">SELECT</span> invoice_id,invoice_total,(</span><br><span class="line">	<span class="keyword">SELECT</span> <span class="built_in">AVG</span>(invoice_total) <span class="keyword">FROM</span> invoices) <span class="keyword">AS</span> invoice_total_avg,</span><br><span class="line">	invoice_total<span class="operator">-</span>(<span class="keyword">SELECT</span> invoice_total_avg) <span class="keyword">AS</span> invoice_total_cz</span><br><span class="line"><span class="keyword">FROM</span> invoices) <span class="keyword">AS</span> invoice;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>SQL</category>
+      </categories>
+      <tags>
+        <tag>SQL</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>SQL库表级操作</title>
+    <url>/2021/09/29/01-SQL%E5%BA%93%E8%A1%A8%E7%BA%A7%E6%93%8D%E4%BD%9C/</url>
+    <content><![CDATA[<h1 id="SQL库表级操作"><a href="#SQL库表级操作" class="headerlink" title="SQL库表级操作"></a>SQL库表级操作</h1><h2 id="数据库操作"><a href="#数据库操作" class="headerlink" title="数据库操作"></a>数据库操作</h2><h3 id="创建数据库"><a href="#创建数据库" class="headerlink" title="创建数据库"></a>创建数据库</h3><h4 id="CREATE"><a href="#CREATE" class="headerlink" title="CREATE"></a>CREATE</h4><p><code>CREATE</code>关键词被用来作为创建数据库和数据表的关键词。<code>DATABASE</code>顾名思义就是数据库的意思。</p>
+<p>数据库名称可以用以下符号包裹 ：</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> DATABASE test;</span><br><span class="line"><span class="keyword">CREATE</span> DATABASE <span class="string">&#x27;test&#x27;</span>;</span><br><span class="line"><span class="keyword">CREATE</span> DATABASE `test`;</span><br></pre></td></tr></table></figure>
+
+<p>数据库是不允许同名的，我们可能会出现名字不小心输一样了的情况,通过下面方式避免错误。</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> DATABASE IF <span class="keyword">NOT</span> <span class="keyword">EXISTS</span> test;</span><br></pre></td></tr></table></figure>
+
+<h4 id="CHARACTER"><a href="#CHARACTER" class="headerlink" title="CHARACTER"></a>CHARACTER</h4><p>大多数时候创建数据库需要指定编码格式,同时我们可能也需要定义规则:</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment">--UTF-8</span></span><br><span class="line"><span class="keyword">CREATE</span> DATABASE `test` <span class="keyword">DEFAULT</span> <span class="type">CHARACTER</span> <span class="keyword">SET</span> utf8 <span class="keyword">COLLATE</span> utf8_general_ci;</span><br><span class="line"><span class="comment">--GBK</span></span><br><span class="line"><span class="keyword">CREATE</span> DATABASE `test` <span class="keyword">DEFAULT</span> <span class="type">CHARACTER</span> <span class="keyword">SET</span> gbk <span class="keyword">COLLATE</span> gbk_chinese_ci</span><br></pre></td></tr></table></figure>
+
+<h4 id="COLLATE"><a href="#COLLATE" class="headerlink" title="COLLATE"></a>COLLATE</h4><p>看完上述例子，<code>COLLATE</code>可能令你有所疑惑。我个人感觉<code>COLLATE</code>就类似于一种规则。它是与编码格式相辅相成的，每一个编码格式都有它自己的规则比如排序的规则，比较的规则，当然这些仅仅正对于字符串类型，所以在对字符串字段创建索引也会被这种规则限制。</p>
+<p>下面的代码可以查看所有的规则以及其适用的编码格式。</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">show</span> <span class="keyword">collation</span>;</span><br></pre></td></tr></table></figure>
+
+<p>我们国人常用的或者说是默认的是<code>UTF8</code>编码下的<code>utf8mb4_general_ci</code>。同时我们可以注意加了<code>ci</code>作为后缀 的规则往往指的是大小写无关性。</p>
+<p>该关键字的应用范围很广，可以用在示例级别、库级别、表级别、列级别、以及在SQL中指定。</p>
+<p>最后总结一下：使用最多的<code>MySQL</code>数据库默认规则如下：</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment">--5.7及以下</span></span><br><span class="line">默认的CHARSET是Latin1，默认的<span class="keyword">COLLATE</span>是latin1_swedish_ci。</span><br><span class="line"><span class="comment">--5.8及以上</span></span><br><span class="line">默认的CHARSET已经改为了utf8mb4，默认的<span class="keyword">COLLATE</span>改为了utf8mb4_0900_ai_ci。</span><br></pre></td></tr></table></figure>
+
+<h3 id="使用数据库"><a href="#使用数据库" class="headerlink" title="使用数据库"></a>使用数据库</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">USE test;</span><br></pre></td></tr></table></figure>
+
+<h3 id="查询数据库"><a href="#查询数据库" class="headerlink" title="查询数据库"></a>查询数据库</h3><h4 id="查询该服务器下所有数据库"><a href="#查询该服务器下所有数据库" class="headerlink" title="查询该服务器下所有数据库"></a>查询该服务器下所有数据库</h4><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SHOW</span> DATABASES;</span><br></pre></td></tr></table></figure>
+
+<h4 id="模糊查询数据库"><a href="#模糊查询数据库" class="headerlink" title="模糊查询数据库"></a>模糊查询数据库</h4><p>一个<code>_</code>相当于一个字符，一个<code>%</code>相当于无数个字符。</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment">--寻找名称为test的数据库</span></span><br><span class="line"><span class="keyword">SHOW</span> DATABASES <span class="keyword">LIKE</span> <span class="string">&#x27;test&#x27;</span>;</span><br><span class="line"><span class="comment">--寻找带有est的五位数的数据库</span></span><br><span class="line"><span class="keyword">SHOW</span> DATABASES <span class="keyword">LIKE</span> <span class="string">&#x27;_est_&#x27;</span>;</span><br><span class="line"><span class="comment">--寻找带有es的数据库</span></span><br><span class="line"><span class="keyword">SHOW</span> DATABASES <span class="keyword">LIKE</span> <span class="string">&#x27;%es%&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<h4 id="查询数据库属性"><a href="#查询数据库属性" class="headerlink" title="查询数据库属性"></a>查询数据库属性</h4><p>可以查看当前数据库的名称，编码</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SHOW</span> <span class="keyword">CREATE</span> DATABASE test;</span><br></pre></td></tr></table></figure>
+
+<h3 id="修改数据库"><a href="#修改数据库" class="headerlink" title="修改数据库"></a>修改数据库</h3><p>注意编码格式需要加<code>SET</code>关键词，矫正规则不需要。</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> DATABASE test</span><br><span class="line"><span class="keyword">DEFAULT</span> <span class="type">CHARACTER</span> <span class="keyword">SET</span> gbk </span><br><span class="line"><span class="keyword">DEFAULT</span> <span class="keyword">COLLATE</span> gbk_chinese_ci;</span><br></pre></td></tr></table></figure>
+
+<h3 id="删除数据库"><a href="#删除数据库" class="headerlink" title="删除数据库"></a>删除数据库</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">DROP</span> DATABASE IF <span class="keyword">EXISTS</span> `test`;</span><br></pre></td></tr></table></figure>
+
+<p>当然也可以不做判断直接删除数据库。</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">DROP</span> DATABASE test;</span><br></pre></td></tr></table></figure>
+
+<h3 id="导出数据库"><a href="#导出数据库" class="headerlink" title="导出数据库"></a>导出数据库</h3><p><code>root</code>改为自己的账户名称,注意把<code>test</code>改为自己的数据库名称，<code>test.sql</code>改为导出的文件名称。</p>
+<p><code>windows/Linux</code>下都可以使用。</p>
+<h4 id="导出数据库的结构"><a href="#导出数据库的结构" class="headerlink" title="导出数据库的结构"></a>导出数据库的结构</h4><p><code>--add-drop-table</code>命令会在每一个成绩表的前边加入删除表的操作。</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">mysqldump <span class="operator">-</span>uroot <span class="operator">-</span>p <span class="operator">-</span>d <span class="comment">--add-drop-table test &gt;d:/test.sql</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="导出数据库的结构和数据"><a href="#导出数据库的结构和数据" class="headerlink" title="导出数据库的结构和数据"></a>导出数据库的结构和数据</h4><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">mysqldump <span class="operator">-</span>uroot <span class="operator">-</span>p test <span class="operator">&gt;</span> test.sql</span><br></pre></td></tr></table></figure>
+
+<h3 id="导入数据库"><a href="#导入数据库" class="headerlink" title="导入数据库"></a>导入数据库</h3><p>命令行界面，创建并选择数据库之后，<code>source</code>跟<code>sql</code>文件路径即可：</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">source d:<span class="operator">/</span>test.sql</span><br></pre></td></tr></table></figure>
+
+<p>或者创建并选择数据库之后：</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">mysqldump <span class="operator">-</span>uroot <span class="operator">-</span>p test<span class="operator">&lt;</span> d:<span class="operator">/</span>test.sql</span><br></pre></td></tr></table></figure>
+
+<p>到这里数据库操作就算是结束了，那么在介绍表操作之前我们先看一些常用的数据类型。</p>
+<h2 id="数据表操作"><a href="#数据表操作" class="headerlink" title="数据表操作"></a>数据表操作</h2><h3 id="创建数据表"><a href="#创建数据表" class="headerlink" title="创建数据表"></a>创建数据表</h3><h4 id="表属性"><a href="#表属性" class="headerlink" title="表属性"></a>表属性</h4><p><code>ENGINE=INNODB</code>: 该表的数据驱动</p>
+<p><code>CHARSET</code>: 该数据表的字符编码格式</p>
+<p><code>DEFAULT</code>: 默认值</p>
+<p><code>COLLATE</code>: 矫正规则</p>
+<h4 id="列属性"><a href="#列属性" class="headerlink" title="列属性"></a>列属性</h4><p><code>primary key</code>: 主键,主键具有唯一性，且不能为空。</p>
+<p><code>NOT NULL </code>: 该字段是否允许空值</p>
+<p><code>AUTO_INCREMENT</code>: 该行的值自增(通常用于主键自增)</p>
+<p><code>defalut</code>: 默认值，默认值会在没有赋值的时候使用。</p>
+<p><code>UNIQUE</code>: 值唯一不能重复。</p>
+<p><code>CHARSET SET utf8mb4</code>为某一列进行编码设置。</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> `products_test` (</span><br><span class="line">  `product_id` <span class="type">INT</span>(<span class="number">11</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span> AUTO_INCREMENT,</span><br><span class="line">  `name` <span class="type">VARCHAR</span>(<span class="number">50</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">  `quantity_in_stock` <span class="type">INT</span>(<span class="number">11</span>) CHARSET <span class="keyword">SET</span> utf8mb4 <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">  `unit_price` <span class="type">DECIMAL</span>(<span class="number">4</span>,<span class="number">2</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span> <span class="keyword">DEFAULT</span> <span class="number">0</span>,<span class="comment">--默认为0</span></span><br><span class="line">  <span class="keyword">PRIMARY</span> KEY (`product_id`)</span><br><span class="line">) ENGINE<span class="operator">=</span>INNODB AUTO_INCREMENT<span class="operator">=</span><span class="number">11</span> <span class="keyword">DEFAULT</span> CHARSET<span class="operator">=</span>utf8mb4 <span class="keyword">COLLATE</span><span class="operator">=</span>utf8mb4_0900_ai_ci;</span><br></pre></td></tr></table></figure>
+
+<h3 id="查询数据表"><a href="#查询数据表" class="headerlink" title="查询数据表"></a>查询数据表</h3><h4 id="查询该数据库下所有数据表"><a href="#查询该数据库下所有数据表" class="headerlink" title="查询该数据库下所有数据表"></a>查询该数据库下所有数据表</h4><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SHOW</span> TABLES;</span><br></pre></td></tr></table></figure>
+
+<h4 id="查询表结构"><a href="#查询表结构" class="headerlink" title="查询表结构"></a>查询表结构</h4><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">DESC</span> p_test;</span><br></pre></td></tr></table></figure>
+
+<h4 id="查询表引擎"><a href="#查询表引擎" class="headerlink" title="查询表引擎"></a>查询表引擎</h4><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SHOW</span> <span class="keyword">CREATE</span> <span class="keyword">TABLE</span> p_test;</span><br></pre></td></tr></table></figure>
+
+<h3 id="修改数据表"><a href="#修改数据表" class="headerlink" title="修改数据表"></a>修改数据表</h3><h4 id="修改数据表名称"><a href="#修改数据表名称" class="headerlink" title="修改数据表名称"></a>修改数据表名称</h4><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> preson_test RENAME <span class="keyword">TO</span> p_test;</span><br></pre></td></tr></table></figure>
+
+<h4 id="修改字符集"><a href="#修改字符集" class="headerlink" title="修改字符集"></a>修改字符集</h4><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> preson_test</span><br><span class="line">	<span class="type">CHARACTER</span> <span class="keyword">SET</span> UTF8;</span><br></pre></td></tr></table></figure>
+
+<h4 id="修改存储引擎"><a href="#修改存储引擎" class="headerlink" title="修改存储引擎"></a>修改存储引擎</h4><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> p_test ENGINE<span class="operator">=</span>InnoDB</span><br></pre></td></tr></table></figure>
+
+<h4 id="添加-删除字段"><a href="#添加-删除字段" class="headerlink" title="添加/删除字段"></a>添加/删除字段</h4><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment">--添加新字段 默认放到最后</span></span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> tb_student <span class="keyword">ADD</span> phone <span class="type">INT</span>;</span><br><span class="line"><span class="comment">--添加新字段到第一个</span></span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> p_test <span class="keyword">ADD</span> test_id <span class="type">INT</span> <span class="keyword">FIRST</span>;</span><br><span class="line"><span class="comment">--添加新字段到某个字段后边</span></span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> p_test <span class="keyword">ADD</span> sex <span class="type">VARCHAR</span>(<span class="number">3</span>) AFTER old_name;</span><br><span class="line"><span class="comment">--删除字段</span></span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> tb_student <span class="keyword">DROP</span> password;</span><br><span class="line"><span class="comment">--同时进行多个操作</span></span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> p_test <span class="keyword">ADD</span> sex <span class="type">VARCHAR</span>(<span class="number">3</span>) AFTER old_name,</span><br><span class="line"><span class="keyword">DROP</span> password;;</span><br></pre></td></tr></table></figure>
+
+<h4 id="修改数据表字段"><a href="#修改数据表字段" class="headerlink" title="修改数据表字段"></a>修改数据表字段</h4><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment">--修改字段名，p_test是表名 old_name是老名字 new_name是修改后的名字 最后是数据类型</span></span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> p_test CHANGE old_name new_name <span class="type">VARCHAR</span>(<span class="number">25</span>);</span><br><span class="line"><span class="comment">--修改数据类型 p_test是表名 new_name是需要修改的字段名 最后是修改后的数据类型</span></span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> p_test MODIFY new_name <span class="type">CHAR</span>(<span class="number">20</span>)；</span><br><span class="line"><span class="comment">--修改字段的排列位置 p_test是表名 new_name是需要修改的字段名 然后是修改后的数据类型 最后是想要的位置</span></span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> p_test MODIFY new_name <span class="type">CHAR</span>(<span class="number">20</span>) <span class="keyword">first</span>;</span><br><span class="line"><span class="comment">--将字段放在什么字段之后 </span></span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> p_test MODIFY new_name <span class="type">CHAR</span>(<span class="number">20</span>) after age;</span><br></pre></td></tr></table></figure>
+
+<h3 id="删除数据表"><a href="#删除数据表" class="headerlink" title="删除数据表"></a>删除数据表</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> <span class="string">&#x27;products&#x27;</span>;</span><br><span class="line"><span class="comment">--若是数据库存在用此种方法比较合适</span></span><br><span class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> IF <span class="keyword">EXISTS</span> `products`;</span><br></pre></td></tr></table></figure>
+
+<h3 id="数据表复制"><a href="#数据表复制" class="headerlink" title="数据表复制"></a>数据表复制</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment">--只有数据没有表结构</span></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> p1 <span class="keyword">AS</span> <span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> p_test;</span><br><span class="line"><span class="comment">--有表结构但是没有数据</span></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> p2 <span class="keyword">LIKE</span> p_test;</span><br></pre></td></tr></table></figure>
+
+<h3 id="表之间的关系"><a href="#表之间的关系" class="headerlink" title="表之间的关系"></a>表之间的关系</h3><p>举个很简单的例子:</p>
+<p>我们有一个顾客表,那么理论上我们的订单表应该是与顾客表相关联的。也就是说,订单表是依赖于顾客表实现的。</p>
+<p>那么我们会发现一些问题。如果我们对一个顾客的信息做了更改，那么对应的订单表应该也需要更改。如果我们删除了一个顾客的信息，那么他的订单信息我们该怎么办。</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> orders(</span><br><span class="line">    order_id <span class="type">INT</span> <span class="keyword">PRIMARY</span> KEY,</span><br><span class="line">    customer_id <span class="type">INT</span> <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">    <span class="keyword">FOREIGN</span> KEY fk_orders_customers(customer_id)</span><br><span class="line">   		<span class="keyword">REFERENCES</span> customers (customer_id)<span class="comment">--注意此处是主键</span></span><br><span class="line">    	<span class="keyword">ON</span> UPDATE CASCADE</span><br><span class="line">    	<span class="keyword">ON</span> <span class="keyword">DELETE</span> <span class="keyword">NO</span> ACTION</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<p>这样以后,我们就可以发现一个巨大的情况，当我们对客户表做删除的时候，我们无法进行。因为我们必须先把依赖于它的订单表删除才行。</p>
+<h4 id="添加-删除主键约束"><a href="#添加-删除主键约束" class="headerlink" title="添加/删除主键约束"></a>添加/删除主键约束</h4><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> persons </span><br><span class="line">	<span class="keyword">DROP</span> <span class="keyword">PRIMARY</span> KEY,</span><br><span class="line">	<span class="keyword">ADD</span> <span class="keyword">PRIMARY</span> KEY (customer_id);</span><br></pre></td></tr></table></figure>
+
+<h4 id="添加-删除外键约束"><a href="#添加-删除外键约束" class="headerlink" title="添加/删除外键约束"></a>添加/删除外键约束</h4><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> persons </span><br><span class="line">	<span class="keyword">DROP</span> <span class="keyword">FOREIGN</span> KEY fk_orders_customers,</span><br><span class="line">	<span class="keyword">ADD</span> <span class="keyword">FOREIGN</span> KEY fk_orders_customers (customer_id);</span><br></pre></td></tr></table></figure>
+
+<h3 id="字符集和排序规则"><a href="#字符集和排序规则" class="headerlink" title="字符集和排序规则"></a>字符集和排序规则</h3><p>查看所有的字符集。</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SHOW</span> CHARSET;</span><br></pre></td></tr></table></figure>
+
+<p>MySQL5以上基本默认UTF-8;</p>
+<h3 id="数据引擎"><a href="#数据引擎" class="headerlink" title="数据引擎"></a>数据引擎</h3><p>MyISAM 5.5以前很流行不支持事务。</p>
+<p>InnoDB 支持事务,支持外键。</p>
+<p>重构存储引擎大概率要重构数据表。</p>
+]]></content>
+      <categories>
+        <category>SQL</category>
+      </categories>
+      <tags>
+        <tag>SQL</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>SQL数据增删改</title>
+    <url>/2021/10/01/02-SQL%E6%95%B0%E6%8D%AE%E5%A2%9E%E5%88%A0%E6%94%B9/</url>
+    <content><![CDATA[<h1 id="SQL数据增删改"><a href="#SQL数据增删改" class="headerlink" title="SQL数据增删改"></a>SQL数据增删改</h1><h2 id="增加数据"><a href="#增加数据" class="headerlink" title="增加数据"></a>增加数据</h2><h3 id="单行插入"><a href="#单行插入" class="headerlink" title="单行插入"></a>单行插入</h3><p>value和values的区别在于:value是插入一条数据,values是插入多条数据,多条数据的插入需要<code>,</code>分隔。</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> `products`(product_id,NAME,quantity_in_stock,unit_price)</span><br><span class="line"><span class="keyword">VALUE</span> (<span class="number">1</span>,<span class="string">&#x27;Pork - Bacon,back Peameal&#x27;</span>,<span class="number">49</span>,<span class="number">4.65</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> `products`(product_id,NAME,quantity_in_stock,unit_price)</span><br><span class="line"><span class="keyword">VALUES</span> (<span class="number">2</span>,<span class="string">&#x27;Foam Dinner Plate&#x27;</span>,<span class="number">70</span>,<span class="number">1.21</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> `products`</span><br><span class="line"><span class="keyword">VALUE</span>(<span class="number">3</span>,<span class="string">&#x27;Brocolinni - Gaylan, Chinese&#x27;</span>,<span class="number">90</span>,<span class="number">4.53</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> `products`</span><br><span class="line"><span class="keyword">VALUES</span> (<span class="number">4</span>,<span class="string">&#x27;Lettuce - Romaine, Heart&#x27;</span>,<span class="number">38</span>,<span class="number">3.35</span>);</span><br></pre></td></tr></table></figure>
+
+<h3 id="多行插入"><a href="#多行插入" class="headerlink" title="多行插入"></a>多行插入</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> `products`</span><br><span class="line"><span class="keyword">VALUES</span></span><br><span class="line">(<span class="number">5</span>,<span class="string">&#x27;Sauce - Ranch Dressing&#x27;</span>,<span class="number">94</span>,<span class="number">1.63</span>),</span><br><span class="line">(<span class="number">6</span>,<span class="string">&#x27;Petit Baguette&#x27;</span>,<span class="number">14</span>,<span class="number">2.39</span>);</span><br></pre></td></tr></table></figure>
+
+<h5 id="分层插入"><a href="#分层插入" class="headerlink" title="分层插入"></a>分层插入</h5><p>有时候在进行操作的时候，我们不仅仅要对一个数据表进行插入操作，还要进行更多的操作。比如我们在进行一笔订单的录入之后，还需要根据订单的条目进行操作。</p>
+<p>此处主要熟悉<code>LAST_INSERT_ID()</code>方法，可以获取最后一次插入的数据的主键id。</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> orders(customer_id,order_date,STATUS)</span><br><span class="line"><span class="keyword">VALUES</span>(<span class="number">6</span>,<span class="string">&#x27;2021-1-1&#x27;</span>,<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> order_items</span><br><span class="line"><span class="keyword">VALUES</span></span><br><span class="line"> (LAST_INSERT_ID(),<span class="number">1</span>,<span class="number">1</span>,<span class="number">2.95</span>);</span><br></pre></td></tr></table></figure>
+
+<h2 id="更新数据"><a href="#更新数据" class="headerlink" title="更新数据"></a>更新数据</h2><h3 id="简单的更新"><a href="#简单的更新" class="headerlink" title="简单的更新"></a>简单的更新</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">UPDATE customers</span><br><span class="line"><span class="keyword">SET</span> </span><br><span class="line">	first_name <span class="operator">=</span> <span class="string">&#x27;张&#x27;</span>,</span><br><span class="line">	last_name <span class="operator">=</span> <span class="string">&#x27;三&#x27;</span></span><br><span class="line"><span class="keyword">WHERE</span> customer_id<span class="operator">=</span><span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+
+<p>注意：正常情况下，我们应该是可以更新所有符合条件的行，但是MySQL会出现一个问题，为了安全性考虑，有的界面应用会有一个限制一次只能更新一行，所以会报错这种的请自行寻找办法。</p>
+<h2 id="删除数据"><a href="#删除数据" class="headerlink" title="删除数据"></a>删除数据</h2><p>删除数据需要使用的是<code>DELETE</code>关键词,同时在这里提醒一下，数据对于每一个软件都是宝贵的，所以我们一般都通过更改状态的方式来假装删除数据，比如当一笔订单被取消，我们并不删除而是更改它的状态为取消。</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">DELETE</span> <span class="keyword">FROM</span> customers</span><br><span class="line"><span class="keyword">WHERE</span> customer_id<span class="operator">=</span><span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+
+
+
+]]></content>
+      <categories>
+        <category>SQL</category>
+      </categories>
+      <tags>
+        <tag>SQL</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>SQL常用APi</title>
+    <url>/2021/10/02/04-SQLApi/</url>
+    <content><![CDATA[<h2 id="SQL常用Api"><a href="#SQL常用Api" class="headerlink" title="SQL常用Api"></a>SQL常用Api</h2><h3 id="数值类函数"><a href="#数值类函数" class="headerlink" title="数值类函数"></a>数值类函数</h3><h4 id="ROUND"><a href="#ROUND" class="headerlink" title="ROUND"></a>ROUND</h4><p>对数字进行四舍五入，第一个参数是需要四舍五入的数值，第二个参数是保留几位小数。</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> ROUND(<span class="number">5.73</span>)；<span class="comment">--取值6</span></span><br><span class="line"><span class="keyword">SELECT</span> ROUND(<span class="number">5.73</span>,<span class="number">1</span>);<span class="comment">--取值5.7</span></span><br><span class="line"><span class="keyword">SELECT</span> ROUND(<span class="number">5.735</span>,<span class="number">2</span>);<span class="comment">--取值5.74</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="TRUNCATE"><a href="#TRUNCATE" class="headerlink" title="TRUNCATE"></a>TRUNCATE</h4><p>对数字进行截断，第一个参数是需要截断的数值，第二个参数是保留几位小数。</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">TRUNCATE</span>(<span class="number">25.735</span>,<span class="number">1</span>);<span class="comment">--取值25.7</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">TRUNCATE</span>(<span class="number">25.75</span>,<span class="number">1</span>);<span class="comment">--取值25.7</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="CEILING"><a href="#CEILING" class="headerlink" title="CEILING"></a>CEILING</h4><p>对数字进行向上取整，获取大于等于它的最小整数，参数是需要截断的数值</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="built_in">CEILING</span>(<span class="number">25.75</span>);<span class="comment">--取值26</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="built_in">CEILING</span>(<span class="number">26</span>);<span class="comment">--取值26</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="字符串类函数"><a href="#字符串类函数" class="headerlink" title="字符串类函数"></a>字符串类函数</h3><h4 id="LENGTH"><a href="#LENGTH" class="headerlink" title="LENGTH"></a>LENGTH</h4><p>获取字符串长度</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> LENGTH(<span class="string">&#x27;WANG&#x27;</span>);<span class="comment">--4</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="UPPER"><a href="#UPPER" class="headerlink" title="UPPER"></a>UPPER</h4><p>使每一个字符串中的英文字符变大写</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="built_in">UPPER</span>(<span class="string">&#x27;wang&#x27;</span>);<span class="comment">--WANG</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="LOWER"><a href="#LOWER" class="headerlink" title="LOWER"></a>LOWER</h4><p>使每一个字符串中的英文字符变小写</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="built_in">LOWER</span>(<span class="string">&#x27;WANG&#x27;</span>);<span class="comment">--wang</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="TRIM"><a href="#TRIM" class="headerlink" title="TRIM"></a>TRIM</h4><p>去掉字符串两侧的空格</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> LENGTH(<span class="built_in">TRIM</span>(<span class="string">&#x27;   ww   &#x27;</span>));<span class="comment">--2</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="RTRIM"><a href="#RTRIM" class="headerlink" title="RTRIM"></a>RTRIM</h4><p>去掉字符串后边的空格</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> LENGTH(RTRIM(<span class="string">&#x27; ww   &#x27;</span>));<span class="comment">--3</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="LEFT"><a href="#LEFT" class="headerlink" title="LEFT"></a>LEFT</h4><p>截取字符串的前几个字符，第一个参数是需要截取的字符串，第二个参数是截取长度</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">LEFT</span>(<span class="string">&#x27;WANG&#x27;</span>,<span class="number">2</span>);<span class="comment">--WA</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="RIGHT"><a href="#RIGHT" class="headerlink" title="RIGHT"></a>RIGHT</h4><p>截取字符串的倒数几个字符，第一个参数是需要截取的字符串，第二个参数是截取长度</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">RIGHT</span>(<span class="string">&#x27;WANG&#x27;</span>,<span class="number">2</span>);<span class="comment">--NG</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="SUBSTRING"><a href="#SUBSTRING" class="headerlink" title="SUBSTRING"></a>SUBSTRING</h4><p>截取字符串，第一个参数是要截取的字符串，第二个参数是截取位置的索引(从1开始查)，第三个参数是截取长度</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="built_in">SUBSTRING</span>(<span class="string">&#x27;wang&#x27;</span>,<span class="number">2</span>,<span class="number">2</span>);<span class="comment">--an</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="built_in">SUBSTRING</span>(<span class="string">&#x27;wang&#x27;</span>,<span class="number">2</span>);<span class="comment">--ang</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="LOCATE"><a href="#LOCATE" class="headerlink" title="LOCATE"></a>LOCATE</h4><p>获取第一次遇见当前字符/字符串的下标，从1开始</p>
+<p>第一个参数是要查找的字符/字符串，第二个参数是查找的字符字符串。</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> LOCATE(<span class="string">&#x27;w&#x27;</span>,<span class="string">&#x27;wang&#x27;</span>);<span class="comment">--1</span></span><br><span class="line"><span class="keyword">SELECT</span> LOCATE(<span class="string">&#x27;ng&#x27;</span>,<span class="string">&#x27;wang&#x27;</span>);<span class="comment">--3</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="REPLACE"><a href="#REPLACE" class="headerlink" title="REPLACE"></a>REPLACE</h4><p>替换字符，第一个参数是要替换的字符串，第二个参数是老字符/老字符串，第三个参数是新字符/字符串</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> REPLACE(<span class="string">&#x27;wang&#x27;</span>,<span class="string">&#x27;w&#x27;</span>,<span class="string">&#x27;hu&#x27;</span>);<span class="comment">--huang</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="CONCAT"><a href="#CONCAT" class="headerlink" title="CONCAT"></a>CONCAT</h4><p>字符串拼接。</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> CONCAT(<span class="string">&#x27;wa&#x27;</span>,<span class="string">&#x27;ng&#x27;</span>);<span class="comment">--wang</span></span><br><span class="line"><span class="keyword">SELECT</span> CONCAT(<span class="string">&#x27;w&#x27;</span>,<span class="string">&#x27;a&#x27;</span>,<span class="string">&#x27;n&#x27;</span>);<span class="comment">--wan</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="日期-时间"><a href="#日期-时间" class="headerlink" title="日期/时间"></a>日期/时间</h3><h4 id="NOW"><a href="#NOW" class="headerlink" title="NOW"></a>NOW</h4><p>获取当前时间年月日，时分秒。</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> NOW();<span class="comment">--2021-01-01 01:02:03</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="CURDATE"><a href="#CURDATE" class="headerlink" title="CURDATE"></a>CURDATE</h4><p>获取年月日</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> CURDATE();<span class="comment">--2021-01-01</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="CURDATE-1"><a href="#CURDATE-1" class="headerlink" title="CURDATE"></a>CURDATE</h4><p>获取时分秒</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> CURTIME();<span class="comment">--01:02:03</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="YEAR-MONTH-DAY"><a href="#YEAR-MONTH-DAY" class="headerlink" title="YEAR/MONTH/DAY"></a>YEAR/MONTH/DAY</h4><p>分别返回年月日</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">YEAR</span>(NOW()),<span class="keyword">MONTH</span>(NOW()),<span class="keyword">DAY</span>(NOW());<span class="comment">--2021,1,1</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="HOUR-MINUTE-SECOND"><a href="#HOUR-MINUTE-SECOND" class="headerlink" title="HOUR/MINUTE/SECOND"></a>HOUR/MINUTE/SECOND</h4><p>分别返回时分秒</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">HOUR</span>(NOW()),<span class="keyword">MINUTE</span>(NOW()),<span class="keyword">SECOND</span>(NOW());<span class="comment">--1,2,3</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="DAYNAME"><a href="#DAYNAME" class="headerlink" title="DAYNAME"></a>DAYNAME</h4><p>获取英文星期几</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> DAYNAME(NOW());<span class="comment">--Monday</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="MONTH"><a href="#MONTH" class="headerlink" title="MONTH"></a>MONTH</h4><p>获取英文月份</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> MONTHNAME(NOW());<span class="comment">--January</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="EXTRACT"><a href="#EXTRACT" class="headerlink" title="EXTRACT"></a>EXTRACT</h4><p>获取数字类型的日期</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="built_in">EXTRACT</span>(<span class="keyword">YEAR</span> <span class="keyword">FROM</span> NOW());<span class="comment">--2021</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="DATE-FORMAT"><a href="#DATE-FORMAT" class="headerlink" title="DATE_FORMAT"></a>DATE_FORMAT</h4><p>日期的格式化，第一个参数获取日期，第二个参数是格式化信息</p>
+<p>其中请注意：</p>
+<table>
+<thead>
+<tr>
+<th>形式</th>
+<th>寓意</th>
+<th>形式</th>
+<th>寓意</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>%y</td>
+<td>两位数的年份比如(2021年返回21)</td>
+<td>%Y</td>
+<td>四位数的年份比如（2021年返回2021）</td>
+</tr>
+<tr>
+<td>%m</td>
+<td>两位数的份比如(一月份返回01)</td>
+<td>%M</td>
+<td>返回英文月份比如一月份返回(January)</td>
+</tr>
+<tr>
+<td>%d</td>
+<td>两位数的日比如（一号返回01）</td>
+<td>%D</td>
+<td>返回英文日期比如（一号返回1th）</td>
+</tr>
+</tbody></table>
+<p>从该网站进行查找翻阅:<a href="https://www.w3school.com.cn/sql/func_date_format.asp">MySQL DATE_FORMAT() 函数 </a></p>
+<p>只要有这些字符便会被替换为数字，所以我们方便的进行数字格式修改。</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> DATE_FORMAT(NOW(),<span class="string">&#x27;%y:%m&#x27;</span>);<span class="comment">--21:01</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="DATE-ADD"><a href="#DATE-ADD" class="headerlink" title="DATE_ADD"></a>DATE_ADD</h4><p>日期时间的增加。</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> NOW(),DATE_ADD(NOW(),<span class="type">INTERVAL</span> <span class="number">1</span> <span class="keyword">YEAR</span>);</span><br><span class="line"><span class="comment">--2021-01-01 01:02:03, --2022-01-01 01:02:03 </span></span><br></pre></td></tr></table></figure>
+
+<h4 id="DATE-SUB"><a href="#DATE-SUB" class="headerlink" title="DATE_SUB"></a>DATE_SUB</h4><p>日期是时间的减少。</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> NOW(),DATE_SUB(NOW(),<span class="type">INTERVAL</span> <span class="number">1</span> <span class="keyword">YEAR</span>);</span><br><span class="line"><span class="comment">--2021-01-01 01:02:03, --2020-01-01 01:02:03 </span></span><br><span class="line"><span class="keyword">SELECT</span> NOW(),DATE_ADD(NOW(),<span class="type">INTERVAL</span> <span class="number">-1</span> <span class="keyword">YEAR</span>);</span><br><span class="line"><span class="comment">--2021-01-01 01:02:03, --2020-01-01 01:02:03 </span></span><br></pre></td></tr></table></figure>
+
+<h4 id="DATEDIFF"><a href="#DATEDIFF" class="headerlink" title="DATEDIFF"></a>DATEDIFF</h4><p>求两个日期相差多少天，注意早的日期在后。</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> DATEDIFF(<span class="string">&#x27;2021-01-05 09:00&#x27;</span>,<span class="string">&#x27;2021-01-01 09:01&#x27;</span>);</span><br><span class="line"><span class="comment">--4</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="TIME-TO-SEC"><a href="#TIME-TO-SEC" class="headerlink" title="TIME_TO_SEC"></a>TIME_TO_SEC</h4><p>求两个日期相差多少秒，注意早的日期在前</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> TIME_TO_SEC(<span class="string">&#x27;2021-01-05 09:01&#x27;</span>)<span class="operator">-</span>TIME_TO_SEC(<span class="string">&#x27;2021-01-01 09:00&#x27;</span>);</span><br><span class="line"><span class="comment">--60</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="空值变换"><a href="#空值变换" class="headerlink" title="空值变换"></a>空值变换</h3><h4 id="IFNULL"><a href="#IFNULL" class="headerlink" title="IFNULL"></a>IFNULL</h4><p>如果这个值是空值则输出我们定义的值。</p>
+<p>下列例子中<code>shipper_id</code>字段为空的地方都变为了<code>Not assigned</code>;</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> order_id,IFNULL(shipper_id,<span class="string">&#x27;Not assigned&#x27;</span>) <span class="keyword">AS</span> shipper</span><br><span class="line"><span class="keyword">FROM</span> orders;</span><br></pre></td></tr></table></figure>
+
+<h4 id="COALESCE"><a href="#COALESCE" class="headerlink" title="COALESCE"></a>COALESCE</h4><p>如果这个值是空值则输出另一个字段的值，如果另一个字段也是空值输出我们定义的值。</p>
+<p>下列例子中<code>shipper_id</code>字段为空的地方都变为了<code>comments</code>字段的值，如果该字段也为空输出<code>Not assigned</code>;</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> order_id,<span class="built_in">COALESCE</span>(shipper_id,comments,<span class="string">&#x27;Not assigned&#x27;</span>) <span class="keyword">AS</span> shipper</span><br><span class="line"><span class="keyword">FROM</span> orders;</span><br></pre></td></tr></table></figure>
+
+<h4 id="IF"><a href="#IF" class="headerlink" title="IF"></a>IF</h4><p>判断语句，第一个参数为判断条件，第二个参数为满足条件后返回的值，第三个参数为不满足条件后返回的值。</p>
+<p>下列例子中如果是当年订单返回<code>Active</code>否则返回<code>Archived</code>。</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> order_id,order_Date,IF(<span class="keyword">YEAR</span>(NOW())<span class="operator">=</span> <span class="keyword">YEAR</span>(order_date),<span class="string">&#x27;Actice&#x27;</span>,<span class="string">&#x27;Archived&#x27;</span>)</span><br><span class="line"><span class="keyword">FROM</span> orders</span><br></pre></td></tr></table></figure>
+
+<h4 id="CASE"><a href="#CASE" class="headerlink" title="CASE"></a>CASE</h4><p>判断语句当有多个条件的时候使用。</p>
+<p><code>CASE</code>开始，<code>END</code>结束，<code>WHEN</code>做条件，<code>THEN</code>做返回值。</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> order_id,order_Date,</span><br><span class="line">  <span class="keyword">CASE</span> </span><br><span class="line">    <span class="keyword">WHEN</span> <span class="keyword">YEAR</span>(NOW()) <span class="operator">=</span> <span class="keyword">YEAR</span>(order_date) <span class="keyword">THEN</span> <span class="string">&#x27;Active&#x27;</span></span><br><span class="line">    <span class="keyword">WHEN</span> <span class="keyword">YEAR</span>(NOW())<span class="number">-1</span> <span class="operator">=</span> <span class="keyword">YEAR</span>(order_date) <span class="keyword">THEN</span> <span class="string">&#x27;Last year&#x27;</span></span><br><span class="line">    <span class="keyword">WHEN</span> <span class="keyword">YEAR</span>(NOW())<span class="number">-1</span> <span class="operator">&gt;</span> <span class="keyword">YEAR</span>(order_date) <span class="keyword">THEN</span> <span class="string">&#x27;Archived&#x27;</span></span><br><span class="line">    <span class="keyword">ELSE</span> <span class="string">&#x27;Future&#x27;</span></span><br><span class="line">  <span class="keyword">END</span> <span class="keyword">AS</span> category  </span><br><span class="line"><span class="keyword">FROM</span> orders</span><br></pre></td></tr></table></figure>
+
+
+
+]]></content>
+      <categories>
+        <category>SQL</category>
+      </categories>
+      <tags>
+        <tag>SQL</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>SQL进阶学习</title>
+    <url>/2021/10/02/05-SQL%E8%BF%9B%E9%98%B6%E5%AD%A6%E4%B9%A0/</url>
+    <content><![CDATA[<h1 id="SQL进阶学习"><a href="#SQL进阶学习" class="headerlink" title="SQL进阶学习"></a>SQL进阶学习</h1><h2 id="视图"><a href="#视图" class="headerlink" title="视图"></a>视图</h2><p>我们有时候需要经常性的需要一些查询结果，快速它的查询过程极为繁琐，这种情况下可以采用视图将结果进行保存。再下一次查询的时候只需要查询视图即可。</p>
+<p>视图不存储数据，他只是数据的搬运工。因此数据表中数据的更新也会使视图中的数据更新。</p>
+<h3 id="视图创建"><a href="#视图创建" class="headerlink" title="视图创建"></a>视图创建</h3><p>我们来将每一个顾客的收支情况存入视图。</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">VIEW</span> clients_balance <span class="keyword">AS</span> </span><br><span class="line">   <span class="keyword">SELECT</span> c.client_id,c.name,<span class="built_in">SUM</span>(invoice_total<span class="operator">-</span>payment_total) <span class="keyword">AS</span> balance</span><br><span class="line">   <span class="keyword">FROM</span> clients c</span><br><span class="line">   <span class="keyword">JOIN</span> invoices i <span class="keyword">USING</span> (client_id)</span><br><span class="line">   <span class="keyword">GROUP</span> <span class="keyword">BY</span> client_id,NAME;</span><br></pre></td></tr></table></figure>
+
+<h3 id="视图查询"><a href="#视图查询" class="headerlink" title="视图查询"></a>视图查询</h3><h4 id="属性查询"><a href="#属性查询" class="headerlink" title="属性查询"></a>属性查询</h4><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">DESCRIBE</span> clients_balance；</span><br><span class="line"><span class="comment">--简写</span></span><br><span class="line"><span class="keyword">DESC</span> clients_balance;</span><br></pre></td></tr></table></figure>
+
+<h4 id="数据查询"><a href="#数据查询" class="headerlink" title="数据查询"></a>数据查询</h4><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> clients_balance;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="视图修改"><a href="#视图修改" class="headerlink" title="视图修改"></a>视图修改</h3><p>我们可以通过修改视图来重新构建/获取视图，<code>OR REPLACE</code>关键词可以做到。</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">OR</span> REPLACE <span class="keyword">VIEW</span> clients_balance <span class="keyword">AS</span> </span><br><span class="line">   <span class="keyword">SELECT</span> c.client_id,c.name,<span class="built_in">SUM</span>(invoice_total<span class="operator">-</span>payment_total) <span class="keyword">AS</span> balance</span><br><span class="line">   <span class="keyword">FROM</span> clients c</span><br><span class="line">   <span class="keyword">JOIN</span> invoices i <span class="keyword">USING</span> (client_id)</span><br><span class="line">   <span class="keyword">GROUP</span> <span class="keyword">BY</span> client_id,NAME;</span><br></pre></td></tr></table></figure>
+
+<h3 id="视图删除"><a href="#视图删除" class="headerlink" title="视图删除"></a>视图删除</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">DROP</span> <span class="keyword">VIEW</span> clients_balance;</span><br><span class="line"></span><br><span class="line"><span class="keyword">DROP</span> <span class="keyword">VIEW</span> IF <span class="keyword">EXISTS</span> clients_balance;</span><br></pre></td></tr></table></figure>
+
+<h3 id="可更新视图"><a href="#可更新视图" class="headerlink" title="可更新视图"></a>可更新视图</h3><p>有时候我们没有对数据表的数据进行增删改的操作权限，但是我们又需要有这样的业务。那么我们可以通过创建一个可更新视图来完成这样的操作。</p>
+<p>可更新视图有以下几个特点：</p>
+<ol>
+<li><p>视图中不含有<code>DICTINCT</code>函数。</p>
+</li>
+<li><p>视图中没有聚合函数(<code>MAX/MIN/SUM</code>)等等。</p>
+</li>
+<li><p>视图中不含有<code>GROUP BY</code>等分组。</p>
+</li>
+<li><p>视图中不含有<code>UNION</code>联合查询。</p>
+</li>
+</ol>
+<p>满足上述条件我们就可以对他进行增删改，结构和在数据表中的操作差不多。</p>
+<p>注意在视图中的更新也会在数据表中更新，也就是说视图中删除了，原表中也将会删除数据。</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment">--增加</span></span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> clients_view <span class="keyword">VALUE</span>(<span class="number">6</span>,<span class="string">&#x27;wang&#x27;</span>)</span><br><span class="line"><span class="comment">--修改</span></span><br><span class="line">update clients_view <span class="keyword">set</span> name<span class="operator">=</span><span class="string">&#x27;wnag&#x27;</span></span><br><span class="line"><span class="keyword">where</span> id<span class="operator">=</span><span class="number">1</span>;</span><br><span class="line"><span class="comment">--删除</span></span><br><span class="line"><span class="keyword">DELETE</span> <span class="keyword">FROM</span> clients_view</span><br><span class="line"><span class="keyword">WHERE</span> NAME<span class="operator">=</span><span class="string">&#x27;zhang&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="WITH-CHECk-OPTION"><a href="#WITH-CHECk-OPTION" class="headerlink" title="WITH CHECk OPTION"></a>WITH CHECk OPTION</h3><p>我们在更新视图的查询过程，可能会减少一些行，有时候我们并不想要减少这些行，可以通过<code>WITH CHECR OPTION</code>关键词来获取这些行。</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">OR</span> REPLACE <span class="keyword">VIEW</span> clients_balance <span class="keyword">AS</span> </span><br><span class="line">   <span class="keyword">SELECT</span> invoice_id,</span><br><span class="line">   invoice_total,</span><br><span class="line">   payment_total,</span><br><span class="line">   invoice_total<span class="operator">-</span>payment_total <span class="keyword">AS</span> balance</span><br><span class="line">   <span class="keyword">FROM</span> invoices</span><br><span class="line">   <span class="keyword">WHERE</span> (invoice_total<span class="operator">-</span>payment_total)<span class="operator">&gt;</span><span class="number">0</span></span><br><span class="line"><span class="keyword">WITH</span> <span class="keyword">CHECK</span> OPTION;</span><br></pre></td></tr></table></figure>
+
+<p>然后我们在视图中寻找一行，更新该行的<code>payment_total</code>使<code>balance</code>值为0，看看该行会不会消失。</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">UPDATE clients_balance</span><br><span class="line"><span class="keyword">SET</span> payment_total <span class="operator">=</span> invoice_total</span><br><span class="line"><span class="keyword">WHERE</span> invoice_id<span class="operator">=</span><span class="number">3</span></span><br></pre></td></tr></table></figure>
+
+<p>此时会报错，提示检查视图失败，通过这种方式我们可以避免视图中的数据丢失。</p>
+<h3 id="视图的优点"><a href="#视图的优点" class="headerlink" title="视图的优点"></a>视图的优点</h3><ol>
+<li>简化查询。</li>
+<li>减少数据表改变带来的影响。</li>
+<li>限制用户对数据的访问。</li>
+</ol>
+<h2 id="存储过程"><a href="#存储过程" class="headerlink" title="存储过程"></a>存储过程</h2><p>我们知道在开发过程中，我们不仅仅需要一门语言，SQL仅仅是数据存储中使用的一门语言。我们不想在其它地方使用它，比如JAVA的代码中，那会使我们很难部署并且调试我们的代码。</p>
+<p>我觉得存储过程就是一个面向对象的设计，把数据的管理通过存储过程来实现，可以增强数据的安全性。</p>
+<h3 id="创建存储过程"><a href="#创建存储过程" class="headerlink" title="创建存储过程"></a>创建存储过程</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">PROCEDURE</span> get_client()</span><br><span class="line"><span class="keyword">BEGIN</span></span><br><span class="line">   <span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> clients;</span><br><span class="line"><span class="keyword">END</span> </span><br></pre></td></tr></table></figure>
+
+<p>在除了<code>MySQL</code>数据库以外的地方这样写好像没有什么问题，但是<code>MySQL</code>中需要更换写法。因为SQL的语法需要在<code>select</code>以后加一个分号，但是我们的语句是到<code>END</code>才结束。所以需要改变分隔符。</p>
+<h4 id="DEFINER"><a href="#DEFINER" class="headerlink" title="DEFINER"></a>DEFINER</h4><p>定义该存储过程是是写的，如果没有写，默认为创建者。</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">DELIMITER $$</span><br><span class="line"><span class="keyword">CREATE</span> DEFINER `root`@`localhost` <span class="keyword">PROCEDURE</span> get_client()</span><br><span class="line"><span class="keyword">BEGIN</span></span><br><span class="line">   <span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> clients;</span><br><span class="line"><span class="keyword">END</span>$$</span><br><span class="line">DELIMITER ;</span><br></pre></td></tr></table></figure>
+
+<h3 id="DELIMITER"><a href="#DELIMITER" class="headerlink" title="DELIMITER"></a>DELIMITER</h3><p><code>DELIMITER</code>可以更改分隔符。</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">DELIMITER $$</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">PROCEDURE</span> get_client()</span><br><span class="line"><span class="keyword">BEGIN</span></span><br><span class="line">   <span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> clients;</span><br><span class="line"><span class="keyword">END</span>$$</span><br><span class="line">DELIMITER ;</span><br></pre></td></tr></table></figure>
+
+<h3 id="SQL中调用存储过程"><a href="#SQL中调用存储过程" class="headerlink" title="SQL中调用存储过程"></a>SQL中调用存储过程</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">CALL</span> get_client();</span><br></pre></td></tr></table></figure>
+
+<h3 id="删除数据库"><a href="#删除数据库" class="headerlink" title="删除数据库"></a>删除数据库</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">DROP</span> <span class="keyword">PROCEDURE</span> get_clients;</span><br><span class="line"></span><br><span class="line"><span class="keyword">DROP</span> <span class="keyword">PROCEDURE</span> IF <span class="keyword">EXISTS</span> get_clients;</span><br></pre></td></tr></table></figure>
+
+<h3 id="带参数的存储过程"><a href="#带参数的存储过程" class="headerlink" title="带参数的存储过程"></a>带参数的存储过程</h3><p>为了保证起的名字不一样，我喜欢用给数据表起别名的方式来进行区分，多个参数用<code>,</code>逗号分隔即可。</p>
+<p>也有一些大佬喜欢更改参数名称，请自便。</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">DELIMITER $$</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">PROCEDURE</span> get_client_by_id(client_id <span class="type">INT</span>(<span class="number">11</span>))</span><br><span class="line"><span class="keyword">BEGIN</span></span><br><span class="line">   <span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> clients c</span><br><span class="line">   <span class="keyword">WHERE</span> c.client_id<span class="operator">=</span>client_id;</span><br><span class="line"><span class="keyword">END</span>$$</span><br><span class="line">DELIMITER ;</span><br><span class="line"></span><br><span class="line"><span class="keyword">CALL</span> get_client_by_id(<span class="number">1</span>);</span><br></pre></td></tr></table></figure>
+
+<h3 id="给参数默认值的存储过程"><a href="#给参数默认值的存储过程" class="headerlink" title="给参数默认值的存储过程"></a>给参数默认值的存储过程</h3><p>其实就是<code>IF</code>语句的使用</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">DROP</span> <span class="keyword">PROCEDURE</span> IF <span class="keyword">EXISTS</span> get_client_by_id;</span><br><span class="line">DELIMITER $$</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">PROCEDURE</span> get_client_by_id(client_id <span class="type">INT</span>(<span class="number">11</span>))</span><br><span class="line"><span class="keyword">BEGIN</span></span><br><span class="line">   IF client_id <span class="keyword">IS</span> <span class="keyword">NULL</span> <span class="keyword">THEN</span> </span><br><span class="line">      <span class="keyword">SET</span> client_id<span class="operator">=</span><span class="number">1</span>;</span><br><span class="line">   <span class="keyword">END</span> IF;</span><br><span class="line">   <span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> clients c</span><br><span class="line">   <span class="keyword">WHERE</span> c.client_id<span class="operator">=</span>client_id;</span><br><span class="line"><span class="keyword">END</span>$$</span><br><span class="line">DELIMITER ;</span><br><span class="line"></span><br><span class="line"><span class="keyword">CALL</span> get_client_by_id(<span class="keyword">NULL</span>);</span><br></pre></td></tr></table></figure>
+
+<p>当然我们也可以使用<code>IFNULL</code>,注意<code>SQL server</code>可能使用的是<code>ISNULL</code> 。</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">DROP</span> <span class="keyword">PROCEDURE</span> IF <span class="keyword">EXISTS</span> get_client_by_id;</span><br><span class="line">DELIMITER $$</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">PROCEDURE</span> get_client_by_id(client_id <span class="type">INT</span>(<span class="number">11</span>))</span><br><span class="line"><span class="keyword">BEGIN</span></span><br><span class="line">   <span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> clients c</span><br><span class="line">   <span class="keyword">WHERE</span> c.client_id<span class="operator">=</span>IFNULL(client_id,c.client_id);</span><br><span class="line"><span class="keyword">END</span>$$</span><br><span class="line">DELIMITER ;</span><br><span class="line"></span><br><span class="line"><span class="keyword">CALL</span> get_client_by_id(<span class="keyword">NULL</span>);</span><br></pre></td></tr></table></figure>
+
+<h3 id="参数校验"><a href="#参数校验" class="headerlink" title="参数校验"></a>参数校验</h3><p><code>SIGNAL SQLSTATE</code>去获取错误编码，<code>SET MESSAGE_TEXT</code>写入错误信息。</p>
+<p>关于错误编码的事情网上搜<code>SQL STATE</code>就有很多，我就不列举了。</p>
+<p>下列例子对编号小于等于0的进行了验证：</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">DROP</span> <span class="keyword">PROCEDURE</span> IF <span class="keyword">EXISTS</span> get_client_by_id;</span><br><span class="line">DELIMITER $$</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">PROCEDURE</span> get_client_by_id(client_id <span class="type">INT</span>(<span class="number">11</span>))</span><br><span class="line"><span class="keyword">BEGIN</span></span><br><span class="line">   IF client_id<span class="operator">&lt;=</span><span class="number">0</span> <span class="keyword">THEN</span></span><br><span class="line">      SIGNAL <span class="keyword">SQLSTATE</span> <span class="string">&#x27;22003&#x27;</span></span><br><span class="line">        <span class="keyword">SET</span> MESSAGE_TEXT <span class="operator">=</span> <span class="string">&#x27;Invalid payment amount&#x27;</span>;</span><br><span class="line">   <span class="keyword">END</span> IF;</span><br><span class="line">   <span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> clients c</span><br><span class="line">   <span class="keyword">WHERE</span> c.client_id<span class="operator">=</span>client_id;</span><br><span class="line"><span class="keyword">END</span>$$</span><br><span class="line">DELIMITER ;</span><br><span class="line"></span><br><span class="line"><span class="keyword">CALL</span> get_client_by_id(<span class="number">-1</span>);</span><br></pre></td></tr></table></figure>
+
+<h3 id="存储过程输出"><a href="#存储过程输出" class="headerlink" title="存储过程输出"></a>存储过程输出</h3><p><code>OUT</code>关键字。</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">DROP</span> <span class="keyword">PROCEDURE</span> IF <span class="keyword">EXISTS</span> get_client_by_id;</span><br><span class="line">DELIMITER $$</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">PROCEDURE</span> get_client_by_id(</span><br><span class="line">client_id <span class="type">INT</span>,</span><br><span class="line"><span class="keyword">OUT</span> p_name <span class="type">VARCHAR</span>(<span class="number">50</span>))</span><br><span class="line"><span class="keyword">BEGIN</span></span><br><span class="line">   <span class="keyword">SELECT</span> c.name </span><br><span class="line">   <span class="keyword">INTO</span> p_name<span class="comment">--输出的名字</span></span><br><span class="line">   <span class="keyword">FROM</span> clients c</span><br><span class="line">   <span class="keyword">WHERE</span> c.client_id<span class="operator">=</span>IFNULL(client_id,c.client_id);</span><br><span class="line"><span class="keyword">END</span>$$</span><br><span class="line">DELIMITER ;</span><br><span class="line"></span><br><span class="line"><span class="keyword">SET</span> <span class="variable">@NAME</span> <span class="operator">=</span> <span class="string">&#x27;&#x27;</span>;</span><br><span class="line"><span class="keyword">CALL</span> get_client_by_id(<span class="keyword">NULL</span>,<span class="variable">@NAME</span>);</span><br><span class="line"><span class="keyword">SELECT</span> <span class="variable">@NAME</span>;</span><br></pre></td></tr></table></figure>
+
+<p>关于存储过程的输出，我个人觉得其实没有那么好用，也不建议使用。</p>
+<h2 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h2><p>直接赋值，相当于全局变量，作用域为当前整个事务。</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SET</span> <span class="variable">@w</span><span class="operator">=</span><span class="number">2</span>;</span><br><span class="line"><span class="keyword">SELECT</span> <span class="variable">@w</span>;</span><br></pre></td></tr></table></figure>
+
+<h4 id="DECLARE"><a href="#DECLARE" class="headerlink" title="DECLARE"></a>DECLARE</h4><p>主要用于存储过程中：</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">DECLARE</span> var1 <span class="type">INT</span> <span class="keyword">DEFAULT</span> <span class="number">0</span>; </span><br></pre></td></tr></table></figure>
+
+<h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><p>DETERMINISTIC–保证输入数据一样时输出结果不变<br>READS SQL DATA –保证可以读取数据<br>MODIFIES SQL DATA–保证可以修改数据</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">DROP</span> <span class="keyword">FUNCTION</span> IF <span class="keyword">EXISTS</span> get_name;</span><br><span class="line">DELIMITER $$</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">FUNCTION</span> get_name(client_id <span class="type">INT</span>) </span><br><span class="line"><span class="keyword">RETURNS</span> <span class="type">VARCHAR</span>(<span class="number">50</span>)</span><br><span class="line"><span class="keyword">BEGIN</span></span><br><span class="line">   <span class="keyword">DECLARE</span> a <span class="type">VARCHAR</span>(<span class="number">50</span>);</span><br><span class="line">   <span class="keyword">SELECT</span> c.name</span><br><span class="line">   <span class="keyword">INTO</span> a <span class="keyword">FROM</span> clients c <span class="keyword">WHERE</span> c.client_id<span class="operator">=</span>client_id;</span><br><span class="line">   <span class="keyword">RETURN</span> a;</span><br><span class="line"><span class="keyword">END</span>$$</span><br><span class="line">DELIMITER ;</span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> get_name(<span class="number">1</span>);</span><br></pre></td></tr></table></figure>
+
+<h2 id="触发器"><a href="#触发器" class="headerlink" title="触发器"></a>触发器</h2><h3 id="创建触发器"><a href="#创建触发器" class="headerlink" title="创建触发器"></a>创建触发器</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">DELIMITER $$</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TRIGGER</span> payments_after_delete</span><br><span class="line">   AFTER <span class="keyword">DELETE</span> <span class="keyword">ON</span> payments</span><br><span class="line">   <span class="keyword">FOR</span> <span class="keyword">EACH</span> <span class="type">ROW</span></span><br><span class="line"><span class="keyword">BEGIN</span></span><br><span class="line">   UPDATE invoices</span><br><span class="line">   <span class="keyword">SET</span> payment_total<span class="operator">=</span>payment_total <span class="operator">-</span>OLD.amount</span><br><span class="line">   <span class="keyword">WHERE</span> invoice_id <span class="operator">=</span> old.invoice_id;</span><br><span class="line"><span class="keyword">END</span> $$</span><br><span class="line">DELIMITER ;</span><br><span class="line"></span><br><span class="line"><span class="keyword">DELETE</span> <span class="keyword">FROM</span> payments <span class="keyword">WHERE</span> payment_id<span class="operator">=</span><span class="number">8</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="查询触发器"><a href="#查询触发器" class="headerlink" title="查询触发器"></a>查询触发器</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SHOW</span> TRIGGERS;</span><br><span class="line"><span class="comment">--模糊查询</span></span><br><span class="line"><span class="keyword">SHOW</span> TRIGGERS <span class="keyword">LIKE</span> <span class="string">&#x27;payments%&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="删除触发器"><a href="#删除触发器" class="headerlink" title="删除触发器"></a>删除触发器</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">DROP</span> <span class="keyword">TRIGGER</span> IF <span class="keyword">EXISTS</span> payments_after_delete;</span><br></pre></td></tr></table></figure>
+
+<h2 id="事件"><a href="#事件" class="headerlink" title="事件"></a>事件</h2><p>先在<code>sql</code>变量表中查询所有的变量信息，找到并打开事件系统。</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment">--找到</span></span><br><span class="line"><span class="keyword">SHOW</span> VARIABLES <span class="keyword">LIKE</span> <span class="string">&#x27;event%&#x27;</span>;</span><br><span class="line"><span class="comment">--打开</span></span><br><span class="line"><span class="keyword">SET</span> <span class="keyword">GLOBAL</span> event_scheduler <span class="operator">=</span> <span class="keyword">ON</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="创建事件"><a href="#创建事件" class="headerlink" title="创建事件"></a>创建事件</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">DELIMITER $$</span><br><span class="line"><span class="keyword">CREATE</span> event yearly_delete_stale_audit_rows</span><br><span class="line"><span class="keyword">ON</span> SCHEDULE</span><br><span class="line">   <span class="comment">--只执行一次</span></span><br><span class="line">   <span class="keyword">at</span> <span class="string">&#x27;&#x27;</span></span><br><span class="line">   <span class="comment">--周期执行</span></span><br><span class="line">   <span class="keyword">EVERY</span> <span class="number">1</span> <span class="keyword">YEAR</span> STARTS <span class="string">&#x27;2020-01-01&#x27;</span> ENDS <span class="string">&#x27;2021-01-02&#x27;</span></span><br><span class="line">DO <span class="keyword">BEGIN</span></span><br><span class="line">   <span class="keyword">DELETE</span> <span class="keyword">FROM</span> payments_audit</span><br><span class="line">   <span class="keyword">WHERE</span> action_date<span class="operator">&lt;</span>NOW()<span class="operator">-</span><span class="type">INTERVAL</span> <span class="number">1</span> <span class="keyword">YEAR</span>;</span><br><span class="line"><span class="keyword">END</span> $$</span><br><span class="line">DELIMITER ;</span><br></pre></td></tr></table></figure>
+
+<h3 id="查询事件"><a href="#查询事件" class="headerlink" title="查询事件"></a>查询事件</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SHOW</span> EVENTS;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">SHOW</span> EVENTS IF <span class="keyword">EXISTS</span> yearly_delete_stale_audit_rows;</span><br></pre></td></tr></table></figure>
+
+<h3 id="修改事件"><a href="#修改事件" class="headerlink" title="修改事件"></a>修改事件</h3><p>我们只需要把<code>CREATE</code>改为<code>ALTER</code>即可。</p>
+<p>当然如果是开始或关闭该事件我们可以通过：</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment">--enable开启事件</span></span><br><span class="line"><span class="keyword">ALTER</span> event yearly_delete_stale_audit_rows DISABLE;<span class="comment">--暂停事件</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="删除事件"><a href="#删除事件" class="headerlink" title="删除事件"></a>删除事件</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">DROP</span> EVENTS yearly_delete_stale_audit_rows;</span><br><span class="line"></span><br><span class="line"><span class="keyword">DROP</span> EVENTS IF <span class="keyword">EXISTS</span> yearly_delete_stale_audit_rows</span><br></pre></td></tr></table></figure>
+
+<h2 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h2><h3 id="事务的属性"><a href="#事务的属性" class="headerlink" title="事务的属性"></a>事务的属性</h3><p>事务的属性可以用<code>ACID</code>来概括。也就是原子性<code>atomicity</code>,一致性<code>consistency</code>,隔离性<code>isolation</code>,持久性<code>durability</code>。换而言之就是保证该事务能够不受外界干扰的执行，并且结果可以持久保持的性质。</p>
+<h3 id="事务的创建"><a href="#事务的创建" class="headerlink" title="事务的创建"></a>事务的创建</h3><p>MySQL自带的有一个事务的情况，当我们的增删改操作在使用的时候，会自动加入事务，这样一行数据的更新即为一个事务。</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SHOW</span> VARIABLES <span class="keyword">LIKE</span> <span class="string">&#x27;autocommit%&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>查到后发现默认开启状态。</p>
+<p>那么我们有时候需要对于多行进行操作并且保证在一个事务里边：</p>
+<p><code>START TRANSACTION;</code>事务的开始，<code>COMMIT</code>事务的提交。</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">USE sql_store;</span><br><span class="line"><span class="keyword">START</span> TRANSACTION;</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> orders(customer_id,order_date,STATUS)</span><br><span class="line"><span class="keyword">VALUE</span>(<span class="number">1</span>,<span class="string">&#x27;2021-01-01&#x27;</span>,<span class="number">1</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> orders_item</span><br><span class="line"><span class="keyword">VALUE</span>(LAST_INSERT_ID(),<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>);</span><br><span class="line"><span class="keyword">COMMIT</span>;</span><br></pre></td></tr></table></figure>
+
+<p>有时候我们会人为的想取消该事务并且不让该事务对数据造成影响使用回滚<code>ROLLBACK</code>,去关闭事务并撤销所有更改。</p>
+]]></content>
+      <categories>
+        <category>SQL</category>
+      </categories>
+      <tags>
+        <tag>SQL</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>SQL数据库设计</title>
+    <url>/2021/10/02/08-%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AE%BE%E8%AE%A1/</url>
+    <content><![CDATA[<h1 id="数据库设计"><a href="#数据库设计" class="headerlink" title="数据库设计"></a>数据库设计</h1><h2 id="数据建模"><a href="#数据建模" class="headerlink" title="数据建模"></a>数据建模</h2><h3 id="数据建模的过程"><a href="#数据建模的过程" class="headerlink" title="数据建模的过程"></a>数据建模的过程</h3><p>分四步：</p>
+<p>理解和分析业务需求：与相关专家，业务参与方，终端客户，查看现有的表单，文档，应用程序，电子表格，数据库。</p>
+<p>构建业务的概念模型：业务中的实体，事务或概念以及他们之间的联系。</p>
+<p>构建数据模型/数据结构(逻辑模型)：更加细节了一些，我们需要问了迎合我们的数据库做出一些更规范的设计，比如选用MySQL数据库管理系统时，我们肯定要做一些更加细节的分工。数据库抽象的数据模型只需要展示表和列.</p>
+<p>实体模型：确切的数据类型，列默认值，表主键以及其他对象如视图触发器等。</p>
+<h3 id="概念模型"><a href="#概念模型" class="headerlink" title="概念模型"></a>概念模型</h3><p>在数据建模的第一阶段我们会对业务需求进行分析。从而获得概念模型中的实体，事务以及之间的关系。</p>
+<p>比如我们想要做一个网站去对学生的成绩进行整理和统计。那么我们经过分析可以得到一些简单的实体与关系。</p>
+<p>比如学生，课程，成绩。而他们之间的关系对于学生与课程来讲是多对多的关系，一个学生可以有好几门课程，一个课程也可以由好几个学生来上。我们可以通过实体关系图基本仅用于数据建模，UML图（标准建模语言图）来进行数据建模。</p>
+<p><img src=".%5Cgn_model.png" alt="gn_model"></p>
+<p>注意此时我们更加管住实体的属性以及实体间的关系，但不对属性做具体的分析。</p>
+<h3 id="逻辑模型"><a href="#逻辑模型" class="headerlink" title="逻辑模型"></a>逻辑模型</h3><p>逻辑模型在使用过程中主要增加了数据结构，包括表的设计。</p>
+<p>还拿概念模型的例子，我们可能需要对我们的实体进行更细粒度的划分。</p>
+<p><img src=".%5Clj_model.png" alt="gn_model"></p>
+<p>比如上边的图片，我们给每一个字段加上了数据类型，同时通过加了一个表的方式来进行解耦，从而帮助我们更好的管理数据。</p>
+<h3 id="实体模型"><a href="#实体模型" class="headerlink" title="实体模型"></a>实体模型</h3><p>这时候就需要去创建数据库模型了，也就是说我们需要给每一个数据表设计字段以及他们的类型和长度。</p>
+<p>我习惯性把数据表定义成复数比如学生表定义为<code>students</code>，而字段则多用单数。</p>
+<p>常见的短字符串比如姓名，电话等我们通常设置为50；而对于中等长度的字符串如邮箱我通常设置为255.</p>
+<p>这些要根据业务去进行沟通和定长度。</p>
+<p>总之我们最好尽可能的去减少我们每一个字段占用的磁盘空间，当数据量够大的时候你就会知道这个决定到底有多么正确。</p>
+<h2 id="表设计"><a href="#表设计" class="headerlink" title="表设计"></a>表设计</h2><h3 id="主键"><a href="#主键" class="headerlink" title="主键"></a>主键</h3><p>我们需要有一个字段来代表一个表里的每一行，就比如我们每一个人上学的时候都有属于自己的唯一的代号。这个代号是不能没有的，不能重复的。当然最好是也不能频繁更改的属性，要想满足这些条件，其实我们最好的情况下就是额外再加一行作以编号的区分。</p>
+<p>哦对了，记住一个数据只有一个主键。比较谁也不想别人没事给自己起了两个名字。</p>
+<h3 id="外键"><a href="#外键" class="headerlink" title="外键"></a>外键</h3><p>如同我举得例子，学生和课程表中都有主键，但是连接表的主键其实是没有什么意义的。我们往往需要根据学生编号获取课程编号，课程编号获取学生编号。</p>
+<p>这种将其他表的主键拿过来的方式，叫做外键。</p>
+<p>有的时候我们也可以采用复合主键，比如我们将两个字段值进行组合形成主键，比如我们在此时将学生编号和课程编号来作为复合主键，因为主键不能重复，所以我们可以避免一个课程被同一个学生选了两次。但是也会遇到一些问题，比如我们如果有一个表与这个连接表有联系，那么我们可能会出现一个新的问题。新表与学生表和课程表也有了联系。所以给连接表额外加一个编号字段作为主键以及采取复合主键两种方式需要谨慎考虑。</p>
+<h3 id="外键约束"><a href="#外键约束" class="headerlink" title="外键约束"></a>外键约束</h3><p>我们有时候会遇到一些问题，尽管我们并不想更改一个实体的主键，但是我们有时候需要这么做。</p>
+<p><code>UPDATE</code>操作后我们也可能希望我们的连接表中的外键也跟着变化，此时我们就需要更改外键的约束了，比如我们可以改为<code>CASCADE</code>来作为级联，此时便可以做到我们上述说的。<code>RESTRICT</code>拒绝更新,<code>SET NULL</code>设置空值。<code>NO ACTION</code>无操作，和拒绝更i性能一样。</p>
+<p><code>DELETE</code>操作中，当我们删除了一行数据，我们可能需要他在连接表中也删除。<code>CASCADE</code>可以删除数据，但是我们有时候并不想要丢失数据，<code>NO ACTION</code>可以帮你做到。</p>
+<h2 id="标准化"><a href="#标准化" class="headerlink" title="标准化"></a>标准化</h2><h3 id="第一范式"><a href="#第一范式" class="headerlink" title="第一范式"></a>第一范式</h3><p>第一范式要求，每一个字段都要有单一值，且不允许有重复列。</p>
+<p>举个例子我们的课程，可能分为好多类，并且一个课程可能属于好几个类别。那么我们如果在字段中加入类别这个字段，我们可能会导致一些问题，比如我们对英语课的分类是语言类，外语类。可是对德语课做分类时取名叫语言类，德语类。这样会导致分类变多不容易做筛查和管理。</p>
+<p>最好的办法是将课程种类建立一个表格，将该表与课程表关联起来。因此我们需要在建立一个课程类别与课程的关联表，他在一定程度上是复杂的，但是在实际的运维和操作过程中，随着数据量的增大，这么做的意义也越来越大。可以提高效率。</p>
+<p>这样做的另外一个好处是如果他是作为一个属性存在，我们在更新标签的时候需要更改每一行数据，行级锁的存在让效率大大降低，而这种方式，我们只需要锁住课程种类表的其中一行即可。</p>
+<h3 id="第二范式"><a href="#第二范式" class="headerlink" title="第二范式"></a>第二范式</h3><p>必须先遵循第一范式，不能有任何取决于这组关系任何后选键的任何真子集的非主属性。</p>
+<p>也就是任何一个表要有其单一的目的，作为一个单一的实体。它的每一个字段都是为了描述它的属性。</p>
+<p>在我们的设计中，课程表中的指导老师便是一个错误的例子，我们应该单独做一张老师表，并且做连接表，从而保证合乎第二范式。这么做也会对我们的很多CUD操作产生便捷。</p>
+<h3 id="第三范式"><a href="#第三范式" class="headerlink" title="第三范式"></a>第三范式</h3><p>表中所有的属性，只能由后选键来决定。也就是说每一个属性不能够是被其他属性所影响的。比如我们有一个字段总支出，一个字段总收入，我们不能再加入一个净收入，净收入可以由前两个得到。</p>
+<h2 id="一些建议"><a href="#一些建议" class="headerlink" title="一些建议"></a>一些建议</h2><h3 id="不要过多关注于规则"><a href="#不要过多关注于规则" class="headerlink" title="不要过多关注于规则"></a>不要过多关注于规则</h3><p>实际的开发当中，只要注意减少冗余就可以了，没有人关注我们到底使用的是第几范式。</p>
+<p>举个例子:我们有一个表，有姓名和收货地址，如果一个客户有多个收货地址，我们就需要一个方法去减少冗余了。我们会产生大量的冗余，我们可以单独建立一张地址表。这样的理解要比第几范式更好理解一点。</p>
+<h3 id="不要对什么都建模"><a href="#不要对什么都建模" class="headerlink" title="不要对什么都建模"></a>不要对什么都建模</h3><p>我们的任何建模都是基于当前的业务需要来进行的。不要去对未来情况做预测。比如我们的用户表，可能会更改姓名，那么我们是否要把原来的名字做存储呢，除非很有必要，要不然最好不要这么做。</p>
+<p>我们不可能对所有未来的情况做出预测并建立模型，针对当前问题，用合理而又简约的方式解决它，要比建模去解决更合适。</p>
+<p>至于业务需求，应该是顾客和老板的意思。我们仅仅专注于眼下情况的实现即可。当然这需要我们更加慎重的对我们当前业务需求的理解和建模。</p>
+<h2 id="模型工程"><a href="#模型工程" class="headerlink" title="模型工程"></a>模型工程</h2><p>正向工程:将我们的逻辑模型转化为我们的数据库。</p>
+<p>逆向工程:将我们的数据库转化为逻辑模型。</p>
+]]></content>
+      <categories>
+        <category>SQL</category>
+      </categories>
+      <tags>
+        <tag>SQL</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>SQL并发与锁</title>
+    <url>/2021/10/02/06-%E5%B9%B6%E5%8F%91%E4%B8%8E%E9%94%81/</url>
+    <content><![CDATA[<h1 id="并发"><a href="#并发" class="headerlink" title="并发"></a>并发</h1><h2 id="MySQL默认的行级锁"><a href="#MySQL默认的行级锁" class="headerlink" title="MySQL默认的行级锁"></a>MySQL默认的行级锁</h2><p>当我们在MySQL数据库开启一个事务，并对一行数据进行修改，该行在事务期间被锁定，也就是说除了该事务其余事务无法对该行进行操作。从而保证了数据的安全性。也就是MySQL默认的行级锁。</p>
+<h2 id="并发的常见问题和解决方式"><a href="#并发的常见问题和解决方式" class="headerlink" title="并发的常见问题和解决方式"></a>并发的常见问题和解决方式</h2><h3 id="事务的隔离级别"><a href="#事务的隔离级别" class="headerlink" title="事务的隔离级别"></a>事务的隔离级别</h3><ol>
+<li>读未提交</li>
+<li>读已提交</li>
+<li>可重复读</li>
+<li>可串行化</li>
+</ol>
+<h3 id="脏读"><a href="#脏读" class="headerlink" title="脏读"></a>脏读</h3><p>读取到了事务尚未提交的修改后数据。</p>
+<p>例如事务A 对于数据进行了更改，比如增加了用户的余额，但是这一行为还没有提交，此时用户看到了自己的余额。然后如果事务A此时撤销了事务，那么用户看到的余额也就是一个垃圾数据，叫做脏读。</p>
+<h3 id="不可重复读"><a href="#不可重复读" class="headerlink" title="不可重复读"></a>不可重复读</h3><p>我们在同一个事务中多次查询，读到不一样的数据。</p>
+<p>比如顾客先读取了自己的余额有10块钱，然后去买东西，交钱之前，他的老婆把十块钱取走了，他交钱的时候发现自己没有钱。</p>
+<h3 id="幻读"><a href="#幻读" class="headerlink" title="幻读"></a>幻读</h3><p>我们的查询结果的事务先于更新结束，导致我们没有查到一些复合条件的数据。</p>
+<h3 id="查看当前隔离级别"><a href="#查看当前隔离级别" class="headerlink" title="查看当前隔离级别"></a>查看当前隔离级别</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SHOW</span> VARIABLES <span class="keyword">LIKE</span> <span class="string">&#x27;transaction_isolation%&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="修改当前隔离级别"><a href="#修改当前隔离级别" class="headerlink" title="修改当前隔离级别"></a>修改当前隔离级别</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment">--可串行化</span></span><br><span class="line"><span class="keyword">SET</span> TRANSACTION ISOLATION LEVEL SERIALIZABLE;</span><br><span class="line"><span class="comment">--可重复读</span></span><br><span class="line"><span class="keyword">SET</span> TRANSACTION ISOLATION LEVEL REPEATABLE<span class="operator">-</span>READ;</span><br><span class="line"><span class="comment">--读已提交</span></span><br><span class="line"><span class="keyword">SET</span> TRANSACTION ISOLATION LEVEL READ COMMITTED;</span><br><span class="line"><span class="comment">--读未提交</span></span><br><span class="line"><span class="keyword">SET</span> TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;</span><br></pre></td></tr></table></figure>
+
+<h3 id="全局修改隔离级别"><a href="#全局修改隔离级别" class="headerlink" title="全局修改隔离级别"></a>全局修改隔离级别</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SET</span> <span class="keyword">GLOBAL</span> TRANSACTION ISOLATION LEVEL SERIALIZABLE;</span><br></pre></td></tr></table></figure>
+
+<h3 id="为当前会话和连接设置隔离级别"><a href="#为当前会话和连接设置隔离级别" class="headerlink" title="为当前会话和连接设置隔离级别"></a>为当前会话和连接设置隔离级别</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SET</span> SESSION TRANSACTION ISOLATION LEVEL SERIALIZABLE;</span><br></pre></td></tr></table></figure>
+
+<h3 id="死锁"><a href="#死锁" class="headerlink" title="死锁"></a>死锁</h3><p>死锁是指两个或两个以上的进程在执行过程中，由于竞争资源或者由于彼此通信而造成的一种阻塞的现象，若无外力作用，它们都将无法推进下去。此时称系统处于死锁状态或系统产生了死锁，这些永远在互相等待的进程称为死锁进程。</p>
+<ol>
+<li>循环等待</li>
+<li>不可剥夺</li>
+<li>互斥性：指进程对所分配到的资源进行排它性使用，即在一段时间内某资源只由一个进程占用。</li>
+<li>请求和保持</li>
+</ol>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">START</span> TRANSACTION;</span><br><span class="line">UPDATE <span class="keyword">ORDER</span> <span class="keyword">SET</span> STATUS<span class="operator">=</span><span class="number">1</span> <span class="keyword">WHERE</span> order_id<span class="operator">=</span><span class="number">1</span>;</span><br><span class="line">UPDATE customers <span class="keyword">SET</span> state<span class="operator">=</span><span class="string">&#x27;VA&#x27;</span> <span class="keyword">WHERE</span> customer_id<span class="operator">=</span><span class="number">1</span>;</span><br><span class="line"><span class="keyword">COMMIT</span>;</span><br><span class="line"><span class="comment">--</span></span><br><span class="line"><span class="keyword">START</span> TRANSACTION;</span><br><span class="line">UPDATE customers <span class="keyword">SET</span> state<span class="operator">=</span><span class="string">&#x27;VA&#x27;</span> <span class="keyword">WHERE</span> customer_id<span class="operator">=</span><span class="number">1</span>;</span><br><span class="line">UPDATE <span class="keyword">ORDER</span> <span class="keyword">SET</span> STATUS<span class="operator">=</span><span class="number">1</span> <span class="keyword">WHERE</span> order_id<span class="operator">=</span><span class="number">1</span>;</span><br><span class="line"><span class="keyword">COMMIT</span>;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>SQL</category>
+      </categories>
+      <tags>
+        <tag>SQL</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>SQL数据类型</title>
+    <url>/2021/10/02/07-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</url>
+    <content><![CDATA[<h1 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h1><h2 id="整数类型"><a href="#整数类型" class="headerlink" title="整数类型"></a>整数类型</h2><table>
+<thead>
+<tr>
+<th>关键词</th>
+<th>最大长度</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>TINYINT</td>
+<td>[-128, 127]</td>
+</tr>
+<tr>
+<td>UNSIGNED TINYINT</td>
+<td>[0, 255]</td>
+</tr>
+<tr>
+<td>SMALLINT</td>
+<td>[-32k, 32k]</td>
+</tr>
+<tr>
+<td>MEDIUMINT</td>
+<td>[-8M, 8M]</td>
+</tr>
+<tr>
+<td>INT</td>
+<td>[-2B, 2B]</td>
+</tr>
+<tr>
+<td>BIGINT</td>
+<td>[-9Z, 9Z]</td>
+</tr>
+</tbody></table>
+<p>整数类型多为定长换句话说,如果你定义了一个长度为3的<code>INT</code>类型，输入一个1会默认前边加两个0。也就是占了额外的空间开销。所以如果你需要存储一个人的年龄可以尽量使用<code>UNSIGNED TINYINT</code>。</p>
+<h2 id="浮点数类型"><a href="#浮点数类型" class="headerlink" title="浮点数类型"></a>浮点数类型</h2><p><code>DECIMAL(p,s)</code>,p的范围为1-65，s是小数点后的位数。</p>
+<p>如果你定义了一个<code>DECIMAL(6,2)</code>指的是小数点前4位，小数点后2两位。</p>
+<p>有的数据库中也是用<code>DEC/NUMERIC/FIXED</code>等来代替<code>DECIMAL</code>。</p>
+<p>双精度的浮点数常用于进行科学计算。他们并不存储准确值。有两个<code>FLOAT/DOUBLE</code>前者占四字节，后者占八字节。</p>
+<h2 id="字符串类型"><a href="#字符串类型" class="headerlink" title="字符串类型"></a>字符串类型</h2><table>
+<thead>
+<tr>
+<th>关键字</th>
+<th>最大长度</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>CHAR</td>
+<td></td>
+</tr>
+<tr>
+<td>VARCHAR</td>
+<td>64KB(65,535)</td>
+</tr>
+<tr>
+<td>TINYTEXT</td>
+<td>255bytes</td>
+</tr>
+<tr>
+<td>TEXT</td>
+<td>64KB</td>
+</tr>
+<tr>
+<td>MEDIUMTEXT</td>
+<td>16MB</td>
+</tr>
+<tr>
+<td>LONGTEXT</td>
+<td>4GB</td>
+</tr>
+</tbody></table>
+<p>下面是一些我写代码的小技巧：</p>
+<p>非定长数据的短字符串设置长度为<code>VARCHAR(50)</code>(用户名，密码)，长字符串设置为<code>VARCHAR（255）</code>（地址，简介）。</p>
+<p>类型是支持国际字符的其中英文占一个字符，中文<code>UNIONCODE</code>占两个字符，<code>UTF8</code>占三个字符。</p>
+<p>在一定的长度范围内我们最好采用<code>VARCHAR</code>类型，因为VARCHAR类型可以被编入索引之中。</p>
+<h2 id="布尔类型"><a href="#布尔类型" class="headerlink" title="布尔类型"></a>布尔类型</h2><p><code>BOOL/BOOLEAN</code>,都可以用来表示真假。</p>
+<p>我们用<code>TRUE</code>或者1来表示真的，<code>FLASE</code>或者0表示假的。</p>
+<p>我一般用<code>TINYINT</code>来存储状态，令1表示存在，0表示不存在。</p>
+<h3 id="日期类型"><a href="#日期类型" class="headerlink" title="日期类型"></a>日期类型</h3><table>
+<thead>
+<tr>
+<th>关键词</th>
+<th>解释</th>
+<th>例子</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>DATE</td>
+<td>日期</td>
+<td>2021-01-01</td>
+</tr>
+<tr>
+<td>TIME</td>
+<td>时间</td>
+<td>01:02:03</td>
+</tr>
+<tr>
+<td>TIMESTAMP</td>
+<td>时间戳</td>
+<td>因为长度问题只能到2038年</td>
+</tr>
+<tr>
+<td>DATETIME</td>
+<td>日期加时间</td>
+<td>2021-01-01 01:02:03</td>
+</tr>
+</tbody></table>
+<h2 id="枚举类型"><a href="#枚举类型" class="headerlink" title="枚举类型"></a>枚举类型</h2><p>比如我们有一个型号字段只能有三个值<code>small,medium,big</code></p>
+<p>我们就需要通过<code>ENUM(&#39;small&#39;,&#39;medium&#39;,&#39;big&#39;)</code>的方式定义该字段。</p>
+<p>个人感觉枚举类型要尽量少用。原因是因为后续想要改变它的组成可能要颇费功夫。你可以通过建立型号表与连接表来实现这个功能，并且使用更加灵活。</p>
+<h2 id="集合类型"><a href="#集合类型" class="headerlink" title="集合类型"></a>集合类型</h2><p><code>SET</code>换掉<code>ENUM</code>就是集合了。同样不推荐使用。</p>
+<h2 id="二进制类型"><a href="#二进制类型" class="headerlink" title="二进制类型"></a>二进制类型</h2><p>主要是为了将音频视频等文件类型化作二进制存取。</p>
+<table>
+<thead>
+<tr>
+<th>关键词</th>
+<th>大小</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>TINYBLOB</td>
+<td>255b</td>
+</tr>
+<tr>
+<td>BLOB</td>
+<td>65KB</td>
+</tr>
+<tr>
+<td>MEDIUMBLOB</td>
+<td>16MB</td>
+</tr>
+<tr>
+<td>LONGBLOB</td>
+<td>4GB</td>
+</tr>
+</tbody></table>
+<p>我并没有用过这个数据类型，我觉得文件应该存在他们应该存在的地方，此处使用可能会增加数据库的负担。</p>
+<p>甚至可能要写一系列的代码将文件先转化为数据库。</p>
+<h2 id="JSON类型"><a href="#JSON类型" class="headerlink" title="JSON类型"></a>JSON类型</h2><p>这个类型是MySQL8以后存在的，对JSON类型有所了解的人应该知道这个是干嘛的，它可以用于存储对象。</p>
+<p>个人喜欢用它来放配置文件。</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">update table1</span><br><span class="line">set properties=JSON_OBJECT(</span><br><span class="line">    &#x27;key1&#x27;, <span class="number">10</span>,</span><br><span class="line">    &#x27;key2&#x27;, JSON_ARRAY(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>),</span><br><span class="line">    &#x27;key3&#x27;, JSON_OBJECT(&#x27;name&#x27;,&#x27;wang&#x27;)</span><br><span class="line">)</span><br><span class="line">where id=<span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+
+<p><code>JSON_ARRAY()</code>会解析为JSON数组，<code>JSON_OBJECT()</code>解析为JSON对象。</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> id,JSON_EXTRACT(properties,<span class="string">&#x27;$.key1&#x27;</span>),JSON_EXTRACT(properties,<span class="string">&#x27;$.key2[0]&#x27;</span>),JSON_EXTRACT(properties,<span class="string">&#x27;$.key3.name&#x27;</span>)</span><br><span class="line"><span class="keyword">from</span> table1;</span><br><span class="line"><span class="comment">--简写</span></span><br><span class="line"><span class="keyword">select</span> id,properties<span class="operator">-</span><span class="operator">&gt;</span><span class="string">&#x27;$.key1&#x27;</span>,properties<span class="operator">-</span><span class="operator">&gt;</span><span class="string">&#x27;$.key3.name&#x27;</span>,properties<span class="operator">-</span><span class="operator">&gt;&gt;</span><span class="string">&#x27;$.key3.name&#x27;</span></span><br><span class="line"><span class="keyword">from</span> table1;</span><br></pre></td></tr></table></figure>
+
+<p><code>JSON_EXTRACT()</code>方法可以解析JSON串获取对象，第一个参数是字段名，第二个参数是想要查询的键名(会返回值)。<code>$</code>相当于这段json对象。</p>
+<p>双箭头可以去掉查询到的字符串的双引号。</p>
+<h3 id="更改JSON值"><a href="#更改JSON值" class="headerlink" title="更改JSON值"></a>更改JSON值</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">update table1</span><br><span class="line"><span class="keyword">set</span> properties<span class="operator">=</span>JSON_SET(</span><br><span class="line">    properties,</span><br><span class="line">    <span class="string">&#x27;$.key1&#x27;</span>, <span class="number">12</span>,</span><br><span class="line">    <span class="string">&#x27;$.key2&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;$.key4&#x27;</span>, &quot;22&quot;</span><br><span class="line">)</span><br><span class="line"><span class="keyword">where</span> id<span class="operator">=</span><span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+
+<p><code>JSON_SET</code>的第一个参数是字段名，后边是需要更改的键路径紧跟着是它的值。</p>
+<p>注意,已经存在的键会更新值，不存在的键会增加进去。如果一个键路径后边并没有跟值，那就会删去这个键。</p>
+]]></content>
+      <categories>
+        <category>SQL</category>
+      </categories>
+      <tags>
+        <tag>SQL</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>SQL数据库安全</title>
+    <url>/2021/10/02/10-%E4%BF%9D%E6%8A%A4%E6%95%B0%E6%8D%AE%E5%BA%93/</url>
+    <content><![CDATA[<h1 id="保护数据库"><a href="#保护数据库" class="headerlink" title="保护数据库"></a>保护数据库</h1><p>一般的开发当中数据库一般都会部署在一个服务器上，然后每一个用户都应该有它对应的访问权限。从而保证我们数据库的安全。</p>
+<h2 id="创建用户"><a href="#创建用户" class="headerlink" title="创建用户"></a>创建用户</h2><h3 id="访问权限"><a href="#访问权限" class="headerlink" title="访问权限"></a>访问权限</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment">--根据Ip连接</span></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">USER</span> ZS<span class="variable">@127</span><span class="number">.0</span><span class="number">.0</span><span class="number">.1</span></span><br><span class="line"><span class="comment">--根据计算机名称连接</span></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">USER</span> ZS<span class="variable">@localhost</span></span><br><span class="line"><span class="comment">--可以连接该域的任何计算机但是不可以连接子网的</span></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">USER</span> ZS<span class="variable">@zs</span>.com</span><br><span class="line"><span class="comment">--可以连接该域的任何计算机</span></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">USER</span> ZS@<span class="string">&#x27;%.zs.com&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="设定用户密码"><a href="#设定用户密码" class="headerlink" title="设定用户密码"></a>设定用户密码</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">USER</span> ZS IDENTIFIED <span class="keyword">BY</span> <span class="string">&#x27;1234&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>当然我们可以一起写：</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">USER</span> li<span class="variable">@127</span><span class="number">.0</span><span class="number">.0</span><span class="number">.1</span> IDENTIFIED <span class="keyword">BY</span> <span class="string">&#x27;1234&#x27;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="查看服务器用户"><a href="#查看服务器用户" class="headerlink" title="查看服务器用户"></a>查看服务器用户</h2><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> mysql.user;</span><br></pre></td></tr></table></figure>
+
+<h2 id="删除用户"><a href="#删除用户" class="headerlink" title="删除用户"></a>删除用户</h2><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">DROP</span> <span class="keyword">USER</span> LI<span class="variable">@127</span><span class="number">.0</span><span class="number">.0</span><span class="number">.1</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="修改密码"><a href="#修改密码" class="headerlink" title="修改密码"></a>修改密码</h2><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment">--修改当前登录用户密码</span></span><br><span class="line"><span class="keyword">SET</span> PASSWORD <span class="operator">=</span> <span class="string">&#x27;4567&#x27;</span>;</span><br><span class="line"><span class="comment">--删除某个人密码</span></span><br><span class="line"><span class="keyword">SET</span> PASSWORD <span class="keyword">FOR</span> john <span class="operator">=</span> <span class="string">&#x27;4567&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="授权"><a href="#授权" class="headerlink" title="授权"></a>授权</h2><h3 id="开发者"><a href="#开发者" class="headerlink" title="开发者"></a>开发者</h3><p>仅仅有对数据的修改查询权限。</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">USER</span> wxn IDENTIFIED <span class="keyword">BY</span> <span class="string">&#x27;1234&#x27;</span>;</span><br><span class="line"><span class="keyword">GRANT</span> <span class="keyword">SELECT</span>, <span class="keyword">INSERT</span>,UPDATE,<span class="keyword">DELETE</span>,<span class="keyword">EXECUTE</span></span><br><span class="line"><span class="comment">--开放某一个表</span></span><br><span class="line"><span class="keyword">ON</span> sql_database.sql_table;</span><br><span class="line"><span class="comment">--开放所有的表</span></span><br><span class="line"><span class="keyword">ON</span> sql_database.<span class="operator">*</span></span><br><span class="line"><span class="keyword">TO</span> wxn;</span><br></pre></td></tr></table></figure>
+
+<h3 id="管理员"><a href="#管理员" class="headerlink" title="管理员"></a>管理员</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">USER</span> wxn IDENTIFIED <span class="keyword">BY</span> <span class="string">&#x27;1234&#x27;</span>;</span><br><span class="line"><span class="comment">--赋予所有特权</span></span><br><span class="line"><span class="keyword">GRANT</span> <span class="keyword">ALL</span></span><br><span class="line"><span class="comment">--开放某一个表</span></span><br><span class="line"><span class="keyword">ON</span> sql_database.sql_table;</span><br><span class="line"><span class="comment">--开放所有的表</span></span><br><span class="line"><span class="keyword">ON</span> sql_database.<span class="operator">*</span></span><br><span class="line"><span class="keyword">TO</span> wxn;</span><br></pre></td></tr></table></figure>
+
+<h2 id="查询用户权限"><a href="#查询用户权限" class="headerlink" title="查询用户权限"></a>查询用户权限</h2><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment">--根用户权限</span></span><br><span class="line"><span class="keyword">SHOW</span> GRANTS;</span><br><span class="line"><span class="comment">--某用户权限</span></span><br><span class="line"><span class="keyword">SHOW</span> GRANTS <span class="keyword">FOR</span> wxn;</span><br></pre></td></tr></table></figure>
+
+<h2 id="撤销用户权限"><a href="#撤销用户权限" class="headerlink" title="撤销用户权限"></a>撤销用户权限</h2><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment">--撤销用户创建试图的权限</span></span><br><span class="line"><span class="keyword">REVOKE</span> <span class="keyword">CREATE</span> <span class="keyword">VIEW</span></span><br><span class="line"><span class="keyword">ON</span> sql_database.<span class="operator">*</span></span><br><span class="line"><span class="keyword">FROM</span> wxn;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>SQL</category>
+      </categories>
+      <tags>
+        <tag>SQL</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>SQL索引</title>
+    <url>/2021/10/02/09-%E7%B4%A2%E5%BC%95/</url>
+    <content><![CDATA[<h1 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h1><p>本质上是数据库引擎用来快速查找数据的数据结构。</p>
+<p>比如我们有一个电话表，我们如果通过电话去寻找某个人,我们可能需要大量的时间。我们根据姓氏进行分类就会简单不少，甚至我们也可以根据省份来进行分类，这样也可以加快速度。</p>
+<p>索引很小,足以放入内存。在内存中的读取是快的。</p>
+<p>增加数据大小,增删改操作需要更新索引。性能关键的词增加索引。</p>
+<p>索引的添加不能基于表的设计,基于业务需要就可以。</p>
+<p>我们的主键相当于是聚集索引每一个表都只能有一个聚集索引，同时主键也是一级索引。但是当我们用其他列来创建二级索引,主键也会被包裹进去变成它的一部分。比如我们根据姓名和州来做索引，其实我们这个复合索引包括了姓名,州和主键。</p>
+<p>不管有多少个索引，MySQL在查找的时候只能使用一个索引。</p>
+<h2 id="创建索引"><a href="#创建索引" class="headerlink" title="创建索引"></a>创建索引</h2><p><code>EXPLAIN </code>关键词放在<code>SELECT</code>前可以告诉我们查询的一些具体参数。比如<code>type</code>为会<code>ALL</code>会进行全盘扫描。<code>rows</code>是指的总的扫描行数。</p>
+ <figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> INDEX idx_state <span class="keyword">ON</span> customers (state);</span><br></pre></td></tr></table></figure>
+
+<p><code>possible_keys</code>指的是根据的索引。</p>
+<h2 id="查看索引"><a href="#查看索引" class="headerlink" title="查看索引"></a>查看索引</h2><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment">--帮助我们精确查询数量</span></span><br><span class="line">ANALYZE <span class="keyword">TABLE</span> customers;</span><br><span class="line"><span class="comment">--查看索引</span></span><br><span class="line"><span class="keyword">SHOW</span> INDEXS <span class="keyword">IN</span> customers;</span><br></pre></td></tr></table></figure>
+
+<h2 id="强制使用某个索引"><a href="#强制使用某个索引" class="headerlink" title="强制使用某个索引"></a>强制使用某个索引</h2><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span></span><br><span class="line">use index (idx_name)</span><br><span class="line"><span class="keyword">from</span> tables;</span><br></pre></td></tr></table></figure>
+
+<h2 id="前缀索引"><a href="#前缀索引" class="headerlink" title="前缀索引"></a>前缀索引</h2><p>有时候我们需要将字符串变为索引，但是他占用大量的内存，因此我们想要将他的一部分变为我们的索引。前缀索引由此而来。</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> INDEX idx_state <span class="keyword">ON</span> customers (per_name(<span class="number">2</span>));<span class="comment">--将per_name前两个字符作为索引</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="全文索引"><a href="#全文索引" class="headerlink" title="全文索引"></a>全文索引</h2><p>在我们做文章查询的时候，我们可能需要找一篇文章去将<code>MySQL INDEX</code>,我们如果采用<code>LIKE</code>关键词去进行查询。那个过程将是缓慢的。因此我们来看一下全文索引。</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> FULLTEXT INDEX idx_title_body <span class="keyword">ON</span> posts(title,body);</span><br><span class="line"><span class="comment">--MATCH(title,body) AGAINST(&#x27;MySQL INDEX&#x27;) 匹配相似度，默认降序排序</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span>, <span class="keyword">MATCH</span>(title,body) AGAINST(<span class="string">&#x27;MySQL INDEX&#x27;</span>)</span><br><span class="line"><span class="keyword">FROM</span> posts</span><br><span class="line"><span class="comment">--注意MATCH中的参数必须和我们索引上边的参数数量保持一致</span></span><br><span class="line"><span class="keyword">WHERE</span> <span class="keyword">MATCH</span>(title, body) AGAINST(<span class="string">&#x27;MySQL INDEX&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>还有一种匹配模式叫做BOOLEAN模型</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> FULLTEXT INDEX idx_title_body <span class="keyword">ON</span> posts(title,body);</span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span>, <span class="keyword">MATCH</span>(title,body) AGAINST(<span class="string">&#x27;MySQL INDEX&#x27;</span>)</span><br><span class="line"><span class="keyword">FROM</span> posts</span><br><span class="line"><span class="keyword">WHERE</span> <span class="keyword">MATCH</span>(title, body) AGAINST(<span class="string">&#x27;+MySQL -INDEX&#x27;</span> <span class="keyword">IN</span> <span class="type">BOOLEAN</span> MODE);</span><br></pre></td></tr></table></figure>
+
+<p>前边加<code>-</code>默认排除在外，也就是查询结果必须不含有该字符串。<code>+</code>查询结果必须含有该字符串。</p>
+<p>有时候我们希望在文章中找到含有某句话:</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> FULLTEXT INDEX idx_title_body <span class="keyword">ON</span> posts(title,body);</span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span>, <span class="keyword">MATCH</span>(title,body) AGAINST(<span class="string">&#x27;MySQL INDEX&#x27;</span>)</span><br><span class="line"><span class="keyword">FROM</span> posts</span><br><span class="line"><span class="keyword">WHERE</span> <span class="keyword">MATCH</span>(title, body) AGAINST(<span class="string">&#x27;&quot;MySQL INDEX&quot;&#x27;</span> <span class="keyword">IN</span> <span class="type">BOOLEAN</span> MODE);</span><br></pre></td></tr></table></figure>
+
+<p>这个例子一定会找到含有<code>MySQL INDEX</code>的文章。</p>
+<h2 id="复合索引"><a href="#复合索引" class="headerlink" title="复合索引"></a>复合索引</h2><p>还拿我们电话表的例子，如果我们现根据省份或者姓去查我们可能会发现很多列。依旧会有很繁琐的查询工作。我们可能需要一些方式去减少查询的行数。复合索引可以帮助我们做到。我们可以将两个列合并为一个索引。事实上<code>MySQL</code>最多可以包含16个列。</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> INDEX idx_state_firstname <span class="keyword">ON</span> posts(state,firstname);</span><br></pre></td></tr></table></figure>
+
+<p>复合索引有一个很大的问题，列的前后顺序问题。</p>
+<p>一般来讲我们会将更频繁使用的列放在前边。</p>
+<p>另一个是把基数更高的列放在前边。基数其实是这一列的唯一值的数量。比如我们有一百万的记录数，我们把性别放在第一个其实也就减去了一般人，还有50万的数量。</p>
+<p> 不过还是要记住,按照业务需求而不是教条走。一切脱离业务的性能调优都是耍流氓。</p>
+<h2 id="索引失效"><a href="#索引失效" class="headerlink" title="索引失效"></a>索引失效</h2><p>有时候没有与索引很好搭配的查询语句可能会导致索引的失效。</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">EXPLAIN <span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> student <span class="keyword">where</span> score<span class="operator">+</span><span class="number">10</span><span class="operator">&gt;</span><span class="number">90</span>;</span><br></pre></td></tr></table></figure>
+
+<p>我们用上述语句查询分数加10分大于90分的人数。我们会发现索引其实没有生效。</p>
+<p>但是如果我们改为下面就会生效。</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">EXPLAIN <span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> student <span class="keyword">where</span> score<span class="operator">&gt;</span><span class="number">80</span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="索引排序"><a href="#索引排序" class="headerlink" title="索引排序"></a>索引排序</h2><p>拿我们的电话簿做例子，我们有一个复合索引<code>idx_state_lastname</code>，我们在排序的时候需要注意外部排序的操作是最浪费资源的。</p>
+<p>我们需要注意如果我们按照复合索引的顺序进行排序，如下表所示：</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">EXPLAIN <span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> person <span class="keyword">order</span> <span class="keyword">by</span> state,lastname;</span><br></pre></td></tr></table></figure>
+
+<p>这种情况下,可以加快排序速度。</p>
+<p>但是注意中间不能有额外的条件比如：</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">EXPLAIN <span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> person <span class="keyword">order</span> <span class="keyword">by</span> state,phone,lastname;</span><br></pre></td></tr></table></figure>
+
+<p>这种情况下是不会加快速度的。</p>
+<p>同样的：</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">EXPLAIN <span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> person <span class="keyword">order</span> <span class="keyword">by</span> state,lastname <span class="keyword">desc</span>;</span><br></pre></td></tr></table></figure>
+
+<p>相反的排序顺序也不会加快运行速度。</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">EXPLAIN <span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> person <span class="keyword">order</span> <span class="keyword">by</span> lastname;</span><br></pre></td></tr></table></figure>
+
+<p>单单对第二个进行排序也不会加快速度。</p>
+<h2 id="覆盖索引"><a href="#覆盖索引" class="headerlink" title="覆盖索引"></a>覆盖索引</h2><p>如果我们的<code>WHERE</code>子句中判断的列都在索引中，我们的<code>ORDER BY</code>也都在索引中，我们的<code>SELECT</code>也都在索引中，那么我们可以不需要通过表查询而仅仅通过索引获取数据，这就叫做覆盖索引。</p>
+<h2 id="维护索引"><a href="#维护索引" class="headerlink" title="维护索引"></a>维护索引</h2><p>创建索引时注意不要有重复索引和多余索引。</p>
+<p>重复索引是指那些同一组列上且顺序相同的索引比如A_B_C与A_B_C;MySQL本身不会阻止这个操作。</p>
+<p>比如我们有一个索引A_B,我们又创建了一个索引A那就是多余的。但是我们创建B_A和B它并不算是多余。这是数学上的包含关系。</p>
+]]></content>
+      <categories>
+        <category>SQL</category>
+      </categories>
+      <tags>
+        <tag>SQL</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>SQLBug</title>
+    <url>/2021/10/02/11-SQLBug/</url>
+    <content><![CDATA[<h1 id="SQL-Bug"><a href="#SQL-Bug" class="headerlink" title="SQL Bug"></a>SQL Bug</h1><h3 id="Unknown-collation-‘utf8mb4-0900-ai-ci’"><a href="#Unknown-collation-‘utf8mb4-0900-ai-ci’" class="headerlink" title="Unknown collation: ‘utf8mb4_0900_ai_ci’"></a>Unknown collation: ‘utf8mb4_0900_ai_ci’</h3><p><code>mysql5.7</code> 及其以下不识别<code>utf8mb4_0900_ai_ci</code></p>
+<p>应改为<code>utf8mb4_unicode_ci</code>或者<code>utf8mb4_general_ci</code></p>
+]]></content>
+      <categories>
+        <category>SQL</category>
+      </categories>
+      <tags>
+        <tag>SQL</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Hello World</title>
     <url>/2021/10/12/hello-world/</url>
     <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>

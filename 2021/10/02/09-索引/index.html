@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="SQL," />
 
 
 
@@ -79,14 +79,17 @@
 
 
 
-<meta name="description" content="那有什么凌云志，不成仙那便成魔">
-<meta property="og:type" content="website">
-<meta property="og:title" content="coloredChicken">
-<meta property="og:url" content="http://coloredchicken.github.io/archives/index.html">
+<meta name="description" content="索引本质上是数据库引擎用来快速查找数据的数据结构。 比如我们有一个电话表，我们如果通过电话去寻找某个人,我们可能需要大量的时间。我们根据姓氏进行分类就会简单不少，甚至我们也可以根据省份来进行分类，这样也可以加快速度。 索引很小,足以放入内存。在内存中的读取是快的。 增加数据大小,增删改操作需要更新索引。性能关键的词增加索引。 索引的添加不能基于表的设计,基于业务需要就可以。 我们的主键相当于是聚集">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SQL索引">
+<meta property="og:url" content="http://coloredchicken.github.io/2021/10/02/09-%E7%B4%A2%E5%BC%95/index.html">
 <meta property="og:site_name" content="coloredChicken">
-<meta property="og:description" content="那有什么凌云志，不成仙那便成魔">
+<meta property="og:description" content="索引本质上是数据库引擎用来快速查找数据的数据结构。 比如我们有一个电话表，我们如果通过电话去寻找某个人,我们可能需要大量的时间。我们根据姓氏进行分类就会简单不少，甚至我们也可以根据省份来进行分类，这样也可以加快速度。 索引很小,足以放入内存。在内存中的读取是快的。 增加数据大小,增删改操作需要更新索引。性能关键的词增加索引。 索引的添加不能基于表的设计,基于业务需要就可以。 我们的主键相当于是聚集">
 <meta property="og:locale">
+<meta property="article:published_time" content="2021-10-02T08:42:14.000Z">
+<meta property="article:modified_time" content="2021-10-12T02:41:04.116Z">
 <meta property="article:author" content="coloredChicken">
+<meta property="article:tag" content="SQL">
 <meta name="twitter:card" content="summary">
 
 
@@ -117,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://coloredChicken.github.io/archives/"/>
+  <link rel="canonical" href="http://coloredChicken.github.io/2021/10/02/09-索引/"/>
 
 
 
 
 
-  <title>归档 | coloredChicken</title>
+  <title>SQL索引 | coloredChicken</title>
   
 
 
@@ -142,7 +145,7 @@
     
   
 
-  <div class="container sidebar-position-left page-archive">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 <a href="https://coloredChicken.github.io" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
 
@@ -291,411 +294,281 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
+  <div id="posts" class="posts-expand">
+    
 
-      <span class="archive-page-counter">
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://coloredChicken.github.io/2021/10/02/09-%E7%B4%A2%E5%BC%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="coloredChicken">
+    </span>
+
+    
+      <header class="post-header">
+
         
         
+          <h1 class="post-title" itemprop="name headline">SQL索引</h1>
         
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-10-02T16:42:14+08:00">
+                2021-10-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
           
-        
-        嗯..! 目前共计 13 篇日志。 继续努力。
-      </span>
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/SQL/" itemprop="url" rel="index">
+                    <span itemprop="name">SQL</span>
+                  </a>
+                </span>
 
-      
-
-        
-        
-        
-
-        
+                
+                
+              
+            </span>
           
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2021">2021</h1>
-          </div>
-        
-        
 
-        
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2021/10/02/09-%E7%B4%A2%E5%BC%95/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2021/10/02/09-%E7%B4%A2%E5%BC%95/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+          
+          
 
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2021/10/12/hello-world/" itemprop="url">
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+            <div class="post-wordcount">
               
-                <span itemprop="name">Hello World</span>
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1.5k
+                </span>
               
-            </a>
-        
-      </h2>
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2021-10-12T09:34:42+08:00"
-              content="2021-10-12" >
-          10-12
-        </time>
-      </div>
+              
+                <span class="post-meta-divider">|</span>
+              
 
-    </header>
-  </article>
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  5
+                </span>
+              
+            </div>
+          
 
+          
 
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2021/10/02/03-SQL%E6%95%B0%E6%8D%AE%E6%9F%A5%E8%AF%A2/" itemprop="url">
-              
-                <span itemprop="name">SQL查询</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2021-10-02T16:42:14+08:00"
-              content="2021-10-02" >
-          10-02
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
       
 
-        
-        
-        
+      
+        <h1 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h1><p>本质上是数据库引擎用来快速查找数据的数据结构。</p>
+<p>比如我们有一个电话表，我们如果通过电话去寻找某个人,我们可能需要大量的时间。我们根据姓氏进行分类就会简单不少，甚至我们也可以根据省份来进行分类，这样也可以加快速度。</p>
+<p>索引很小,足以放入内存。在内存中的读取是快的。</p>
+<p>增加数据大小,增删改操作需要更新索引。性能关键的词增加索引。</p>
+<p>索引的添加不能基于表的设计,基于业务需要就可以。</p>
+<p>我们的主键相当于是聚集索引每一个表都只能有一个聚集索引，同时主键也是一级索引。但是当我们用其他列来创建二级索引,主键也会被包裹进去变成它的一部分。比如我们根据姓名和州来做索引，其实我们这个复合索引包括了姓名,州和主键。</p>
+<p>不管有多少个索引，MySQL在查找的时候只能使用一个索引。</p>
+<h2 id="创建索引"><a href="#创建索引" class="headerlink" title="创建索引"></a>创建索引</h2><p><code>EXPLAIN </code>关键词放在<code>SELECT</code>前可以告诉我们查询的一些具体参数。比如<code>type</code>为会<code>ALL</code>会进行全盘扫描。<code>rows</code>是指的总的扫描行数。</p>
+ <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> INDEX idx_state <span class="keyword">ON</span> customers (state);</span><br></pre></td></tr></table></figure>
 
-        
-        
+<p><code>possible_keys</code>指的是根据的索引。</p>
+<h2 id="查看索引"><a href="#查看索引" class="headerlink" title="查看索引"></a>查看索引</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--帮助我们精确查询数量</span></span><br><span class="line">ANALYZE <span class="keyword">TABLE</span> customers;</span><br><span class="line"><span class="comment">--查看索引</span></span><br><span class="line"><span class="keyword">SHOW</span> INDEXS <span class="keyword">IN</span> customers;</span><br></pre></td></tr></table></figure>
 
-        
+<h2 id="强制使用某个索引"><a href="#强制使用某个索引" class="headerlink" title="强制使用某个索引"></a>强制使用某个索引</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span></span><br><span class="line">use index (idx_name)</span><br><span class="line"><span class="keyword">from</span> tables;</span><br></pre></td></tr></table></figure>
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+<h2 id="前缀索引"><a href="#前缀索引" class="headerlink" title="前缀索引"></a>前缀索引</h2><p>有时候我们需要将字符串变为索引，但是他占用大量的内存，因此我们想要将他的一部分变为我们的索引。前缀索引由此而来。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> INDEX idx_state <span class="keyword">ON</span> customers (per_name(<span class="number">2</span>));<span class="comment">--将per_name前两个字符作为索引</span></span><br></pre></td></tr></table></figure>
 
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2021/10/02/04-SQLApi/" itemprop="url">
-              
-                <span itemprop="name">SQL常用APi</span>
-              
-            </a>
-        
-      </h2>
+<h2 id="全文索引"><a href="#全文索引" class="headerlink" title="全文索引"></a>全文索引</h2><p>在我们做文章查询的时候，我们可能需要找一篇文章去将<code>MySQL INDEX</code>,我们如果采用<code>LIKE</code>关键词去进行查询。那个过程将是缓慢的。因此我们来看一下全文索引。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> FULLTEXT INDEX idx_title_body <span class="keyword">ON</span> posts(title,body);</span><br><span class="line"><span class="comment">--MATCH(title,body) AGAINST(&#x27;MySQL INDEX&#x27;) 匹配相似度，默认降序排序</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span>, <span class="keyword">MATCH</span>(title,body) AGAINST(<span class="string">&#x27;MySQL INDEX&#x27;</span>)</span><br><span class="line"><span class="keyword">FROM</span> posts</span><br><span class="line"><span class="comment">--注意MATCH中的参数必须和我们索引上边的参数数量保持一致</span></span><br><span class="line"><span class="keyword">WHERE</span> <span class="keyword">MATCH</span>(title, body) AGAINST(<span class="string">&#x27;MySQL INDEX&#x27;</span>);</span><br></pre></td></tr></table></figure>
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2021-10-02T16:42:14+08:00"
-              content="2021-10-02" >
-          10-02
-        </time>
-      </div>
+<p>还有一种匹配模式叫做BOOLEAN模型</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> FULLTEXT INDEX idx_title_body <span class="keyword">ON</span> posts(title,body);</span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span>, <span class="keyword">MATCH</span>(title,body) AGAINST(<span class="string">&#x27;MySQL INDEX&#x27;</span>)</span><br><span class="line"><span class="keyword">FROM</span> posts</span><br><span class="line"><span class="keyword">WHERE</span> <span class="keyword">MATCH</span>(title, body) AGAINST(<span class="string">&#x27;+MySQL -INDEX&#x27;</span> <span class="keyword">IN</span> <span class="type">BOOLEAN</span> MODE);</span><br></pre></td></tr></table></figure>
 
-    </header>
-  </article>
+<p>前边加<code>-</code>默认排除在外，也就是查询结果必须不含有该字符串。<code>+</code>查询结果必须含有该字符串。</p>
+<p>有时候我们希望在文章中找到含有某句话:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> FULLTEXT INDEX idx_title_body <span class="keyword">ON</span> posts(title,body);</span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span>, <span class="keyword">MATCH</span>(title,body) AGAINST(<span class="string">&#x27;MySQL INDEX&#x27;</span>)</span><br><span class="line"><span class="keyword">FROM</span> posts</span><br><span class="line"><span class="keyword">WHERE</span> <span class="keyword">MATCH</span>(title, body) AGAINST(<span class="string">&#x27;&quot;MySQL INDEX&quot;&#x27;</span> <span class="keyword">IN</span> <span class="type">BOOLEAN</span> MODE);</span><br></pre></td></tr></table></figure>
 
+<p>这个例子一定会找到含有<code>MySQL INDEX</code>的文章。</p>
+<h2 id="复合索引"><a href="#复合索引" class="headerlink" title="复合索引"></a>复合索引</h2><p>还拿我们电话表的例子，如果我们现根据省份或者姓去查我们可能会发现很多列。依旧会有很繁琐的查询工作。我们可能需要一些方式去减少查询的行数。复合索引可以帮助我们做到。我们可以将两个列合并为一个索引。事实上<code>MySQL</code>最多可以包含16个列。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> INDEX idx_state_firstname <span class="keyword">ON</span> posts(state,firstname);</span><br></pre></td></tr></table></figure>
 
+<p>复合索引有一个很大的问题，列的前后顺序问题。</p>
+<p>一般来讲我们会将更频繁使用的列放在前边。</p>
+<p>另一个是把基数更高的列放在前边。基数其实是这一列的唯一值的数量。比如我们有一百万的记录数，我们把性别放在第一个其实也就减去了一般人，还有50万的数量。</p>
+<p> 不过还是要记住,按照业务需求而不是教条走。一切脱离业务的性能调优都是耍流氓。</p>
+<h2 id="索引失效"><a href="#索引失效" class="headerlink" title="索引失效"></a>索引失效</h2><p>有时候没有与索引很好搭配的查询语句可能会导致索引的失效。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">EXPLAIN <span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> student <span class="keyword">where</span> score<span class="operator">+</span><span class="number">10</span><span class="operator">&gt;</span><span class="number">90</span>;</span><br></pre></td></tr></table></figure>
+
+<p>我们用上述语句查询分数加10分大于90分的人数。我们会发现索引其实没有生效。</p>
+<p>但是如果我们改为下面就会生效。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">EXPLAIN <span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> student <span class="keyword">where</span> score<span class="operator">&gt;</span><span class="number">80</span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="索引排序"><a href="#索引排序" class="headerlink" title="索引排序"></a>索引排序</h2><p>拿我们的电话簿做例子，我们有一个复合索引<code>idx_state_lastname</code>，我们在排序的时候需要注意外部排序的操作是最浪费资源的。</p>
+<p>我们需要注意如果我们按照复合索引的顺序进行排序，如下表所示：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">EXPLAIN <span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> person <span class="keyword">order</span> <span class="keyword">by</span> state,lastname;</span><br></pre></td></tr></table></figure>
+
+<p>这种情况下,可以加快排序速度。</p>
+<p>但是注意中间不能有额外的条件比如：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">EXPLAIN <span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> person <span class="keyword">order</span> <span class="keyword">by</span> state,phone,lastname;</span><br></pre></td></tr></table></figure>
+
+<p>这种情况下是不会加快速度的。</p>
+<p>同样的：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">EXPLAIN <span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> person <span class="keyword">order</span> <span class="keyword">by</span> state,lastname <span class="keyword">desc</span>;</span><br></pre></td></tr></table></figure>
+
+<p>相反的排序顺序也不会加快运行速度。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">EXPLAIN <span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> person <span class="keyword">order</span> <span class="keyword">by</span> lastname;</span><br></pre></td></tr></table></figure>
+
+<p>单单对第二个进行排序也不会加快速度。</p>
+<h2 id="覆盖索引"><a href="#覆盖索引" class="headerlink" title="覆盖索引"></a>覆盖索引</h2><p>如果我们的<code>WHERE</code>子句中判断的列都在索引中，我们的<code>ORDER BY</code>也都在索引中，我们的<code>SELECT</code>也都在索引中，那么我们可以不需要通过表查询而仅仅通过索引获取数据，这就叫做覆盖索引。</p>
+<h2 id="维护索引"><a href="#维护索引" class="headerlink" title="维护索引"></a>维护索引</h2><p>创建索引时注意不要有重复索引和多余索引。</p>
+<p>重复索引是指那些同一组列上且顺序相同的索引比如A_B_C与A_B_C;MySQL本身不会阻止这个操作。</p>
+<p>比如我们有一个索引A_B,我们又创建了一个索引A那就是多余的。但是我们创建B_A和B它并不算是多余。这是数学上的包含关系。</p>
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2021/10/02/05-SQL%E8%BF%9B%E9%98%B6%E5%AD%A6%E4%B9%A0/" itemprop="url">
-              
-                <span itemprop="name">SQL进阶学习</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2021-10-02T16:42:14+08:00"
-              content="2021-10-02" >
-          10-02
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2021/10/02/08-%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AE%BE%E8%AE%A1/" itemprop="url">
-              
-                <span itemprop="name">SQL数据库设计</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2021-10-02T16:42:14+08:00"
-              content="2021-10-02" >
-          10-02
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2021/10/02/06-%E5%B9%B6%E5%8F%91%E4%B8%8E%E9%94%81/" itemprop="url">
-              
-                <span itemprop="name">SQL并发与锁</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2021-10-02T16:42:14+08:00"
-              content="2021-10-02" >
-          10-02
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2021/10/02/07-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" itemprop="url">
-              
-                <span itemprop="name">SQL数据类型</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2021-10-02T16:42:14+08:00"
-              content="2021-10-02" >
-          10-02
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2021/10/02/10-%E4%BF%9D%E6%8A%A4%E6%95%B0%E6%8D%AE%E5%BA%93/" itemprop="url">
-              
-                <span itemprop="name">SQL数据库安全</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2021-10-02T16:42:14+08:00"
-              content="2021-10-02" >
-          10-02
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2021/10/02/09-%E7%B4%A2%E5%BC%95/" itemprop="url">
-              
-                <span itemprop="name">SQL索引</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2021-10-02T16:42:14+08:00"
-              content="2021-10-02" >
-          10-02
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2021/10/02/11-SQLBug/" itemprop="url">
-              
-                <span itemprop="name">SQLBug</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2021-10-02T16:42:14+08:00"
-              content="2021-10-02" >
-          10-02
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/SQL/" rel="tag"># SQL</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2021/10/02/11-SQLBug/" rel="next" title="SQLBug">
+                <i class="fa fa-chevron-left"></i> SQLBug
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2021/10/02/10-%E4%BF%9D%E6%8A%A4%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="prev" title="SQL数据库安全">
+                SQL数据库安全 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
-
-  
-  <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/archives/page/2/">2</a><a class="extend next" rel="next" href="/archives/page/2/">&lt;i class&#x3D;&quot;fa fa-angle-right&quot;&gt;&lt;&#x2F;i&gt;</a>
-  </nav>
+  </article>
 
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -703,6 +576,13 @@
 
 
           
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
 
         </div>
         
@@ -723,8 +603,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -808,6 +697,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%B4%A2%E5%BC%95"><span class="nav-number">1.</span> <span class="nav-text">索引</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E7%B4%A2%E5%BC%95"><span class="nav-number">1.1.</span> <span class="nav-text">创建索引</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E7%B4%A2%E5%BC%95"><span class="nav-number">1.2.</span> <span class="nav-text">查看索引</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%BA%E5%88%B6%E4%BD%BF%E7%94%A8%E6%9F%90%E4%B8%AA%E7%B4%A2%E5%BC%95"><span class="nav-number">1.3.</span> <span class="nav-text">强制使用某个索引</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E7%BC%80%E7%B4%A2%E5%BC%95"><span class="nav-number">1.4.</span> <span class="nav-text">前缀索引</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%A8%E6%96%87%E7%B4%A2%E5%BC%95"><span class="nav-number">1.5.</span> <span class="nav-text">全文索引</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%8D%E5%90%88%E7%B4%A2%E5%BC%95"><span class="nav-number">1.6.</span> <span class="nav-text">复合索引</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B4%A2%E5%BC%95%E5%A4%B1%E6%95%88"><span class="nav-number">1.7.</span> <span class="nav-text">索引失效</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B4%A2%E5%BC%95%E6%8E%92%E5%BA%8F"><span class="nav-number">1.8.</span> <span class="nav-text">索引排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A6%86%E7%9B%96%E7%B4%A2%E5%BC%95"><span class="nav-number">1.9.</span> <span class="nav-text">覆盖索引</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%B4%E6%8A%A4%E7%B4%A2%E5%BC%95"><span class="nav-number">1.10.</span> <span class="nav-text">维护索引</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -986,6 +891,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 

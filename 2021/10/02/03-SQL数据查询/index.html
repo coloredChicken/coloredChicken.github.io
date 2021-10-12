@@ -1,0 +1,1502 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="SQL," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="SQL查询简单查询我们可以通过*来查询数据库所有的字段，也可以通过字段名并用,分隔的方式来查询需要的字段。 from后跟我们需要查询的数据表。 在数据库的操作中，我习惯性的把关键字进行大写，把数据库名&#x2F;表名&#x2F;列名&#x2F;字段名进行小写，当然我们也可以用下边的符号,具体可以看例子，但是注意此处不能使用单引号，单引号默认指的是字符串。 123456--查询指定字段SELECT product_id,&#96;nam">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SQL查询">
+<meta property="og:url" content="http://coloredchicken.github.io/2021/10/02/03-SQL%E6%95%B0%E6%8D%AE%E6%9F%A5%E8%AF%A2/index.html">
+<meta property="og:site_name" content="coloredChicken">
+<meta property="og:description" content="SQL查询简单查询我们可以通过*来查询数据库所有的字段，也可以通过字段名并用,分隔的方式来查询需要的字段。 from后跟我们需要查询的数据表。 在数据库的操作中，我习惯性的把关键字进行大写，把数据库名&#x2F;表名&#x2F;列名&#x2F;字段名进行小写，当然我们也可以用下边的符号,具体可以看例子，但是注意此处不能使用单引号，单引号默认指的是字符串。 123456--查询指定字段SELECT product_id,&#96;nam">
+<meta property="og:locale">
+<meta property="article:published_time" content="2021-10-02T08:42:14.000Z">
+<meta property="article:modified_time" content="2021-10-12T02:39:06.653Z">
+<meta property="article:author" content="coloredChicken">
+<meta property="article:tag" content="SQL">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://coloredChicken.github.io/2021/10/02/03-SQL数据查询/"/>
+
+
+
+
+
+  <title>SQL查询 | coloredChicken</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+<a href="https://coloredChicken.github.io" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">coloredChicken</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br />
+            
+            日程表
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://coloredChicken.github.io/2021/10/02/03-SQL%E6%95%B0%E6%8D%AE%E6%9F%A5%E8%AF%A2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="coloredChicken">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">SQL查询</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-10-02T16:42:14+08:00">
+                2021-10-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/SQL/" itemprop="url" rel="index">
+                    <span itemprop="name">SQL</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2021/10/02/03-SQL%E6%95%B0%E6%8D%AE%E6%9F%A5%E8%AF%A2/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2021/10/02/03-SQL%E6%95%B0%E6%8D%AE%E6%9F%A5%E8%AF%A2/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  4.6k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  18
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="SQL查询"><a href="#SQL查询" class="headerlink" title="SQL查询"></a>SQL查询</h1><h2 id="简单查询"><a href="#简单查询" class="headerlink" title="简单查询"></a>简单查询</h2><p>我们可以通过<code>*</code>来查询数据库所有的字段，也可以通过字段名并用<code>,</code>分隔的方式来查询需要的字段。</p>
+<p><code>from</code>后跟我们需要查询的数据表。</p>
+<p>在数据库的操作中，我习惯性的把关键字进行大写，把数据库名/表名/列名/字段名进行小写，当然我们也可以用下边的符号,具体可以看例子，但是注意此处不能使用单引号，单引号默认指的是字符串。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--查询指定字段</span></span><br><span class="line"><span class="keyword">SELECT</span> product_id,`name`,`quantity_in_stock`,`unit_price`</span><br><span class="line"><span class="keyword">FROM</span> `products`;</span><br><span class="line"><span class="comment">--查询所有结果</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> </span><br><span class="line"><span class="keyword">FROM</span> `products`;</span><br></pre></td></tr></table></figure>
+
+<h2 id="数据运算"><a href="#数据运算" class="headerlink" title="数据运算"></a>数据运算</h2><p>在查询的时候我们也支持一些简单的数据运算<code>+,-,*,/,%</code>分别对应加减乘除取模运算,当然和数学运行一样我们可以<code>()</code>来提高它的运算等级。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> `name`,unit_price,unit_price<span class="operator">+</span><span class="number">2</span>,unit_price<span class="number">-2</span>,unit_price<span class="operator">*</span><span class="number">2</span>,unit_price<span class="operator">/</span><span class="number">2</span>,unit_price<span class="operator">%</span><span class="number">2</span></span><br><span class="line"><span class="keyword">FROM</span> `products`;</span><br></pre></td></tr></table></figure>
+
+<p>得到的结果,我取其中一行放在下边：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">4.65 6.65 2.65 9.30 2.325000 0.65</span><br></pre></td></tr></table></figure>
+
+<h2 id="查询结果筛选"><a href="#查询结果筛选" class="headerlink" title="查询结果筛选"></a>查询结果筛选</h2><h4 id="DISTINCT"><a href="#DISTINCT" class="headerlink" title="DISTINCT"></a>DISTINCT</h4><p>再有计数之后我们会有一个新的需求，比如我们想要知道不同价格物品种类总数时，我们需要把相同价格的物品进行去重，我们就需要用到<code>DISTINCT</code>关键字。</p>
+<p>同时注意：<code>DISTINCT</code>关键字只能用于开头。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span> unit_price,`name`</span><br><span class="line"><span class="keyword">FROM</span> `products`;</span><br></pre></td></tr></table></figure>
+
+<h4 id="AS"><a href="#AS" class="headerlink" title="AS"></a>AS</h4><p>我们在COUNT时发现它的字段名为<code>COUNT(unit_price)</code>这是很不舒服的，我们需要一个能够代表该行特点的字段名称，我们就需要用到as</p>
+<p>有时候我们可能需要更改某个字段的字段名,这个时候我们就需要用到<code>as</code>关键词,当然我们也可以不使用。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> `name` <span class="keyword">AS</span> `姓名`,unit_price 价格，unit_price <span class="string">&#x27;价格&#x27;</span></span><br><span class="line"><span class="keyword">FROM</span> `products`;</span><br></pre></td></tr></table></figure>
+
+<p>我们有这两种方式来改变字段名，如果不用as记得加空格哦。</p>
+<p>同时注意：别名是可以加单引号的。</p>
+<p>对以上三个关键字同时使用:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span> <span class="built_in">COUNT</span>(unit_price) <span class="keyword">AS</span> <span class="string">&#x27;不同价格商品的种类数量&#x27;</span>,`name`</span><br><span class="line"><span class="keyword">FROM</span> `products`;</span><br></pre></td></tr></table></figure>
+
+<p>这也说明对于同一个字段，可以有多个不同的关键字来进行修饰。</p>
+<h4 id="TOP"><a href="#TOP" class="headerlink" title="TOP"></a>TOP</h4><p>top并不是所有的数据库都支持事实上常用的MySQL并不支持<code>TOP</code>关键字。该关键字在SQL Server中被支持。</p>
+<p>查询数据库中前三条数据：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> TOP <span class="number">3</span> <span class="operator">*</span> </span><br><span class="line"><span class="keyword">FROM</span> products;</span><br></pre></td></tr></table></figure>
+
+<p>查询数据库中前百分之三的数据：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> TOP <span class="number">3</span> <span class="keyword">PERCENT</span> <span class="operator">*</span> </span><br><span class="line"><span class="keyword">FROM</span> products;</span><br></pre></td></tr></table></figure>
+
+<h3 id="条件关键词"><a href="#条件关键词" class="headerlink" title="条件关键词"></a>条件关键词</h3><h4 id="WHERE"><a href="#WHERE" class="headerlink" title="WHERE"></a>WHERE</h4><p>条件都放在<code>where</code>关键词后。当然也有特殊情况，后边我们回学到<code>HAVING</code>,如果我们的条件是分组后的必须用<code>HAVING</code>关键词。</p>
+<h4 id="比较运算符"><a href="#比较运算符" class="headerlink" title="比较运算符"></a>比较运算符</h4><p>一说到条件，那么比较运算应该是最常见的，比如获取价格在某一个区间内的商品。</p>
+<p>常见的比较运算符包括<code>&gt;,&lt;,=,&gt;=,&lt;=,!=,&lt;&gt;</code>，分别表示大于，小于，等于，大于等于，小于等于，后两个都表示为不等于。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> `name`,unit_price <span class="keyword">FROM</span> `products` <span class="keyword">WHERE</span> unit_price<span class="operator">&gt;</span><span class="number">4</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> `name`,unit_price <span class="keyword">FROM</span> `products` <span class="keyword">WHERE</span> unit_price<span class="operator">&gt;=</span><span class="number">4</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> `name`,unit_price <span class="keyword">FROM</span> `products` <span class="keyword">WHERE</span> unit_price<span class="operator">&lt;</span><span class="number">4</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> `name`,unit_price <span class="keyword">FROM</span> `products` <span class="keyword">WHERE</span> unit_price<span class="operator">&lt;=</span><span class="number">4</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> `name`,unit_price <span class="keyword">FROM</span> `products` <span class="keyword">WHERE</span> unit_price<span class="operator">=</span><span class="number">4</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> `name`,unit_price <span class="keyword">FROM</span> `products` <span class="keyword">WHERE</span> unit_price<span class="operator">!=</span><span class="number">4</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> `name`,unit_price <span class="keyword">FROM</span> `products` <span class="keyword">WHERE</span> unit_price<span class="operator">&lt;&gt;</span><span class="number">4</span>;</span><br></pre></td></tr></table></figure>
+
+<h4 id="AND"><a href="#AND" class="headerlink" title="AND"></a>AND</h4><p>我们可能有多个条件同时满足的情况比如价格小于4或者大于3的物品。而这些不同的条件都需要<code>and</code>关键词来连接。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> `name`,unit_price </span><br><span class="line"><span class="keyword">FROM</span> `products` </span><br><span class="line"><span class="keyword">WHERE</span> unit_price<span class="operator">&lt;</span><span class="number">4</span></span><br><span class="line"><span class="keyword">AND</span> unit_price<span class="operator">&gt;</span><span class="number">3</span>;</span><br></pre></td></tr></table></figure>
+
+<h4 id="OR"><a href="#OR" class="headerlink" title="OR"></a>OR</h4><p>我们可能有多个条件仅需满足这些条件中的一部分即可，比如价格大于4或者小于3的物品。而这些条件就可以用<code>or</code>关键词来修饰。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> `name`,unit_price </span><br><span class="line"><span class="keyword">FROM</span> `products` </span><br><span class="line"><span class="keyword">WHERE</span> unit_price<span class="operator">&gt;</span><span class="number">4</span></span><br><span class="line"><span class="keyword">OR</span> unit_price<span class="operator">&lt;</span><span class="number">3</span>;</span><br></pre></td></tr></table></figure>
+
+<h4 id="NOT"><a href="#NOT" class="headerlink" title="NOT"></a>NOT</h4><p>我们有时候对于满足一些条件的数据字段是不想要查询的就需要通过<code>NOT</code>关键字来过滤这些结果。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> `name`,unit_price </span><br><span class="line"><span class="keyword">FROM</span> `products` </span><br><span class="line"><span class="keyword">WHERE</span> </span><br><span class="line"><span class="keyword">NOT</span> unit_price<span class="operator">&gt;</span><span class="number">4</span></span><br><span class="line"><span class="keyword">OR</span> unit_price<span class="operator">&lt;</span><span class="number">3</span>;</span><br></pre></td></tr></table></figure>
+
+<p>当然 <code>NOT</code>的内部也可以写其他的东西比如: </p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> `name`,unit_price </span><br><span class="line"><span class="keyword">FROM</span> `products` </span><br><span class="line"><span class="keyword">WHERE</span> </span><br><span class="line"><span class="keyword">NOT</span> (unit_price<span class="operator">&gt;</span><span class="number">4</span></span><br><span class="line"><span class="keyword">OR</span> unit_price<span class="operator">&lt;</span><span class="number">3</span>);</span><br></pre></td></tr></table></figure>
+
+<h4 id="BETWEEN"><a href="#BETWEEN" class="headerlink" title="BETWEEN"></a>BETWEEN</h4><p>我们在定义一个区间范围内的条件时使用<code>AND/OR+比较运算符</code>的方式略微有些麻烦。</p>
+<p><code>BETWEEN AND</code>可以帮我们减少麻烦。</p>
+<p>注意:<code>BETWEEN AND</code>区间两侧都是闭区间。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> `name`,unit_price </span><br><span class="line"><span class="keyword">FROM</span> `products` </span><br><span class="line"><span class="keyword">WHERE</span> </span><br><span class="line">unit_price <span class="keyword">BETWEEN</span> <span class="number">1</span> <span class="keyword">AND</span> <span class="number">4</span>;</span><br></pre></td></tr></table></figure>
+
+<h4 id="IN"><a href="#IN" class="headerlink" title="IN"></a>IN</h4><p>我们在遇到一个符合<code>OR</code>关键词的场景时，字符串或者数字的操作往往有些许麻烦：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> `name`,unit_price </span><br><span class="line"><span class="keyword">FROM</span> `products` </span><br><span class="line"><span class="keyword">WHERE</span> unit_price <span class="operator">=</span> <span class="number">1</span> <span class="keyword">OR</span> unit_price <span class="operator">=</span> <span class="number">3</span> <span class="keyword">OR</span> unit_price <span class="operator">=</span> <span class="number">4</span>;</span><br></pre></td></tr></table></figure>
+
+<p>此时<code>IN</code>关键词应该可以帮你减轻一些负担，并且使代码变得优雅起来。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> `name`,unit_price </span><br><span class="line"><span class="keyword">FROM</span> `products` </span><br><span class="line"><span class="keyword">WHERE</span> </span><br><span class="line">unit_price <span class="keyword">IN</span> (<span class="number">1</span>,<span class="number">3</span>,<span class="number">4</span>);</span><br></pre></td></tr></table></figure>
+
+<p>当然<code>IN</code>关键词还支持字符的操作。只是字符需要加上单引号。</p>
+<h4 id="LIKE"><a href="#LIKE" class="headerlink" title="LIKE"></a>LIKE</h4><p>我们有时候需要查询复合一个特定条件的字符串比如：姓张的用户名单或是名字中含有糖的食物又或者姓张并且只有两个字的名字。</p>
+<p><code>LIKE</code>关键字使我们可以非常容易的做到。与<code>LIKE</code>关键词一起使用的有<code>%</code>,<code>_</code>两个符号<code>%</code>代表多个字符,<code>_</code>代表一个字符可以同时使用。</p>
+<p>查询带有字符<code>o</code>的名字：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> `name`,unit_price </span><br><span class="line"><span class="keyword">FROM</span> `products` </span><br><span class="line"><span class="keyword">WHERE</span> </span><br><span class="line">`name` <span class="keyword">LIKE</span> <span class="string">&#x27;%o%&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>查询开头为<code>o</code>或者结尾为<code>O</code>的名字：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> `name`,unit_price </span><br><span class="line"><span class="keyword">FROM</span> `products` </span><br><span class="line"><span class="keyword">WHERE</span> </span><br><span class="line">`name` <span class="keyword">LIKE</span> <span class="string">&#x27;%o&#x27;</span></span><br><span class="line"><span class="keyword">OR</span> `name` <span class="keyword">LIKE</span> <span class="string">&#x27;o%&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>查询符合倒数第二个字符为<code>p</code>的字段:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> `name`,unit_price </span><br><span class="line"><span class="keyword">FROM</span> `products` </span><br><span class="line"><span class="keyword">WHERE</span> </span><br><span class="line">`name` <span class="keyword">LIKE</span> <span class="string">&#x27;%p_&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<h4 id="REGEXP"><a href="#REGEXP" class="headerlink" title="REGEXP"></a>REGEXP</h4><p>正则表达式在处理字符串的过程中可能更加合适。</p>
+<p>查询符合名字中带有字符<code>o</code>的名字：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> `name`,unit_price </span><br><span class="line"><span class="keyword">FROM</span> `products` </span><br><span class="line"><span class="keyword">WHERE</span> </span><br><span class="line">`name` REGEXP <span class="string">&#x27;o&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>查询符合名字开头是字符<code>o</code>的名字：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> `name`,unit_price </span><br><span class="line"><span class="keyword">FROM</span> `products` </span><br><span class="line"><span class="keyword">WHERE</span> </span><br><span class="line">`name` REGEXP <span class="string">&#x27;^o&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>查询符合名字结尾是字符<code>o</code>的名字：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> `name`,unit_price </span><br><span class="line"><span class="keyword">FROM</span> `products` </span><br><span class="line"><span class="keyword">WHERE</span> </span><br><span class="line">`name` REGEXP <span class="string">&#x27;o$&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>查询符合名字中带有字符<code>o</code>或者字符<code>p</code>的名字：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> `name`,unit_price </span><br><span class="line"><span class="keyword">FROM</span> `products` </span><br><span class="line"><span class="keyword">WHERE</span> </span><br><span class="line">`name` REGEXP <span class="string">&#x27;o|p&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>查询符合名字中以字符<code>p</code>开头或者字符<code>e</code>结尾的名字：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> `name`,unit_price </span><br><span class="line"><span class="keyword">FROM</span> `products` </span><br><span class="line"><span class="keyword">WHERE</span> </span><br><span class="line">`name` REGEXP <span class="string">&#x27;^P|e$&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>查询符合名字中带有字符<code>o</code>并且该字符前边是<code>P/F</code>两个字符中的一个的名字：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> `name`,unit_price </span><br><span class="line"><span class="keyword">FROM</span> `products` </span><br><span class="line"><span class="keyword">WHERE</span> </span><br><span class="line">`name` REGEXP <span class="string">&#x27;[PF]o&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>查询符合名字中带有字符<code>o</code>并且该字符前边是<code>A-G</code>字符中的一个的名字：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> `name`,unit_price </span><br><span class="line"><span class="keyword">FROM</span> `products` </span><br><span class="line"><span class="keyword">WHERE</span> </span><br><span class="line">`name` REGEXP <span class="string">&#x27;[A-Z]o&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<h4 id="IS-NULL"><a href="#IS-NULL" class="headerlink" title="IS NULL"></a>IS NULL</h4><p>有时候我们需要查询没有标记价格(该字段为空)的物品,此时用到<code>IS NULL</code>关键词</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> `name`</span><br><span class="line"><span class="keyword">FROM</span> `products` </span><br><span class="line"><span class="keyword">WHERE</span> </span><br><span class="line">unit_price <span class="keyword">IS</span> <span class="keyword">NULL</span>;</span><br></pre></td></tr></table></figure>
+
+<h4 id="ORDER-BY"><a href="#ORDER-BY" class="headerlink" title="ORDER BY"></a>ORDER BY</h4><p>有时候我们需要对查询到的数据进行排序,此时需要用到<code>ORDER BY</code>关键词。</p>
+<p><code>ASC</code>：表示升序排列；<code>DESC</code>：表示降序排列；</p>
+<p>将查询到的数据按价格降序排列：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> `name`,unit_price</span><br><span class="line"><span class="keyword">FROM</span> `products` </span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> unit_price <span class="keyword">DESC</span>;</span><br></pre></td></tr></table></figure>
+
+<p>同时，我们可以通过多个字段进行排序：</p>
+<p>先按照价格进行排序，后根据名字进行排序(相同价格的物品按名字排序)</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> `name`,unit_price</span><br><span class="line"><span class="keyword">FROM</span> `products` </span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> unit_price,`name`;</span><br></pre></td></tr></table></figure>
+
+<p>我们还可以简化写法：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> `name`,unit_price</span><br><span class="line"><span class="keyword">FROM</span> `products` </span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> <span class="number">1</span>,<span class="number">2</span>;</span><br></pre></td></tr></table></figure>
+
+<p>此处的<code>1</code>代表我们查询的第一个字段，<code>2</code>代表我们查询的第二个字段。</p>
+<p>需要注意：MySQL区别于其他数据库的地方在于，我们可以根据任何一个该数据表的字段进行排序。</p>
+<p>比如我们虽然没有查询购买日期，但是我们可以根据他排序后进行查找。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> `name`,unit_price</span><br><span class="line"><span class="keyword">FROM</span> `products` </span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> buy_date <span class="keyword">DESC</span>;</span><br></pre></td></tr></table></figure>
+
+<h4 id="LIMIT"><a href="#LIMIT" class="headerlink" title="LIMIT"></a>LIMIT</h4><p>有时候我们需要查询前几条数据，就需要用到<code>LIMIT</code>关键字：</p>
+<p>查询前五条数据：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> `name`,unit_price</span><br><span class="line"><span class="keyword">FROM</span> `products` </span><br><span class="line">LIMIT <span class="number">5</span>;</span><br></pre></td></tr></table></figure>
+
+<p>我们在做数据分页的时候希望有一个偏移量：</p>
+<p>跳过前三行，查询两行。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> product_id,`name`,unit_price</span><br><span class="line"><span class="keyword">FROM</span> `products` </span><br><span class="line">LIMIT <span class="number">3</span>,<span class="number">2</span>;</span><br></pre></td></tr></table></figure>
+
+<p>^开头 |不同分割  $结尾 []任意匹配 [a-f]for</p>
+<h2 id="子查询"><a href="#子查询" class="headerlink" title="子查询"></a>子查询</h2><p>我们有时候需要进行，3号客户最大发票数额更大的发票，可以进行多个的嵌套查询。</p>
+<h4 id="ALL"><a href="#ALL" class="headerlink" title="ALL"></a>ALL</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span></span><br><span class="line"><span class="keyword">FROM</span> invoices i</span><br><span class="line"><span class="keyword">WHERE</span> invoice_total<span class="operator">&gt;</span>(</span><br><span class="line">  <span class="keyword">SELECT</span> <span class="built_in">MAX</span>(i.invoice_total)</span><br><span class="line">  <span class="keyword">FROM</span> invoices i</span><br><span class="line"><span class="keyword">WHERE</span> i.client_id<span class="operator">=</span><span class="number">3</span>);</span><br></pre></td></tr></table></figure>
+
+<p>正常的子查询如上所述，我们也可以采用下面的方法，<code>ALL</code>关键词表示该字段数据必须满足<code>ALL</code>后边括号内的所有条件比如<code>invoice_total</code>必须大于查询到的所有的值，也就是大于最大值了。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span></span><br><span class="line"><span class="keyword">FROM</span> invoices i</span><br><span class="line"><span class="keyword">WHERE</span> invoice_total<span class="operator">&gt;</span><span class="keyword">ALL</span>(</span><br><span class="line">  <span class="keyword">SELECT</span> i.invoice_total</span><br><span class="line">  <span class="keyword">FROM</span> invoices i</span><br><span class="line"><span class="keyword">WHERE</span> i.client_id<span class="operator">=</span><span class="number">3</span>);</span><br></pre></td></tr></table></figure>
+
+<h4 id="ANY-SOME"><a href="#ANY-SOME" class="headerlink" title="ANY/SOME"></a>ANY/SOME</h4><p>表示满足其中一个条件即可。</p>
+<p>比如下面表示我们找到与三号客户有过一样发票值的人即可。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span></span><br><span class="line"><span class="keyword">FROM</span> invoices i</span><br><span class="line"><span class="keyword">WHERE</span> invoice_total<span class="operator">=</span><span class="keyword">ANY</span>(</span><br><span class="line">  <span class="keyword">SELECT</span> i.invoice_total</span><br><span class="line">  <span class="keyword">FROM</span> invoices i</span><br><span class="line"><span class="keyword">WHERE</span> i.client_id<span class="operator">=</span><span class="number">3</span>);</span><br></pre></td></tr></table></figure>
+
+<h2 id="连接查询"><a href="#连接查询" class="headerlink" title="连接查询"></a>连接查询</h2><h3 id="内连接"><a href="#内连接" class="headerlink" title="内连接"></a>内连接</h3><p>内连接：我们在查询某个表数据的时候，往往还需要查询与该表相关的表的数据。比如：我们查询订单系统，订单系统中包含了物品的id，购买数量。</p>
+<p>他的作用是: 我们<code>FROM</code>关键词后的数据表的每一行在<code>JOIN</code>关键词的表中的每一行进行条件匹配，两张表都匹配的才会显示。</p>
+<p>此时如果我们需要查询总价就需要从商品表获取价格以及商品名称，看下面例子：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> oi.order_id,p.name,oi.quantity,p.unit_price</span><br><span class="line"><span class="keyword">FROM</span> order_items oi</span><br><span class="line"><span class="keyword">INNER</span> <span class="keyword">JOIN</span> products p</span><br><span class="line"><span class="keyword">ON</span> oi.product_id<span class="operator">=</span>p.product_id;</span><br></pre></td></tr></table></figure>
+
+<p>此时是对<code>order_items</code>的每一行在<code>products</code>中进行条件匹配。</p>
+<p>需要注意：内连接的默认排序是按照 连接进来的表排序的，比如上述例子按照products的查询顺序排序。</p>
+<p><code>INNER JOIN</code>关键字在做内连接时可以简写为<code>JOIN</code>。</p>
+<h4 id="USING"><a href="#USING" class="headerlink" title="USING"></a>USING</h4><p>我们在做连接的时候，看上一个例子<code>ON</code>关键词后边跟了条件，这样看上去其实很麻烦，我们可以用<code>USING</code>关键词来简化写法。但是要保证连接的两个表中都有该字段。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> o.customer_id,c.customer_id</span><br><span class="line"><span class="keyword">FROM</span> orders o</span><br><span class="line"><span class="keyword">JOIN</span> customers c</span><br><span class="line">  <span class="keyword">USING</span>(customer_id);</span><br></pre></td></tr></table></figure>
+
+<h3 id="跨数据库表连接"><a href="#跨数据库表连接" class="headerlink" title="跨数据库表连接"></a>跨数据库表连接</h3><p>我们在实际开发过程中，不可能仅仅对一个数据库进行操作，多个数据库之间的操作才是正常的。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> oi.order_id,p.name,oi.quantity,p.unit_price</span><br><span class="line"><span class="keyword">FROM</span> order_items oi</span><br><span class="line"><span class="keyword">INNER</span> <span class="keyword">JOIN</span> sql_inventory.products p</span><br><span class="line"><span class="keyword">ON</span> oi.product_id<span class="operator">=</span>p.product_id;</span><br></pre></td></tr></table></figure>
+
+<p>注意上述例子默认使用的数据库为<code>order_items</code>，连接的数据库是<code>sql_inventory</code>。</p>
+<h3 id="自连接"><a href="#自连接" class="headerlink" title="自连接"></a>自连接</h3><p>我们有时候在员工表中，需要得到他们的上下级从属关系，自连接可以很容易做到这一点。</p>
+<p>需要注意自连接需要对每一个表起别名，同时通过别名来获取表数据。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> e.first_name,m.first_name</span><br><span class="line"><span class="keyword">FROM</span> employees e</span><br><span class="line"><span class="keyword">INNER</span> <span class="keyword">JOIN</span> employees m</span><br><span class="line"><span class="keyword">ON</span> e.reports_to<span class="operator">=</span>m.employee_id;</span><br></pre></td></tr></table></figure>
+
+<h3 id="多表内连接"><a href="#多表内连接" class="headerlink" title="多表内连接"></a>多表内连接</h3><p>我们需要有多个表进行查询工作，就可以采用多个<code>JOIN</code>关键词串联的方式来解决。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> o.order_id,o.order_date,c.first_name,c.last_name,os.name <span class="keyword">AS</span> STATUS</span><br><span class="line"><span class="keyword">FROM</span> orders o</span><br><span class="line"><span class="keyword">JOIN</span> customers c</span><br><span class="line">  <span class="keyword">ON</span> o.customer_id<span class="operator">=</span>c.customer_id</span><br><span class="line"><span class="keyword">JOIN</span> order_statuses os</span><br><span class="line">  <span class="keyword">ON</span> o.status <span class="operator">=</span> os.order_status_id;</span><br></pre></td></tr></table></figure>
+
+<h3 id="复合条件内连接"><a href="#复合条件内连接" class="headerlink" title="复合条件内连接"></a>复合条件内连接</h3><p>我们有时候不仅仅需要符合一个条件，此时就需要用到<code>AND</code>关键词来复合我们的条件。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span></span><br><span class="line"><span class="keyword">FROM</span> order_items oi</span><br><span class="line"><span class="keyword">JOIN</span> order_item_notes oin</span><br><span class="line">  <span class="keyword">ON</span> oi.order_id <span class="operator">=</span> oin.order_Id</span><br><span class="line">  <span class="keyword">AND</span> oi.product_id<span class="operator">=</span>oin.product_id;</span><br></pre></td></tr></table></figure>
+
+<h3 id="隐式内链接"><a href="#隐式内链接" class="headerlink" title="隐式内链接"></a>隐式内链接</h3><p>不建议使用，因为一旦没有加入<code>WHERE</code>关键词和条件，会导致交叉连接比如第一个表有5条数据，第二个表有10条数据，就会查出来<code>5*10=50</code>条数据。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> oi.order_id,p.name,oi.quantity,p.unit_price</span><br><span class="line"><span class="keyword">FROM</span> order_items oi,products p</span><br><span class="line"><span class="keyword">WHERE</span> oi.product_id<span class="operator">=</span>p.product_id;</span><br></pre></td></tr></table></figure>
+
+<h3 id="左外连接"><a href="#左外连接" class="headerlink" title="左外连接"></a>左外连接</h3><p>我们有时候需要外连接比如在获取订单的时候，我们也希望把那些没有下单的人也查出来。</p>
+<p>左外连接表示：左表数据全有，右表中不符合条件的字段为<code>NULL</code>值。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> c.customer_id,o.customer_id</span><br><span class="line"><span class="keyword">FROM</span> customers c</span><br><span class="line"><span class="keyword">LEFT</span> <span class="keyword">OUTER</span> <span class="keyword">JOIN</span> orders o</span><br><span class="line">  <span class="keyword">ON</span> c.customer_id<span class="operator">=</span>o.customer_id;</span><br></pre></td></tr></table></figure>
+
+<h3 id="右外连接"><a href="#右外连接" class="headerlink" title="右外连接"></a>右外连接</h3><p>当然我们也可以用右连接的方式来获取它。</p>
+<p>右外连接表示：右表数据全有，左表中不符合条件的字段为<code>NULL</code>值。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> o.customer_id,c.customer_id</span><br><span class="line"><span class="keyword">FROM</span> orders o</span><br><span class="line"><span class="keyword">RIGHT</span> <span class="keyword">OUTER</span> <span class="keyword">JOIN</span> customers c</span><br><span class="line">  <span class="keyword">ON</span> c.customer_id<span class="operator">=</span>o.customer_id;</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意：</strong>与<code>INNER</code>关键词一样<code>OUTER</code>关键词是可以省略的。</p>
+<h3 id="自外连接"><a href="#自外连接" class="headerlink" title="自外连接"></a>自外连接</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> e.first_name,m.first_name</span><br><span class="line"><span class="keyword">FROM</span> employees e</span><br><span class="line"><span class="keyword">LEFT</span> <span class="keyword">JOIN</span> employees m</span><br><span class="line">     <span class="keyword">ON</span> e.reports_to<span class="operator">=</span>m.employee_id;</span><br></pre></td></tr></table></figure>
+
+<h3 id="多表外连接"><a href="#多表外连接" class="headerlink" title="多表外连接"></a>多表外连接</h3><p>与多表内连接类似：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> o.customer_id,c.customer_id,s.name</span><br><span class="line"><span class="keyword">FROM</span> orders o</span><br><span class="line"><span class="keyword">LEFT</span> <span class="keyword">JOIN</span> customers c</span><br><span class="line">  <span class="keyword">ON</span> c.customer_id<span class="operator">=</span>o.customer_id</span><br><span class="line"><span class="keyword">LEFT</span> <span class="keyword">JOIN</span> shippers s</span><br><span class="line">  <span class="keyword">ON</span> o.shipper_id<span class="operator">=</span>s.shipper_id;</span><br></pre></td></tr></table></figure>
+
+<h3 id="自然连接"><a href="#自然连接" class="headerlink" title="自然连接"></a>自然连接</h3><p>数据引擎自己猜测该如何连接，不建议使用(随机性),(会对字段相同的列进行连接)</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> o.customer_id,c.first_name</span><br><span class="line"><span class="keyword">FROM</span> orders o</span><br><span class="line"><span class="keyword">NATURAL</span> <span class="keyword">JOIN</span> customers c;</span><br></pre></td></tr></table></figure>
+
+<p>类似于</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> o.customer_id,c.first_name</span><br><span class="line"><span class="keyword">FROM</span> orders o</span><br><span class="line"><span class="keyword">JOIN</span> customers c</span><br><span class="line">  <span class="keyword">USING</span>(customer_id);</span><br></pre></td></tr></table></figure>
+
+<h3 id="交叉连接"><a href="#交叉连接" class="headerlink" title="交叉连接"></a>交叉连接</h3><p>连接的两个表的每一行都会与另一个表中的每一行进行连接。</p>
+<p>他的用法我个人觉得是在型号表中可能会有所使用：</p>
+<p>比如我们有一个颜色表，一个大小表我们可以自由组合出所有的结果：</p>
+<p>显示的写法：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span></span><br><span class="line"><span class="keyword">FROM</span> sizes s</span><br><span class="line"><span class="keyword">CROSS</span> <span class="keyword">JOIN</span> colors c;</span><br></pre></td></tr></table></figure>
+
+<p>其实我们在将隐式内连接的时候就有所描述，隐式的交叉连接：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span></span><br><span class="line"><span class="keyword">FROM</span> sizes s,colors c;</span><br></pre></td></tr></table></figure>
+
+<h2 id="联合查询"><a href="#联合查询" class="headerlink" title="联合查询"></a>联合查询</h2><p>我们在进行订单查询的时候，我们想要把21年以后的订单定为活跃订单，21年以前的订单为存档订单，并把它联合到一个结果集<code>UNION</code>关键词可以帮助我们解决这个问题：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> o.customer_id,o.order_date,<span class="string">&#x27;active&#x27;</span> <span class="keyword">AS</span> statue</span><br><span class="line"><span class="keyword">FROM</span> orders o</span><br><span class="line"><span class="keyword">WHERE</span> o.order_date <span class="operator">&gt;=</span> <span class="string">&#x27;2021-01-01&#x27;</span></span><br><span class="line"><span class="keyword">UNION</span></span><br><span class="line"><span class="keyword">SELECT</span> o.customer_id,o.order_date,<span class="string">&#x27;archive&#x27;</span> <span class="keyword">AS</span> statue</span><br><span class="line"><span class="keyword">FROM</span> orders o</span><br><span class="line"><span class="keyword">WHERE</span> o.order_date <span class="operator">&lt;</span> <span class="string">&#x27;2021-01-01&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>注意需要合并的字段数量必须一致。</p>
+<p>注意如果字段数量一样但是字段名不一样，但是数据类型一样也是会查询出来的比如：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> o.customer_id,o.order_date,<span class="string">&#x27;active&#x27;</span> <span class="keyword">AS</span> statue</span><br><span class="line"><span class="keyword">FROM</span> orders o</span><br><span class="line"><span class="keyword">WHERE</span> o.order_date <span class="operator">&gt;=</span> <span class="string">&#x27;2019-01-01&#x27;</span></span><br><span class="line"><span class="keyword">UNION</span></span><br><span class="line"><span class="keyword">SELECT</span> o.customer_id,o.order_date,o.comments</span><br><span class="line"><span class="keyword">FROM</span> orders o</span><br><span class="line"><span class="keyword">WHERE</span> o.order_date <span class="operator">&lt;</span> <span class="string">&#x27;2019-01-01&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>当然字段数量一样，字段不一样且数据类型不一样是查不出来的。</p>
+<h2 id="聚合函数查询"><a href="#聚合函数查询" class="headerlink" title="聚合函数查询"></a>聚合函数查询</h2><h3 id="COUNT"><a href="#COUNT" class="headerlink" title="COUNT"></a>COUNT</h3><p>有的时候我们需要知道合乎我们查询条件的字段有多少个，此时我们就需要COUNT去计数。</p>
+<p>当然<code>COUNT</code>默认返回所有的非空字段数量;</p>
+<p>可以使用<code>COUNT(*)</code>获取该表的总列数;</p>
+<p>可以使用<code>DISTINCT</code>对结果集去重。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> </span><br><span class="line"><span class="built_in">COUNT</span>(unit_price),</span><br><span class="line"><span class="built_in">COUNT</span>(<span class="keyword">DISTINCT</span> unit_price),</span><br><span class="line"><span class="built_in">COUNT</span>(<span class="operator">*</span>)</span><br><span class="line"><span class="keyword">FROM</span> products;</span><br></pre></td></tr></table></figure>
+
+<h3 id="MAX-MIN-AVG-SUM"><a href="#MAX-MIN-AVG-SUM" class="headerlink" title="MAX/MIN/AVG/SUM"></a>MAX/MIN/AVG/SUM</h3><p>以上三个分别表示最大值，最小值，平均值和总和。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> </span><br><span class="line"><span class="built_in">MAX</span>(unit_price),</span><br><span class="line"><span class="built_in">MIN</span>(unit_price),</span><br><span class="line"><span class="built_in">AVG</span>(unit_price),</span><br><span class="line"><span class="built_in">SUM</span>(unit_price)</span><br><span class="line"><span class="keyword">FROM</span> products;</span><br></pre></td></tr></table></figure>
+
+<h3 id="GROUP-BY"><a href="#GROUP-BY" class="headerlink" title="GROUP BY"></a>GROUP BY</h3><p>我们有时也需要获取每一个用户花了多少钱，这个时候我们可以用<code>GROUP BY</code>来进行分组操作。</p>
+<p>我们甚至还可以给他进行排序。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> </span><br><span class="line">NAME,</span><br><span class="line"><span class="built_in">SUM</span>(unit_price) <span class="keyword">AS</span> sum_price</span><br><span class="line"><span class="keyword">FROM</span> products</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> NAME</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> sum_price <span class="keyword">DESC</span>;</span><br></pre></td></tr></table></figure>
+
+<p><code>GROUP BY</code>必须放在<code>ORDER BY</code>的前边，不能放在<code>ORDER BY</code>的后边。</p>
+<p>我们也可以根据多个字段进行分组：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> </span><br><span class="line">NAME,</span><br><span class="line"><span class="built_in">SUM</span>(unit_price)<span class="keyword">AS</span> sum_price</span><br><span class="line"><span class="keyword">FROM</span> products</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> NAME,unit_price;</span><br></pre></td></tr></table></figure>
+
+<h3 id="HAVING"><a href="#HAVING" class="headerlink" title="HAVING"></a>HAVING</h3><p>有时候需要在分组后对数据进行筛选，<code>HAVING</code>能够很好的帮助我们。</p>
+<p><code>HAVING</code>关键词也支持<code>AND/OR</code>等关键词来进行复合查询。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> </span><br><span class="line">NAME,</span><br><span class="line"><span class="built_in">SUM</span>(unit_price)<span class="keyword">AS</span> sum_price</span><br><span class="line"><span class="keyword">FROM</span> products</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> NAME</span><br><span class="line"><span class="keyword">HAVING</span> sum_price<span class="operator">&gt;</span><span class="number">3</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="WITH-ROLLUP"><a href="#WITH-ROLLUP" class="headerlink" title="WITH ROLLUP"></a>WITH ROLLUP</h3><p>作用是把值全部加起来，来获取汇总值（我们可以很容易得到各省的产值与总产量）。</p>
+<p>仅仅在MySQL中被支持。仅仅用于聚合值的列。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> </span><br><span class="line">product_id,</span><br><span class="line">NAME,</span><br><span class="line"><span class="built_in">SUM</span>(unit_price) <span class="keyword">AS</span> sum_price</span><br><span class="line"><span class="keyword">FROM</span> products</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> NAME <span class="keyword">WITH</span> <span class="keyword">ROLLUP</span>;</span><br></pre></td></tr></table></figure>
+
+<p>上述例子中只有<code>sum_price</code>的列被全部求和了，也就是说我们除了获取了分组以后的和还获得了总和。</p>
+<h2 id="查询练习"><a href="#查询练习" class="headerlink" title="查询练习"></a>查询练习</h2><h3 id="比生菜更贵的产品"><a href="#比生菜更贵的产品" class="headerlink" title="比生菜更贵的产品"></a>比生菜更贵的产品</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span></span><br><span class="line"><span class="keyword">FROM</span> products</span><br><span class="line"><span class="keyword">WHERE</span> unit_price<span class="operator">&gt;</span> (</span><br><span class="line">  <span class="keyword">SELECT</span> unit_price </span><br><span class="line">  <span class="keyword">FROM</span> products</span><br><span class="line">  <span class="keyword">WHERE</span> NAME <span class="operator">=</span> <span class="string">&#x27;Lettuce - Romaine, Heart&#x27;</span></span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<h3 id="比平均工资高的雇员"><a href="#比平均工资高的雇员" class="headerlink" title="比平均工资高的雇员"></a>比平均工资高的雇员</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span></span><br><span class="line"><span class="keyword">FROM</span> employees</span><br><span class="line"><span class="keyword">WHERE</span> salary <span class="operator">&gt;</span>(</span><br><span class="line"><span class="keyword">SELECT</span> <span class="built_in">AVG</span>(salary)</span><br><span class="line"><span class="keyword">FROM</span> employees);</span><br></pre></td></tr></table></figure>
+
+<h3 id="没有被下单的商品"><a href="#没有被下单的商品" class="headerlink" title="没有被下单的商品"></a>没有被下单的商品</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span></span><br><span class="line"><span class="keyword">FROM</span> products</span><br><span class="line"><span class="keyword">WHERE</span> product_id <span class="keyword">NOT</span> <span class="keyword">IN</span>(</span><br><span class="line"> <span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span> product_id</span><br><span class="line"> <span class="keyword">FROM</span> order_items</span><br><span class="line"> );</span><br></pre></td></tr></table></figure>
+
+<h3 id="没有发票的客户"><a href="#没有发票的客户" class="headerlink" title="没有发票的客户"></a>没有发票的客户</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span></span><br><span class="line"><span class="keyword">FROM</span> clients</span><br><span class="line"><span class="keyword">WHERE</span> client_id <span class="keyword">NOT</span> <span class="keyword">IN</span>(</span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span> client_id</span><br><span class="line"><span class="keyword">FROM</span>  invoices);</span><br></pre></td></tr></table></figure>
+
+<p>如果我们不用子查询的话，我们应该怎么做呢？</p>
+<p>连接查询你值得拥有！！！</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span></span><br><span class="line"><span class="keyword">FROM</span> clients c</span><br><span class="line"><span class="keyword">LEFT</span> <span class="keyword">JOIN</span> invoices i</span><br><span class="line"><span class="keyword">ON</span> c.client_id<span class="operator">=</span>i.client_id</span><br><span class="line"><span class="keyword">WHERE</span> i.invoice_id <span class="keyword">IS</span> <span class="keyword">NULL</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="查询购买了生菜的客户编号与姓名"><a href="#查询购买了生菜的客户编号与姓名" class="headerlink" title="查询购买了生菜的客户编号与姓名"></a>查询购买了生菜的客户编号与姓名</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> c.customer_id,c.first_name,c.last_name</span><br><span class="line"><span class="keyword">FROM</span> customers c</span><br><span class="line"><span class="keyword">WHERE</span> c.customer_id <span class="keyword">IN</span> (</span><br><span class="line">  <span class="keyword">SELECT</span> o.customer_id</span><br><span class="line">  <span class="keyword">FROM</span> orders o</span><br><span class="line">  <span class="keyword">WHERE</span> o.order_id <span class="keyword">IN</span>(</span><br><span class="line">    <span class="keyword">SELECT</span> order_id </span><br><span class="line">    <span class="keyword">FROM</span> order_items oi</span><br><span class="line">    <span class="keyword">WHERE</span> oi.product_id <span class="operator">=</span> (</span><br><span class="line">      <span class="keyword">SELECT</span> p.product_id</span><br><span class="line">      <span class="keyword">FROM</span> products p</span><br><span class="line">      <span class="keyword">WHERE</span> NAME <span class="operator">=</span> <span class="string">&#x27;Lettuce - Romaine, Heart&#x27;</span></span><br><span class="line">    )</span><br><span class="line">  )</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<p>此处再看连接查询：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span> c.customer_id,c.first_name,c.last_name</span><br><span class="line"><span class="keyword">FROM</span> customers c</span><br><span class="line"><span class="keyword">LEFT</span> <span class="keyword">JOIN</span> orders o <span class="keyword">USING</span>(customer_id)</span><br><span class="line"><span class="keyword">LEFT</span> <span class="keyword">JOIN</span> order_items oi <span class="keyword">USING</span>(order_id)</span><br><span class="line"><span class="keyword">LEFT</span> <span class="keyword">JOIN</span> products p <span class="keyword">USING</span>(product_id)</span><br><span class="line"><span class="keyword">WHERE</span> p.name<span class="operator">=</span><span class="string">&#x27;Lettuce - Romaine, Heart&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>连接查询的写作思想在于时刻记得你要查什么，什么表可以得到它，然后去连接吧！</p>
+<h3 id="比自己部门平均工资高的员工"><a href="#比自己部门平均工资高的员工" class="headerlink" title="比自己部门平均工资高的员工"></a>比自己部门平均工资高的员工</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span></span><br><span class="line"><span class="keyword">FROM</span> employees e</span><br><span class="line"><span class="keyword">WHERE</span> salary <span class="operator">&gt;</span>(</span><br><span class="line">	<span class="keyword">SELECT</span> <span class="built_in">AVG</span>(salary)</span><br><span class="line">	<span class="keyword">FROM</span> employees</span><br><span class="line">	<span class="keyword">WHERE</span> e.office_id<span class="operator">=</span>office_id</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<p>看上表，在查询过程中，进入<code>employees</code>表然后对表中的数据进行平均值的求取，随后每一行都会进行一次平均值的求取这种方式叫做相关子查询，这种查询方式慢并且比较占内存，但是使用却很广泛。</p>
+<h3 id="每个客户高于自己发票平均值的发票"><a href="#每个客户高于自己发票平均值的发票" class="headerlink" title="每个客户高于自己发票平均值的发票"></a>每个客户高于自己发票平均值的发票</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> client_id</span><br><span class="line"><span class="keyword">FROM</span> invoices i</span><br><span class="line"><span class="keyword">WHERE</span> invoice_total<span class="operator">&gt;</span>(</span><br><span class="line">  <span class="keyword">SELECT</span> <span class="built_in">AVG</span>(invoice_total)</span><br><span class="line">  <span class="keyword">FROM</span> invoices</span><br><span class="line">  <span class="keyword">WHERE</span> i.client_id<span class="operator">=</span>client_id</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<h3 id="得到所有有发票的客户信息"><a href="#得到所有有发票的客户信息" class="headerlink" title="得到所有有发票的客户信息"></a>得到所有有发票的客户信息</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span></span><br><span class="line"><span class="keyword">FROM</span> clients</span><br><span class="line"><span class="keyword">WHERE</span> client_id <span class="keyword">IN</span>(</span><br><span class="line">  <span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span> client_id</span><br><span class="line">  <span class="keyword">FROM</span> invoices</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<p>同时我们也可以通过连接来获取。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span> client_id</span><br><span class="line"><span class="keyword">FROM</span> clients c</span><br><span class="line"><span class="keyword">INNER</span> <span class="keyword">JOIN</span> invoices <span class="keyword">USING</span>(client_id);</span><br></pre></td></tr></table></figure>
+
+<p>让我们再来一个方法：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span> client_id</span><br><span class="line"><span class="keyword">FROM</span> clients c</span><br><span class="line"><span class="keyword">WHERE</span> <span class="keyword">EXISTS</span>(</span><br><span class="line">  <span class="keyword">SELECT</span> client_id</span><br><span class="line">  <span class="keyword">FROM</span> invoices</span><br><span class="line">  <span class="keyword">WHERE</span> client_id<span class="operator">=</span>c.client_id</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<p><code>EXISTS</code>的意义在于当我们的表数据有很多的情况下，<code>IN</code>关键词的效率自然是不如<code>EXISTS</code>。</p>
+<h3 id="从来没有下过单的商品"><a href="#从来没有下过单的商品" class="headerlink" title="从来没有下过单的商品"></a>从来没有下过单的商品</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span></span><br><span class="line"><span class="keyword">FROM</span> products p</span><br><span class="line"><span class="keyword">WHERE</span> <span class="keyword">NOT</span> <span class="keyword">EXISTS</span>(</span><br><span class="line">  <span class="keyword">SELECT</span> <span class="operator">*</span></span><br><span class="line">  <span class="keyword">FROM</span> order_items</span><br><span class="line">  <span class="keyword">WHERE</span> p.product_id<span class="operator">=</span>product_id</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<h3 id="发票数额以及每一列都有平均额度"><a href="#发票数额以及每一列都有平均额度" class="headerlink" title="发票数额以及每一列都有平均额度"></a>发票数额以及每一列都有平均额度</h3><p><code>AVG</code>关键词只能查询到一行也就是该行的平均额度，此处就需要在<code>SELECT</code>关键词后边加入我们的子查询结果。</p>
+<p>并且如果我们在一条查询语句中写过了查询那么我们可以直接通过<code>SELECT</code>获取他。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> invoice_id,invoice_total,(</span><br><span class="line">	<span class="keyword">SELECT</span> <span class="built_in">AVG</span>(invoice_total) <span class="keyword">FROM</span> invoices) <span class="keyword">AS</span> invoice_total_avg,</span><br><span class="line">	invoice_total<span class="operator">-</span>(<span class="keyword">SELECT</span> invoice_total_avg) <span class="keyword">AS</span> invoice_total_cz</span><br><span class="line"><span class="keyword">FROM</span> invoices;</span><br></pre></td></tr></table></figure>
+
+<h3 id="FROM中的查询"><a href="#FROM中的查询" class="headerlink" title="FROM中的查询"></a>FROM中的查询</h3><p>注意必须要起一个别名。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> invoice_total_avg,invoice_total_cz</span><br><span class="line"><span class="keyword">FROM</span> </span><br><span class="line">(<span class="keyword">SELECT</span> invoice_id,invoice_total,(</span><br><span class="line">	<span class="keyword">SELECT</span> <span class="built_in">AVG</span>(invoice_total) <span class="keyword">FROM</span> invoices) <span class="keyword">AS</span> invoice_total_avg,</span><br><span class="line">	invoice_total<span class="operator">-</span>(<span class="keyword">SELECT</span> invoice_total_avg) <span class="keyword">AS</span> invoice_total_cz</span><br><span class="line"><span class="keyword">FROM</span> invoices) <span class="keyword">AS</span> invoice;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/SQL/" rel="tag"># SQL</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2021/10/02/04-SQLApi/" rel="next" title="SQL常用APi">
+                <i class="fa fa-chevron-left"></i> SQL常用APi
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2021/10/12/hello-world/" rel="prev" title="Hello World">
+                Hello World <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://blog.csdn.net/m0_50210478?spm=1000.2115.3001.5343" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-globe"></i>CSDN</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://baizuige.github.io/" title="白嘴鸽" target="_blank">白嘴鸽</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#SQL%E6%9F%A5%E8%AF%A2"><span class="nav-number">1.</span> <span class="nav-text">SQL查询</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%80%E5%8D%95%E6%9F%A5%E8%AF%A2"><span class="nav-number">1.1.</span> <span class="nav-text">简单查询</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E8%BF%90%E7%AE%97"><span class="nav-number">1.2.</span> <span class="nav-text">数据运算</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2%E7%BB%93%E6%9E%9C%E7%AD%9B%E9%80%89"><span class="nav-number">1.3.</span> <span class="nav-text">查询结果筛选</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#DISTINCT"><span class="nav-number">1.3.0.1.</span> <span class="nav-text">DISTINCT</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#AS"><span class="nav-number">1.3.0.2.</span> <span class="nav-text">AS</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#TOP"><span class="nav-number">1.3.0.3.</span> <span class="nav-text">TOP</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9D%A1%E4%BB%B6%E5%85%B3%E9%94%AE%E8%AF%8D"><span class="nav-number">1.3.1.</span> <span class="nav-text">条件关键词</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#WHERE"><span class="nav-number">1.3.1.1.</span> <span class="nav-text">WHERE</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%AF%94%E8%BE%83%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">1.3.1.2.</span> <span class="nav-text">比较运算符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#AND"><span class="nav-number">1.3.1.3.</span> <span class="nav-text">AND</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#OR"><span class="nav-number">1.3.1.4.</span> <span class="nav-text">OR</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#NOT"><span class="nav-number">1.3.1.5.</span> <span class="nav-text">NOT</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#BETWEEN"><span class="nav-number">1.3.1.6.</span> <span class="nav-text">BETWEEN</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#IN"><span class="nav-number">1.3.1.7.</span> <span class="nav-text">IN</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#LIKE"><span class="nav-number">1.3.1.8.</span> <span class="nav-text">LIKE</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#REGEXP"><span class="nav-number">1.3.1.9.</span> <span class="nav-text">REGEXP</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#IS-NULL"><span class="nav-number">1.3.1.10.</span> <span class="nav-text">IS NULL</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ORDER-BY"><span class="nav-number">1.3.1.11.</span> <span class="nav-text">ORDER BY</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#LIMIT"><span class="nav-number">1.3.1.12.</span> <span class="nav-text">LIMIT</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%90%E6%9F%A5%E8%AF%A2"><span class="nav-number">1.4.</span> <span class="nav-text">子查询</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ALL"><span class="nav-number">1.4.0.1.</span> <span class="nav-text">ALL</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ANY-SOME"><span class="nav-number">1.4.0.2.</span> <span class="nav-text">ANY&#x2F;SOME</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%9E%E6%8E%A5%E6%9F%A5%E8%AF%A2"><span class="nav-number">1.5.</span> <span class="nav-text">连接查询</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%85%E8%BF%9E%E6%8E%A5"><span class="nav-number">1.5.1.</span> <span class="nav-text">内连接</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#USING"><span class="nav-number">1.5.1.1.</span> <span class="nav-text">USING</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B7%A8%E6%95%B0%E6%8D%AE%E5%BA%93%E8%A1%A8%E8%BF%9E%E6%8E%A5"><span class="nav-number">1.5.2.</span> <span class="nav-text">跨数据库表连接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E8%BF%9E%E6%8E%A5"><span class="nav-number">1.5.3.</span> <span class="nav-text">自连接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A%E8%A1%A8%E5%86%85%E8%BF%9E%E6%8E%A5"><span class="nav-number">1.5.4.</span> <span class="nav-text">多表内连接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%8D%E5%90%88%E6%9D%A1%E4%BB%B6%E5%86%85%E8%BF%9E%E6%8E%A5"><span class="nav-number">1.5.5.</span> <span class="nav-text">复合条件内连接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9A%90%E5%BC%8F%E5%86%85%E9%93%BE%E6%8E%A5"><span class="nav-number">1.5.6.</span> <span class="nav-text">隐式内链接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B7%A6%E5%A4%96%E8%BF%9E%E6%8E%A5"><span class="nav-number">1.5.7.</span> <span class="nav-text">左外连接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%B3%E5%A4%96%E8%BF%9E%E6%8E%A5"><span class="nav-number">1.5.8.</span> <span class="nav-text">右外连接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E5%A4%96%E8%BF%9E%E6%8E%A5"><span class="nav-number">1.5.9.</span> <span class="nav-text">自外连接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A%E8%A1%A8%E5%A4%96%E8%BF%9E%E6%8E%A5"><span class="nav-number">1.5.10.</span> <span class="nav-text">多表外连接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E7%84%B6%E8%BF%9E%E6%8E%A5"><span class="nav-number">1.5.11.</span> <span class="nav-text">自然连接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%A4%E5%8F%89%E8%BF%9E%E6%8E%A5"><span class="nav-number">1.5.12.</span> <span class="nav-text">交叉连接</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%81%94%E5%90%88%E6%9F%A5%E8%AF%A2"><span class="nav-number">1.6.</span> <span class="nav-text">联合查询</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%81%9A%E5%90%88%E5%87%BD%E6%95%B0%E6%9F%A5%E8%AF%A2"><span class="nav-number">1.7.</span> <span class="nav-text">聚合函数查询</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#COUNT"><span class="nav-number">1.7.1.</span> <span class="nav-text">COUNT</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MAX-MIN-AVG-SUM"><span class="nav-number">1.7.2.</span> <span class="nav-text">MAX&#x2F;MIN&#x2F;AVG&#x2F;SUM</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GROUP-BY"><span class="nav-number">1.7.3.</span> <span class="nav-text">GROUP BY</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HAVING"><span class="nav-number">1.7.4.</span> <span class="nav-text">HAVING</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#WITH-ROLLUP"><span class="nav-number">1.7.5.</span> <span class="nav-text">WITH ROLLUP</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2%E7%BB%83%E4%B9%A0"><span class="nav-number">1.8.</span> <span class="nav-text">查询练习</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AF%94%E7%94%9F%E8%8F%9C%E6%9B%B4%E8%B4%B5%E7%9A%84%E4%BA%A7%E5%93%81"><span class="nav-number">1.8.1.</span> <span class="nav-text">比生菜更贵的产品</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AF%94%E5%B9%B3%E5%9D%87%E5%B7%A5%E8%B5%84%E9%AB%98%E7%9A%84%E9%9B%87%E5%91%98"><span class="nav-number">1.8.2.</span> <span class="nav-text">比平均工资高的雇员</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B2%A1%E6%9C%89%E8%A2%AB%E4%B8%8B%E5%8D%95%E7%9A%84%E5%95%86%E5%93%81"><span class="nav-number">1.8.3.</span> <span class="nav-text">没有被下单的商品</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B2%A1%E6%9C%89%E5%8F%91%E7%A5%A8%E7%9A%84%E5%AE%A2%E6%88%B7"><span class="nav-number">1.8.4.</span> <span class="nav-text">没有发票的客户</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2%E8%B4%AD%E4%B9%B0%E4%BA%86%E7%94%9F%E8%8F%9C%E7%9A%84%E5%AE%A2%E6%88%B7%E7%BC%96%E5%8F%B7%E4%B8%8E%E5%A7%93%E5%90%8D"><span class="nav-number">1.8.5.</span> <span class="nav-text">查询购买了生菜的客户编号与姓名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AF%94%E8%87%AA%E5%B7%B1%E9%83%A8%E9%97%A8%E5%B9%B3%E5%9D%87%E5%B7%A5%E8%B5%84%E9%AB%98%E7%9A%84%E5%91%98%E5%B7%A5"><span class="nav-number">1.8.6.</span> <span class="nav-text">比自己部门平均工资高的员工</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AF%8F%E4%B8%AA%E5%AE%A2%E6%88%B7%E9%AB%98%E4%BA%8E%E8%87%AA%E5%B7%B1%E5%8F%91%E7%A5%A8%E5%B9%B3%E5%9D%87%E5%80%BC%E7%9A%84%E5%8F%91%E7%A5%A8"><span class="nav-number">1.8.7.</span> <span class="nav-text">每个客户高于自己发票平均值的发票</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BE%97%E5%88%B0%E6%89%80%E6%9C%89%E6%9C%89%E5%8F%91%E7%A5%A8%E7%9A%84%E5%AE%A2%E6%88%B7%E4%BF%A1%E6%81%AF"><span class="nav-number">1.8.8.</span> <span class="nav-text">得到所有有发票的客户信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%8E%E6%9D%A5%E6%B2%A1%E6%9C%89%E4%B8%8B%E8%BF%87%E5%8D%95%E7%9A%84%E5%95%86%E5%93%81"><span class="nav-number">1.8.9.</span> <span class="nav-text">从来没有下过单的商品</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%91%E7%A5%A8%E6%95%B0%E9%A2%9D%E4%BB%A5%E5%8F%8A%E6%AF%8F%E4%B8%80%E5%88%97%E9%83%BD%E6%9C%89%E5%B9%B3%E5%9D%87%E9%A2%9D%E5%BA%A6"><span class="nav-number">1.8.10.</span> <span class="nav-text">发票数额以及每一列都有平均额度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#FROM%E4%B8%AD%E7%9A%84%E6%9F%A5%E8%AF%A2"><span class="nav-number">1.8.11.</span> <span class="nav-text">FROM中的查询</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">coloredChicken</span>
+<!--
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">16.4k</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+-->
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'UhoqgUWqLOptc9J6lX0IIVEl-gzGzoHsz',
+        appKey: 'xYF8UJxC6Kz738PvCdl9Dcfr',
+        placeholder: 'lei me write',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
