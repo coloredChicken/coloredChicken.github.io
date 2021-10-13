@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="SQL," />
+  <meta name="keywords" content="WebStyle," />
 
 
 
@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="索引本质上是数据库引擎用来快速查找数据的数据结构。 比如我们有一个电话表，我们如果通过电话去寻找某个人,我们可能需要大量的时间。我们根据姓氏进行分类就会简单不少，甚至我们也可以根据省份来进行分类，这样也可以加快速度。 索引很小,足以放入内存。在内存中的读取是快的。 增加数据大小,增删改操作需要更新索引。性能关键的词增加索引。 索引的添加不能基于表的设计,基于业务需要就可以。 我们的主键相当于是聚集">
+<meta name="description" content="ElementUi一些小技巧表格实现数据判断使用场景，有时候从后端取过来的状态显示为1,2,3这样的数字，但是我们想要把它变为启用,禁用等，需要操作。 当前环境：win10,vue2.9,ElementUi2.4.5 1234567&lt;el-table-column     label&#x3D;&quot;状态&quot;     width&#x3D;&quot;180&quot;&gt;    &lt;te">
 <meta property="og:type" content="article">
-<meta property="og:title" content="SQL索引">
-<meta property="og:url" content="http://coloredchicken.github.io/2021/10/02/09-%E7%B4%A2%E5%BC%95/index.html">
+<meta property="og:title" content="ElementUi一些小技巧">
+<meta property="og:url" content="http://coloredchicken.github.io/2021/10/13/ElementUi%E4%B8%80%E4%BA%9B%E5%B0%8F%E6%8A%80%E5%B7%A7/index.html">
 <meta property="og:site_name" content="coloredChicken">
-<meta property="og:description" content="索引本质上是数据库引擎用来快速查找数据的数据结构。 比如我们有一个电话表，我们如果通过电话去寻找某个人,我们可能需要大量的时间。我们根据姓氏进行分类就会简单不少，甚至我们也可以根据省份来进行分类，这样也可以加快速度。 索引很小,足以放入内存。在内存中的读取是快的。 增加数据大小,增删改操作需要更新索引。性能关键的词增加索引。 索引的添加不能基于表的设计,基于业务需要就可以。 我们的主键相当于是聚集">
+<meta property="og:description" content="ElementUi一些小技巧表格实现数据判断使用场景，有时候从后端取过来的状态显示为1,2,3这样的数字，但是我们想要把它变为启用,禁用等，需要操作。 当前环境：win10,vue2.9,ElementUi2.4.5 1234567&lt;el-table-column     label&#x3D;&quot;状态&quot;     width&#x3D;&quot;180&quot;&gt;    &lt;te">
 <meta property="og:locale">
-<meta property="article:published_time" content="2021-10-02T08:42:14.000Z">
-<meta property="article:modified_time" content="2021-10-12T02:41:04.116Z">
+<meta property="article:published_time" content="2021-10-13T13:35:43.000Z">
+<meta property="article:modified_time" content="2021-10-13T13:45:22.254Z">
 <meta property="article:author" content="coloredChicken">
-<meta property="article:tag" content="SQL">
+<meta property="article:tag" content="WebStyle">
 <meta name="twitter:card" content="summary">
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://coloredChicken.github.io/2021/10/02/09-索引/"/>
+  <link rel="canonical" href="http://coloredChicken.github.io/2021/10/13/ElementUi一些小技巧/"/>
 
 
 
 
 
-  <title>SQL索引 | coloredChicken</title>
+  <title>ElementUi一些小技巧 | coloredChicken</title>
   
 
 
@@ -308,7 +308,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://coloredChicken.github.io/2021/10/02/09-%E7%B4%A2%E5%BC%95/">
+    <link itemprop="mainEntityOfPage" href="http://coloredChicken.github.io/2021/10/13/ElementUi%E4%B8%80%E4%BA%9B%E5%B0%8F%E6%8A%80%E5%B7%A7/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -325,11 +325,16 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">SQL索引</h1>
+          <h1 class="post-title" itemprop="name headline">ElementUi一些小技巧</h1>
         
 
         <div class="post-meta">
           <span class="post-time">
+
+    <i class="fa fa-thumb-tack"></i>
+    <font color=7D26CD>置顶</font>
+    <span class="post-meta-divider">|</span>
+
             
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
@@ -337,8 +342,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-10-02T16:42:14+08:00">
-                2021-10-02
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-10-13T21:35:43+08:00">
+                2021-10-13
               </time>
             
 
@@ -360,8 +365,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/SQL/" itemprop="url" rel="index">
-                    <span itemprop="name">SQL</span>
+                  <a href="/categories/WebStyle/" itemprop="url" rel="index">
+                    <span itemprop="name">WebStyle</span>
                   </a>
                 </span>
 
@@ -378,8 +383,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2021/10/02/09-%E7%B4%A2%E5%BC%95/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2021/10/02/09-%E7%B4%A2%E5%BC%95/" itemprop="commentCount"></span>
+                <a href="/2021/10/13/ElementUi%E4%B8%80%E4%BA%9B%E5%B0%8F%E6%8A%80%E5%B7%A7/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2021/10/13/ElementUi%E4%B8%80%E4%BA%9B%E5%B0%8F%E6%8A%80%E5%B7%A7/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -406,7 +411,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1.5k
+                  252
                 </span>
               
 
@@ -422,7 +427,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  5
+                  1
                 </span>
               
             </div>
@@ -443,69 +448,14 @@
       
 
       
-        <h1 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h1><p>本质上是数据库引擎用来快速查找数据的数据结构。</p>
-<p>比如我们有一个电话表，我们如果通过电话去寻找某个人,我们可能需要大量的时间。我们根据姓氏进行分类就会简单不少，甚至我们也可以根据省份来进行分类，这样也可以加快速度。</p>
-<p>索引很小,足以放入内存。在内存中的读取是快的。</p>
-<p>增加数据大小,增删改操作需要更新索引。性能关键的词增加索引。</p>
-<p>索引的添加不能基于表的设计,基于业务需要就可以。</p>
-<p>我们的主键相当于是聚集索引每一个表都只能有一个聚集索引，同时主键也是一级索引。但是当我们用其他列来创建二级索引,主键也会被包裹进去变成它的一部分。比如我们根据姓名和州来做索引，其实我们这个复合索引包括了姓名,州和主键。</p>
-<p>不管有多少个索引，MySQL在查找的时候只能使用一个索引。</p>
-<h2 id="创建索引"><a href="#创建索引" class="headerlink" title="创建索引"></a>创建索引</h2><p><code>EXPLAIN </code>关键词放在<code>SELECT</code>前可以告诉我们查询的一些具体参数。比如<code>type</code>为会<code>ALL</code>会进行全盘扫描。<code>rows</code>是指的总的扫描行数。</p>
- <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> INDEX idx_state <span class="keyword">ON</span> customers (state);</span><br></pre></td></tr></table></figure>
+        <h1 id="ElementUi一些小技巧"><a href="#ElementUi一些小技巧" class="headerlink" title="ElementUi一些小技巧"></a>ElementUi一些小技巧</h1><h2 id="表格"><a href="#表格" class="headerlink" title="表格"></a>表格</h2><h3 id="实现数据判断"><a href="#实现数据判断" class="headerlink" title="实现数据判断"></a>实现数据判断</h3><p>使用场景，有时候从后端取过来的状态显示为1,2,3这样的数字，但是我们想要把它变为启用,禁用等，需要操作。</p>
+<p>当前环境：<code>win10,vue2.9,ElementUi2.4.5</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;el-table-column</span><br><span class="line">     label=&quot;状态&quot;</span><br><span class="line">     width=&quot;180&quot;&gt;</span><br><span class="line">    &lt;template slot-scope=&quot;scope&quot;&gt;</span><br><span class="line">        &lt;span style=&quot;margin-left: 10px&quot;&gt;&#123;&#123; scope.row.status==1?&#x27;启用&#x27;:&#x27;禁用&#x27; &#125;&#125;&lt;/span&gt;</span><br><span class="line">    &lt;/template&gt;</span><br><span class="line">&lt;/el-table-column&gt;</span><br></pre></td></tr></table></figure>
 
-<p><code>possible_keys</code>指的是根据的索引。</p>
-<h2 id="查看索引"><a href="#查看索引" class="headerlink" title="查看索引"></a>查看索引</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--帮助我们精确查询数量</span></span><br><span class="line">ANALYZE <span class="keyword">TABLE</span> customers;</span><br><span class="line"><span class="comment">--查看索引</span></span><br><span class="line"><span class="keyword">SHOW</span> INDEXS <span class="keyword">IN</span> customers;</span><br></pre></td></tr></table></figure>
+<h3 id="实现一个表格多个数据"><a href="#实现一个表格多个数据" class="headerlink" title="实现一个表格多个数据"></a>实现一个表格多个数据</h3><p>比如我们在做一个后台系统，需要复制一段数据就可以通过在后边加一个复制按钮的方式实现。</p>
+<p>当前环境：<code>win10,vue2.9,ElementUi2.4.5</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;el-table-column  align=&quot;center&quot;</span><br><span class="line">     label=&quot;内容&quot;&gt;</span><br><span class="line">    &lt;template slot-scope=&quot;scope&quot;&gt;</span><br><span class="line">		&lt;span&gt;&#123;&#123; scope.row.note_title &#125;&#125;&lt;/span&gt;</span><br><span class="line">		&lt;el-button icon=&quot;el-icon-document-copy&quot; size=&quot;mini&quot;&gt;&lt;/el-button&gt;</span><br><span class="line">    &lt;/template&gt;</span><br><span class="line">&lt;/el-table-column&gt;</span><br></pre></td></tr></table></figure>
 
-<h2 id="强制使用某个索引"><a href="#强制使用某个索引" class="headerlink" title="强制使用某个索引"></a>强制使用某个索引</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span></span><br><span class="line">use index (idx_name)</span><br><span class="line"><span class="keyword">from</span> tables;</span><br></pre></td></tr></table></figure>
-
-<h2 id="前缀索引"><a href="#前缀索引" class="headerlink" title="前缀索引"></a>前缀索引</h2><p>有时候我们需要将字符串变为索引，但是他占用大量的内存，因此我们想要将他的一部分变为我们的索引。前缀索引由此而来。</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> INDEX idx_state <span class="keyword">ON</span> customers (per_name(<span class="number">2</span>));<span class="comment">--将per_name前两个字符作为索引</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="全文索引"><a href="#全文索引" class="headerlink" title="全文索引"></a>全文索引</h2><p>在我们做文章查询的时候，我们可能需要找一篇文章去将<code>MySQL INDEX</code>,我们如果采用<code>LIKE</code>关键词去进行查询。那个过程将是缓慢的。因此我们来看一下全文索引。</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> FULLTEXT INDEX idx_title_body <span class="keyword">ON</span> posts(title,body);</span><br><span class="line"><span class="comment">--MATCH(title,body) AGAINST(&#x27;MySQL INDEX&#x27;) 匹配相似度，默认降序排序</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span>, <span class="keyword">MATCH</span>(title,body) AGAINST(<span class="string">&#x27;MySQL INDEX&#x27;</span>)</span><br><span class="line"><span class="keyword">FROM</span> posts</span><br><span class="line"><span class="comment">--注意MATCH中的参数必须和我们索引上边的参数数量保持一致</span></span><br><span class="line"><span class="keyword">WHERE</span> <span class="keyword">MATCH</span>(title, body) AGAINST(<span class="string">&#x27;MySQL INDEX&#x27;</span>);</span><br></pre></td></tr></table></figure>
-
-<p>还有一种匹配模式叫做BOOLEAN模型</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> FULLTEXT INDEX idx_title_body <span class="keyword">ON</span> posts(title,body);</span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span>, <span class="keyword">MATCH</span>(title,body) AGAINST(<span class="string">&#x27;MySQL INDEX&#x27;</span>)</span><br><span class="line"><span class="keyword">FROM</span> posts</span><br><span class="line"><span class="keyword">WHERE</span> <span class="keyword">MATCH</span>(title, body) AGAINST(<span class="string">&#x27;+MySQL -INDEX&#x27;</span> <span class="keyword">IN</span> <span class="type">BOOLEAN</span> MODE);</span><br></pre></td></tr></table></figure>
-
-<p>前边加<code>-</code>默认排除在外，也就是查询结果必须不含有该字符串。<code>+</code>查询结果必须含有该字符串。</p>
-<p>有时候我们希望在文章中找到含有某句话:</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> FULLTEXT INDEX idx_title_body <span class="keyword">ON</span> posts(title,body);</span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span>, <span class="keyword">MATCH</span>(title,body) AGAINST(<span class="string">&#x27;MySQL INDEX&#x27;</span>)</span><br><span class="line"><span class="keyword">FROM</span> posts</span><br><span class="line"><span class="keyword">WHERE</span> <span class="keyword">MATCH</span>(title, body) AGAINST(<span class="string">&#x27;&quot;MySQL INDEX&quot;&#x27;</span> <span class="keyword">IN</span> <span class="type">BOOLEAN</span> MODE);</span><br></pre></td></tr></table></figure>
-
-<p>这个例子一定会找到含有<code>MySQL INDEX</code>的文章。</p>
-<h2 id="复合索引"><a href="#复合索引" class="headerlink" title="复合索引"></a>复合索引</h2><p>还拿我们电话表的例子，如果我们现根据省份或者姓去查我们可能会发现很多列。依旧会有很繁琐的查询工作。我们可能需要一些方式去减少查询的行数。复合索引可以帮助我们做到。我们可以将两个列合并为一个索引。事实上<code>MySQL</code>最多可以包含16个列。</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> INDEX idx_state_firstname <span class="keyword">ON</span> posts(state,firstname);</span><br></pre></td></tr></table></figure>
-
-<p>复合索引有一个很大的问题，列的前后顺序问题。</p>
-<p>一般来讲我们会将更频繁使用的列放在前边。</p>
-<p>另一个是把基数更高的列放在前边。基数其实是这一列的唯一值的数量。比如我们有一百万的记录数，我们把性别放在第一个其实也就减去了一般人，还有50万的数量。</p>
-<p> 不过还是要记住,按照业务需求而不是教条走。一切脱离业务的性能调优都是耍流氓。</p>
-<h2 id="索引失效"><a href="#索引失效" class="headerlink" title="索引失效"></a>索引失效</h2><p>有时候没有与索引很好搭配的查询语句可能会导致索引的失效。</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">EXPLAIN <span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> student <span class="keyword">where</span> score<span class="operator">+</span><span class="number">10</span><span class="operator">&gt;</span><span class="number">90</span>;</span><br></pre></td></tr></table></figure>
-
-<p>我们用上述语句查询分数加10分大于90分的人数。我们会发现索引其实没有生效。</p>
-<p>但是如果我们改为下面就会生效。</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">EXPLAIN <span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> student <span class="keyword">where</span> score<span class="operator">&gt;</span><span class="number">80</span>;</span><br></pre></td></tr></table></figure>
-
-<h2 id="索引排序"><a href="#索引排序" class="headerlink" title="索引排序"></a>索引排序</h2><p>拿我们的电话簿做例子，我们有一个复合索引<code>idx_state_lastname</code>，我们在排序的时候需要注意外部排序的操作是最浪费资源的。</p>
-<p>我们需要注意如果我们按照复合索引的顺序进行排序，如下表所示：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">EXPLAIN <span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> person <span class="keyword">order</span> <span class="keyword">by</span> state,lastname;</span><br></pre></td></tr></table></figure>
-
-<p>这种情况下,可以加快排序速度。</p>
-<p>但是注意中间不能有额外的条件比如：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">EXPLAIN <span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> person <span class="keyword">order</span> <span class="keyword">by</span> state,phone,lastname;</span><br></pre></td></tr></table></figure>
-
-<p>这种情况下是不会加快速度的。</p>
-<p>同样的：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">EXPLAIN <span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> person <span class="keyword">order</span> <span class="keyword">by</span> state,lastname <span class="keyword">desc</span>;</span><br></pre></td></tr></table></figure>
-
-<p>相反的排序顺序也不会加快运行速度。</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">EXPLAIN <span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> person <span class="keyword">order</span> <span class="keyword">by</span> lastname;</span><br></pre></td></tr></table></figure>
-
-<p>单单对第二个进行排序也不会加快速度。</p>
-<h2 id="覆盖索引"><a href="#覆盖索引" class="headerlink" title="覆盖索引"></a>覆盖索引</h2><p>如果我们的<code>WHERE</code>子句中判断的列都在索引中，我们的<code>ORDER BY</code>也都在索引中，我们的<code>SELECT</code>也都在索引中，那么我们可以不需要通过表查询而仅仅通过索引获取数据，这就叫做覆盖索引。</p>
-<h2 id="维护索引"><a href="#维护索引" class="headerlink" title="维护索引"></a>维护索引</h2><p>创建索引时注意不要有重复索引和多余索引。</p>
-<p>重复索引是指那些同一组列上且顺序相同的索引比如A_B_C与A_B_C;MySQL本身不会阻止这个操作。</p>
-<p>比如我们有一个索引A_B,我们又创建了一个索引A那就是多余的。但是我们创建B_A和B它并不算是多余。这是数学上的包含关系。</p>
 
       
     </div>
@@ -523,7 +473,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/SQL/" rel="tag"># SQL</a>
+            <a href="/tags/WebStyle/" rel="tag"># WebStyle</a>
           
         </div>
       
@@ -536,8 +486,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2021/10/02/11-SQLBug/" rel="next" title="SQLBug">
-                <i class="fa fa-chevron-left"></i> SQLBug
+              <a href="/2021/10/08/10-%E4%BF%9D%E6%8A%A4%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="next" title="SQL数据库安全">
+                <i class="fa fa-chevron-left"></i> SQL数据库安全
               </a>
             
           </div>
@@ -546,8 +496,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2021/10/02/10-%E4%BF%9D%E6%8A%A4%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="prev" title="SQL数据库安全">
-                SQL数据库安全 <i class="fa fa-chevron-right"></i>
+              <a href="/2021/10/13/Vue2%E4%B8%80%E4%BA%9B%E5%B0%8F%E6%8A%80%E5%B7%A7/" rel="prev" title="Vue2一些小技巧">
+                Vue2一些小技巧 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -628,7 +578,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-count">14</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -639,7 +589,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -650,7 +600,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -707,7 +657,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%B4%A2%E5%BC%95"><span class="nav-number">1.</span> <span class="nav-text">索引</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E7%B4%A2%E5%BC%95"><span class="nav-number">1.1.</span> <span class="nav-text">创建索引</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E7%B4%A2%E5%BC%95"><span class="nav-number">1.2.</span> <span class="nav-text">查看索引</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%BA%E5%88%B6%E4%BD%BF%E7%94%A8%E6%9F%90%E4%B8%AA%E7%B4%A2%E5%BC%95"><span class="nav-number">1.3.</span> <span class="nav-text">强制使用某个索引</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E7%BC%80%E7%B4%A2%E5%BC%95"><span class="nav-number">1.4.</span> <span class="nav-text">前缀索引</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%A8%E6%96%87%E7%B4%A2%E5%BC%95"><span class="nav-number">1.5.</span> <span class="nav-text">全文索引</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%8D%E5%90%88%E7%B4%A2%E5%BC%95"><span class="nav-number">1.6.</span> <span class="nav-text">复合索引</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B4%A2%E5%BC%95%E5%A4%B1%E6%95%88"><span class="nav-number">1.7.</span> <span class="nav-text">索引失效</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B4%A2%E5%BC%95%E6%8E%92%E5%BA%8F"><span class="nav-number">1.8.</span> <span class="nav-text">索引排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A6%86%E7%9B%96%E7%B4%A2%E5%BC%95"><span class="nav-number">1.9.</span> <span class="nav-text">覆盖索引</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%B4%E6%8A%A4%E7%B4%A2%E5%BC%95"><span class="nav-number">1.10.</span> <span class="nav-text">维护索引</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#ElementUi%E4%B8%80%E4%BA%9B%E5%B0%8F%E6%8A%80%E5%B7%A7"><span class="nav-number">1.</span> <span class="nav-text">ElementUi一些小技巧</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A1%A8%E6%A0%BC"><span class="nav-number">1.1.</span> <span class="nav-text">表格</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E5%88%A4%E6%96%AD"><span class="nav-number">1.1.1.</span> <span class="nav-text">实现数据判断</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E8%A1%A8%E6%A0%BC%E5%A4%9A%E4%B8%AA%E6%95%B0%E6%8D%AE"><span class="nav-number">1.1.2.</span> <span class="nav-text">实现一个表格多个数据</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
@@ -741,7 +691,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">16.4k</span>
+    <span title="Site words total count">16.7k</span>
   
 </div>
 
@@ -1296,5 +1246,5 @@
 
   
 
-</body>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 </html>

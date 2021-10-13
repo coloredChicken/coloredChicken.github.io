@@ -79,15 +79,15 @@
 
 
 
-<meta name="description" content="并发MySQL默认的行级锁当我们在MySQL数据库开启一个事务，并对一行数据进行修改，该行在事务期间被锁定，也就是说除了该事务其余事务无法对该行进行操作。从而保证了数据的安全性。也就是MySQL默认的行级锁。 并发的常见问题和解决方式事务的隔离级别 读未提交 读已提交 可重复读 可串行化  脏读读取到了事务尚未提交的修改后数据。 例如事务A 对于数据进行了更改，比如增加了用户的余额，但是这一行为还">
+<meta name="description" content="SQL常用Api数值类函数ROUND对数字进行四舍五入，第一个参数是需要四舍五入的数值，第二个参数是保留几位小数。 123SELECT ROUND(5.73)；--取值6SELECT ROUND(5.73,1);--取值5.7SELECT ROUND(5.735,2);--取值5.74  TRUNCATE对数字进行截断，第一个参数是需要截断的数值，第二个参数是保留几位小数。 12SELECT TR">
 <meta property="og:type" content="article">
-<meta property="og:title" content="SQL并发与锁">
-<meta property="og:url" content="http://coloredchicken.github.io/2021/10/02/06-%E5%B9%B6%E5%8F%91%E4%B8%8E%E9%94%81/index.html">
+<meta property="og:title" content="SQL常用APi">
+<meta property="og:url" content="http://coloredchicken.github.io/2021/10/03/04-SQLApi/index.html">
 <meta property="og:site_name" content="coloredChicken">
-<meta property="og:description" content="并发MySQL默认的行级锁当我们在MySQL数据库开启一个事务，并对一行数据进行修改，该行在事务期间被锁定，也就是说除了该事务其余事务无法对该行进行操作。从而保证了数据的安全性。也就是MySQL默认的行级锁。 并发的常见问题和解决方式事务的隔离级别 读未提交 读已提交 可重复读 可串行化  脏读读取到了事务尚未提交的修改后数据。 例如事务A 对于数据进行了更改，比如增加了用户的余额，但是这一行为还">
+<meta property="og:description" content="SQL常用Api数值类函数ROUND对数字进行四舍五入，第一个参数是需要四舍五入的数值，第二个参数是保留几位小数。 123SELECT ROUND(5.73)；--取值6SELECT ROUND(5.73,1);--取值5.7SELECT ROUND(5.735,2);--取值5.74  TRUNCATE对数字进行截断，第一个参数是需要截断的数值，第二个参数是保留几位小数。 12SELECT TR">
 <meta property="og:locale">
-<meta property="article:published_time" content="2021-10-02T08:42:14.000Z">
-<meta property="article:modified_time" content="2021-10-12T02:40:25.917Z">
+<meta property="article:published_time" content="2021-10-03T08:42:14.000Z">
+<meta property="article:modified_time" content="2021-10-13T13:15:14.241Z">
 <meta property="article:author" content="coloredChicken">
 <meta property="article:tag" content="SQL">
 <meta name="twitter:card" content="summary">
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://coloredChicken.github.io/2021/10/02/06-并发与锁/"/>
+  <link rel="canonical" href="http://coloredChicken.github.io/2021/10/03/04-SQLApi/"/>
 
 
 
 
 
-  <title>SQL并发与锁 | coloredChicken</title>
+  <title>SQL常用APi | coloredChicken</title>
   
 
 
@@ -308,7 +308,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://coloredChicken.github.io/2021/10/02/06-%E5%B9%B6%E5%8F%91%E4%B8%8E%E9%94%81/">
+    <link itemprop="mainEntityOfPage" href="http://coloredChicken.github.io/2021/10/03/04-SQLApi/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -325,11 +325,12 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">SQL并发与锁</h1>
+          <h1 class="post-title" itemprop="name headline">SQL常用APi</h1>
         
 
         <div class="post-meta">
           <span class="post-time">
+
             
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
@@ -337,8 +338,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-10-02T16:42:14+08:00">
-                2021-10-02
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-10-03T16:42:14+08:00">
+                2021-10-03
               </time>
             
 
@@ -378,8 +379,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2021/10/02/06-%E5%B9%B6%E5%8F%91%E4%B8%8E%E9%94%81/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2021/10/02/06-%E5%B9%B6%E5%8F%91%E4%B8%8E%E9%94%81/" itemprop="commentCount"></span>
+                <a href="/2021/10/03/04-SQLApi/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2021/10/03/04-SQLApi/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -406,7 +407,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  623
+                  1.3k
                 </span>
               
 
@@ -422,7 +423,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  2
+                  5
                 </span>
               
             </div>
@@ -443,34 +444,136 @@
       
 
       
-        <h1 id="并发"><a href="#并发" class="headerlink" title="并发"></a>并发</h1><h2 id="MySQL默认的行级锁"><a href="#MySQL默认的行级锁" class="headerlink" title="MySQL默认的行级锁"></a>MySQL默认的行级锁</h2><p>当我们在MySQL数据库开启一个事务，并对一行数据进行修改，该行在事务期间被锁定，也就是说除了该事务其余事务无法对该行进行操作。从而保证了数据的安全性。也就是MySQL默认的行级锁。</p>
-<h2 id="并发的常见问题和解决方式"><a href="#并发的常见问题和解决方式" class="headerlink" title="并发的常见问题和解决方式"></a>并发的常见问题和解决方式</h2><h3 id="事务的隔离级别"><a href="#事务的隔离级别" class="headerlink" title="事务的隔离级别"></a>事务的隔离级别</h3><ol>
-<li>读未提交</li>
-<li>读已提交</li>
-<li>可重复读</li>
-<li>可串行化</li>
-</ol>
-<h3 id="脏读"><a href="#脏读" class="headerlink" title="脏读"></a>脏读</h3><p>读取到了事务尚未提交的修改后数据。</p>
-<p>例如事务A 对于数据进行了更改，比如增加了用户的余额，但是这一行为还没有提交，此时用户看到了自己的余额。然后如果事务A此时撤销了事务，那么用户看到的余额也就是一个垃圾数据，叫做脏读。</p>
-<h3 id="不可重复读"><a href="#不可重复读" class="headerlink" title="不可重复读"></a>不可重复读</h3><p>我们在同一个事务中多次查询，读到不一样的数据。</p>
-<p>比如顾客先读取了自己的余额有10块钱，然后去买东西，交钱之前，他的老婆把十块钱取走了，他交钱的时候发现自己没有钱。</p>
-<h3 id="幻读"><a href="#幻读" class="headerlink" title="幻读"></a>幻读</h3><p>我们的查询结果的事务先于更新结束，导致我们没有查到一些复合条件的数据。</p>
-<h3 id="查看当前隔离级别"><a href="#查看当前隔离级别" class="headerlink" title="查看当前隔离级别"></a>查看当前隔离级别</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SHOW</span> VARIABLES <span class="keyword">LIKE</span> <span class="string">&#x27;transaction_isolation%&#x27;</span></span><br></pre></td></tr></table></figure>
+        <h2 id="SQL常用Api"><a href="#SQL常用Api" class="headerlink" title="SQL常用Api"></a>SQL常用Api</h2><h3 id="数值类函数"><a href="#数值类函数" class="headerlink" title="数值类函数"></a>数值类函数</h3><h4 id="ROUND"><a href="#ROUND" class="headerlink" title="ROUND"></a>ROUND</h4><p>对数字进行四舍五入，第一个参数是需要四舍五入的数值，第二个参数是保留几位小数。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> ROUND(<span class="number">5.73</span>)；<span class="comment">--取值6</span></span><br><span class="line"><span class="keyword">SELECT</span> ROUND(<span class="number">5.73</span>,<span class="number">1</span>);<span class="comment">--取值5.7</span></span><br><span class="line"><span class="keyword">SELECT</span> ROUND(<span class="number">5.735</span>,<span class="number">2</span>);<span class="comment">--取值5.74</span></span><br></pre></td></tr></table></figure>
 
-<h3 id="修改当前隔离级别"><a href="#修改当前隔离级别" class="headerlink" title="修改当前隔离级别"></a>修改当前隔离级别</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--可串行化</span></span><br><span class="line"><span class="keyword">SET</span> TRANSACTION ISOLATION LEVEL SERIALIZABLE;</span><br><span class="line"><span class="comment">--可重复读</span></span><br><span class="line"><span class="keyword">SET</span> TRANSACTION ISOLATION LEVEL REPEATABLE<span class="operator">-</span>READ;</span><br><span class="line"><span class="comment">--读已提交</span></span><br><span class="line"><span class="keyword">SET</span> TRANSACTION ISOLATION LEVEL READ COMMITTED;</span><br><span class="line"><span class="comment">--读未提交</span></span><br><span class="line"><span class="keyword">SET</span> TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;</span><br></pre></td></tr></table></figure>
+<h4 id="TRUNCATE"><a href="#TRUNCATE" class="headerlink" title="TRUNCATE"></a>TRUNCATE</h4><p>对数字进行截断，第一个参数是需要截断的数值，第二个参数是保留几位小数。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">TRUNCATE</span>(<span class="number">25.735</span>,<span class="number">1</span>);<span class="comment">--取值25.7</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">TRUNCATE</span>(<span class="number">25.75</span>,<span class="number">1</span>);<span class="comment">--取值25.7</span></span><br></pre></td></tr></table></figure>
 
-<h3 id="全局修改隔离级别"><a href="#全局修改隔离级别" class="headerlink" title="全局修改隔离级别"></a>全局修改隔离级别</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SET</span> <span class="keyword">GLOBAL</span> TRANSACTION ISOLATION LEVEL SERIALIZABLE;</span><br></pre></td></tr></table></figure>
+<h4 id="CEILING"><a href="#CEILING" class="headerlink" title="CEILING"></a>CEILING</h4><p>对数字进行向上取整，获取大于等于它的最小整数，参数是需要截断的数值</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="built_in">CEILING</span>(<span class="number">25.75</span>);<span class="comment">--取值26</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="built_in">CEILING</span>(<span class="number">26</span>);<span class="comment">--取值26</span></span><br></pre></td></tr></table></figure>
 
-<h3 id="为当前会话和连接设置隔离级别"><a href="#为当前会话和连接设置隔离级别" class="headerlink" title="为当前会话和连接设置隔离级别"></a>为当前会话和连接设置隔离级别</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SET</span> SESSION TRANSACTION ISOLATION LEVEL SERIALIZABLE;</span><br></pre></td></tr></table></figure>
+<h3 id="字符串类函数"><a href="#字符串类函数" class="headerlink" title="字符串类函数"></a>字符串类函数</h3><h4 id="LENGTH"><a href="#LENGTH" class="headerlink" title="LENGTH"></a>LENGTH</h4><p>获取字符串长度</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> LENGTH(<span class="string">&#x27;WANG&#x27;</span>);<span class="comment">--4</span></span><br></pre></td></tr></table></figure>
 
-<h3 id="死锁"><a href="#死锁" class="headerlink" title="死锁"></a>死锁</h3><p>死锁是指两个或两个以上的进程在执行过程中，由于竞争资源或者由于彼此通信而造成的一种阻塞的现象，若无外力作用，它们都将无法推进下去。此时称系统处于死锁状态或系统产生了死锁，这些永远在互相等待的进程称为死锁进程。</p>
-<ol>
-<li>循环等待</li>
-<li>不可剥夺</li>
-<li>互斥性：指进程对所分配到的资源进行排它性使用，即在一段时间内某资源只由一个进程占用。</li>
-<li>请求和保持</li>
-</ol>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">START</span> TRANSACTION;</span><br><span class="line">UPDATE <span class="keyword">ORDER</span> <span class="keyword">SET</span> STATUS<span class="operator">=</span><span class="number">1</span> <span class="keyword">WHERE</span> order_id<span class="operator">=</span><span class="number">1</span>;</span><br><span class="line">UPDATE customers <span class="keyword">SET</span> state<span class="operator">=</span><span class="string">&#x27;VA&#x27;</span> <span class="keyword">WHERE</span> customer_id<span class="operator">=</span><span class="number">1</span>;</span><br><span class="line"><span class="keyword">COMMIT</span>;</span><br><span class="line"><span class="comment">--</span></span><br><span class="line"><span class="keyword">START</span> TRANSACTION;</span><br><span class="line">UPDATE customers <span class="keyword">SET</span> state<span class="operator">=</span><span class="string">&#x27;VA&#x27;</span> <span class="keyword">WHERE</span> customer_id<span class="operator">=</span><span class="number">1</span>;</span><br><span class="line">UPDATE <span class="keyword">ORDER</span> <span class="keyword">SET</span> STATUS<span class="operator">=</span><span class="number">1</span> <span class="keyword">WHERE</span> order_id<span class="operator">=</span><span class="number">1</span>;</span><br><span class="line"><span class="keyword">COMMIT</span>;</span><br></pre></td></tr></table></figure>
+<h4 id="UPPER"><a href="#UPPER" class="headerlink" title="UPPER"></a>UPPER</h4><p>使每一个字符串中的英文字符变大写</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="built_in">UPPER</span>(<span class="string">&#x27;wang&#x27;</span>);<span class="comment">--WANG</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="LOWER"><a href="#LOWER" class="headerlink" title="LOWER"></a>LOWER</h4><p>使每一个字符串中的英文字符变小写</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="built_in">LOWER</span>(<span class="string">&#x27;WANG&#x27;</span>);<span class="comment">--wang</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="TRIM"><a href="#TRIM" class="headerlink" title="TRIM"></a>TRIM</h4><p>去掉字符串两侧的空格</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> LENGTH(<span class="built_in">TRIM</span>(<span class="string">&#x27;   ww   &#x27;</span>));<span class="comment">--2</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="RTRIM"><a href="#RTRIM" class="headerlink" title="RTRIM"></a>RTRIM</h4><p>去掉字符串后边的空格</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> LENGTH(RTRIM(<span class="string">&#x27; ww   &#x27;</span>));<span class="comment">--3</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="LEFT"><a href="#LEFT" class="headerlink" title="LEFT"></a>LEFT</h4><p>截取字符串的前几个字符，第一个参数是需要截取的字符串，第二个参数是截取长度</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">LEFT</span>(<span class="string">&#x27;WANG&#x27;</span>,<span class="number">2</span>);<span class="comment">--WA</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="RIGHT"><a href="#RIGHT" class="headerlink" title="RIGHT"></a>RIGHT</h4><p>截取字符串的倒数几个字符，第一个参数是需要截取的字符串，第二个参数是截取长度</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">RIGHT</span>(<span class="string">&#x27;WANG&#x27;</span>,<span class="number">2</span>);<span class="comment">--NG</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="SUBSTRING"><a href="#SUBSTRING" class="headerlink" title="SUBSTRING"></a>SUBSTRING</h4><p>截取字符串，第一个参数是要截取的字符串，第二个参数是截取位置的索引(从1开始查)，第三个参数是截取长度</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="built_in">SUBSTRING</span>(<span class="string">&#x27;wang&#x27;</span>,<span class="number">2</span>,<span class="number">2</span>);<span class="comment">--an</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="built_in">SUBSTRING</span>(<span class="string">&#x27;wang&#x27;</span>,<span class="number">2</span>);<span class="comment">--ang</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="LOCATE"><a href="#LOCATE" class="headerlink" title="LOCATE"></a>LOCATE</h4><p>获取第一次遇见当前字符/字符串的下标，从1开始</p>
+<p>第一个参数是要查找的字符/字符串，第二个参数是查找的字符字符串。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> LOCATE(<span class="string">&#x27;w&#x27;</span>,<span class="string">&#x27;wang&#x27;</span>);<span class="comment">--1</span></span><br><span class="line"><span class="keyword">SELECT</span> LOCATE(<span class="string">&#x27;ng&#x27;</span>,<span class="string">&#x27;wang&#x27;</span>);<span class="comment">--3</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="REPLACE"><a href="#REPLACE" class="headerlink" title="REPLACE"></a>REPLACE</h4><p>替换字符，第一个参数是要替换的字符串，第二个参数是老字符/老字符串，第三个参数是新字符/字符串</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> REPLACE(<span class="string">&#x27;wang&#x27;</span>,<span class="string">&#x27;w&#x27;</span>,<span class="string">&#x27;hu&#x27;</span>);<span class="comment">--huang</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="CONCAT"><a href="#CONCAT" class="headerlink" title="CONCAT"></a>CONCAT</h4><p>字符串拼接。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> CONCAT(<span class="string">&#x27;wa&#x27;</span>,<span class="string">&#x27;ng&#x27;</span>);<span class="comment">--wang</span></span><br><span class="line"><span class="keyword">SELECT</span> CONCAT(<span class="string">&#x27;w&#x27;</span>,<span class="string">&#x27;a&#x27;</span>,<span class="string">&#x27;n&#x27;</span>);<span class="comment">--wan</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="日期-时间"><a href="#日期-时间" class="headerlink" title="日期/时间"></a>日期/时间</h3><h4 id="NOW"><a href="#NOW" class="headerlink" title="NOW"></a>NOW</h4><p>获取当前时间年月日，时分秒。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> NOW();<span class="comment">--2021-01-01 01:02:03</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="CURDATE"><a href="#CURDATE" class="headerlink" title="CURDATE"></a>CURDATE</h4><p>获取年月日</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> CURDATE();<span class="comment">--2021-01-01</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="CURDATE-1"><a href="#CURDATE-1" class="headerlink" title="CURDATE"></a>CURDATE</h4><p>获取时分秒</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> CURTIME();<span class="comment">--01:02:03</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="YEAR-MONTH-DAY"><a href="#YEAR-MONTH-DAY" class="headerlink" title="YEAR/MONTH/DAY"></a>YEAR/MONTH/DAY</h4><p>分别返回年月日</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">YEAR</span>(NOW()),<span class="keyword">MONTH</span>(NOW()),<span class="keyword">DAY</span>(NOW());<span class="comment">--2021,1,1</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="HOUR-MINUTE-SECOND"><a href="#HOUR-MINUTE-SECOND" class="headerlink" title="HOUR/MINUTE/SECOND"></a>HOUR/MINUTE/SECOND</h4><p>分别返回时分秒</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">HOUR</span>(NOW()),<span class="keyword">MINUTE</span>(NOW()),<span class="keyword">SECOND</span>(NOW());<span class="comment">--1,2,3</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="DAYNAME"><a href="#DAYNAME" class="headerlink" title="DAYNAME"></a>DAYNAME</h4><p>获取英文星期几</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> DAYNAME(NOW());<span class="comment">--Monday</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="MONTH"><a href="#MONTH" class="headerlink" title="MONTH"></a>MONTH</h4><p>获取英文月份</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> MONTHNAME(NOW());<span class="comment">--January</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="EXTRACT"><a href="#EXTRACT" class="headerlink" title="EXTRACT"></a>EXTRACT</h4><p>获取数字类型的日期</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="built_in">EXTRACT</span>(<span class="keyword">YEAR</span> <span class="keyword">FROM</span> NOW());<span class="comment">--2021</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="DATE-FORMAT"><a href="#DATE-FORMAT" class="headerlink" title="DATE_FORMAT"></a>DATE_FORMAT</h4><p>日期的格式化，第一个参数获取日期，第二个参数是格式化信息</p>
+<p>其中请注意：</p>
+<table>
+<thead>
+<tr>
+<th>形式</th>
+<th>寓意</th>
+<th>形式</th>
+<th>寓意</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>%y</td>
+<td>两位数的年份比如(2021年返回21)</td>
+<td>%Y</td>
+<td>四位数的年份比如（2021年返回2021）</td>
+</tr>
+<tr>
+<td>%m</td>
+<td>两位数的份比如(一月份返回01)</td>
+<td>%M</td>
+<td>返回英文月份比如一月份返回(January)</td>
+</tr>
+<tr>
+<td>%d</td>
+<td>两位数的日比如（一号返回01）</td>
+<td>%D</td>
+<td>返回英文日期比如（一号返回1th）</td>
+</tr>
+</tbody></table>
+<p>从该网站进行查找翻阅:<a target="_blank" rel="noopener" href="https://www.w3school.com.cn/sql/func_date_format.asp">MySQL DATE_FORMAT() 函数 </a></p>
+<p>只要有这些字符便会被替换为数字，所以我们方便的进行数字格式修改。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> DATE_FORMAT(NOW(),<span class="string">&#x27;%y:%m&#x27;</span>);<span class="comment">--21:01</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="DATE-ADD"><a href="#DATE-ADD" class="headerlink" title="DATE_ADD"></a>DATE_ADD</h4><p>日期时间的增加。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> NOW(),DATE_ADD(NOW(),<span class="type">INTERVAL</span> <span class="number">1</span> <span class="keyword">YEAR</span>);</span><br><span class="line"><span class="comment">--2021-01-01 01:02:03, --2022-01-01 01:02:03 </span></span><br></pre></td></tr></table></figure>
+
+<h4 id="DATE-SUB"><a href="#DATE-SUB" class="headerlink" title="DATE_SUB"></a>DATE_SUB</h4><p>日期是时间的减少。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> NOW(),DATE_SUB(NOW(),<span class="type">INTERVAL</span> <span class="number">1</span> <span class="keyword">YEAR</span>);</span><br><span class="line"><span class="comment">--2021-01-01 01:02:03, --2020-01-01 01:02:03 </span></span><br><span class="line"><span class="keyword">SELECT</span> NOW(),DATE_ADD(NOW(),<span class="type">INTERVAL</span> <span class="number">-1</span> <span class="keyword">YEAR</span>);</span><br><span class="line"><span class="comment">--2021-01-01 01:02:03, --2020-01-01 01:02:03 </span></span><br></pre></td></tr></table></figure>
+
+<h4 id="DATEDIFF"><a href="#DATEDIFF" class="headerlink" title="DATEDIFF"></a>DATEDIFF</h4><p>求两个日期相差多少天，注意早的日期在后。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> DATEDIFF(<span class="string">&#x27;2021-01-05 09:00&#x27;</span>,<span class="string">&#x27;2021-01-01 09:01&#x27;</span>);</span><br><span class="line"><span class="comment">--4</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="TIME-TO-SEC"><a href="#TIME-TO-SEC" class="headerlink" title="TIME_TO_SEC"></a>TIME_TO_SEC</h4><p>求两个日期相差多少秒，注意早的日期在前</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> TIME_TO_SEC(<span class="string">&#x27;2021-01-05 09:01&#x27;</span>)<span class="operator">-</span>TIME_TO_SEC(<span class="string">&#x27;2021-01-01 09:00&#x27;</span>);</span><br><span class="line"><span class="comment">--60</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="空值变换"><a href="#空值变换" class="headerlink" title="空值变换"></a>空值变换</h3><h4 id="IFNULL"><a href="#IFNULL" class="headerlink" title="IFNULL"></a>IFNULL</h4><p>如果这个值是空值则输出我们定义的值。</p>
+<p>下列例子中<code>shipper_id</code>字段为空的地方都变为了<code>Not assigned</code>;</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> order_id,IFNULL(shipper_id,<span class="string">&#x27;Not assigned&#x27;</span>) <span class="keyword">AS</span> shipper</span><br><span class="line"><span class="keyword">FROM</span> orders;</span><br></pre></td></tr></table></figure>
+
+<h4 id="COALESCE"><a href="#COALESCE" class="headerlink" title="COALESCE"></a>COALESCE</h4><p>如果这个值是空值则输出另一个字段的值，如果另一个字段也是空值输出我们定义的值。</p>
+<p>下列例子中<code>shipper_id</code>字段为空的地方都变为了<code>comments</code>字段的值，如果该字段也为空输出<code>Not assigned</code>;</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> order_id,<span class="built_in">COALESCE</span>(shipper_id,comments,<span class="string">&#x27;Not assigned&#x27;</span>) <span class="keyword">AS</span> shipper</span><br><span class="line"><span class="keyword">FROM</span> orders;</span><br></pre></td></tr></table></figure>
+
+<h4 id="IF"><a href="#IF" class="headerlink" title="IF"></a>IF</h4><p>判断语句，第一个参数为判断条件，第二个参数为满足条件后返回的值，第三个参数为不满足条件后返回的值。</p>
+<p>下列例子中如果是当年订单返回<code>Active</code>否则返回<code>Archived</code>。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> order_id,order_Date,IF(<span class="keyword">YEAR</span>(NOW())<span class="operator">=</span> <span class="keyword">YEAR</span>(order_date),<span class="string">&#x27;Actice&#x27;</span>,<span class="string">&#x27;Archived&#x27;</span>)</span><br><span class="line"><span class="keyword">FROM</span> orders</span><br></pre></td></tr></table></figure>
+
+<h4 id="CASE"><a href="#CASE" class="headerlink" title="CASE"></a>CASE</h4><p>判断语句当有多个条件的时候使用。</p>
+<p><code>CASE</code>开始，<code>END</code>结束，<code>WHEN</code>做条件，<code>THEN</code>做返回值。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> order_id,order_Date,</span><br><span class="line">  <span class="keyword">CASE</span> </span><br><span class="line">    <span class="keyword">WHEN</span> <span class="keyword">YEAR</span>(NOW()) <span class="operator">=</span> <span class="keyword">YEAR</span>(order_date) <span class="keyword">THEN</span> <span class="string">&#x27;Active&#x27;</span></span><br><span class="line">    <span class="keyword">WHEN</span> <span class="keyword">YEAR</span>(NOW())<span class="number">-1</span> <span class="operator">=</span> <span class="keyword">YEAR</span>(order_date) <span class="keyword">THEN</span> <span class="string">&#x27;Last year&#x27;</span></span><br><span class="line">    <span class="keyword">WHEN</span> <span class="keyword">YEAR</span>(NOW())<span class="number">-1</span> <span class="operator">&gt;</span> <span class="keyword">YEAR</span>(order_date) <span class="keyword">THEN</span> <span class="string">&#x27;Archived&#x27;</span></span><br><span class="line">    <span class="keyword">ELSE</span> <span class="string">&#x27;Future&#x27;</span></span><br><span class="line">  <span class="keyword">END</span> <span class="keyword">AS</span> category  </span><br><span class="line"><span class="keyword">FROM</span> orders</span><br></pre></td></tr></table></figure>
+
+
 
 
       
@@ -502,8 +605,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2021/10/02/07-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" rel="next" title="SQL数据类型">
-                <i class="fa fa-chevron-left"></i> SQL数据类型
+              <a href="/2021/10/02/03-SQL%E6%95%B0%E6%8D%AE%E6%9F%A5%E8%AF%A2/" rel="next" title="SQL查询">
+                <i class="fa fa-chevron-left"></i> SQL查询
               </a>
             
           </div>
@@ -512,8 +615,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2021/10/02/08-%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AE%BE%E8%AE%A1/" rel="prev" title="SQL数据库设计">
-                SQL数据库设计 <i class="fa fa-chevron-right"></i>
+              <a href="/2021/10/04/05-SQL%E8%BF%9B%E9%98%B6%E5%AD%A6%E4%B9%A0/" rel="prev" title="SQL进阶学习">
+                SQL进阶学习 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -594,7 +697,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-count">14</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -605,7 +708,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -616,7 +719,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -673,7 +776,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B9%B6%E5%8F%91"><span class="nav-number">1.</span> <span class="nav-text">并发</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#MySQL%E9%BB%98%E8%AE%A4%E7%9A%84%E8%A1%8C%E7%BA%A7%E9%94%81"><span class="nav-number">1.1.</span> <span class="nav-text">MySQL默认的行级锁</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B9%B6%E5%8F%91%E7%9A%84%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E5%92%8C%E8%A7%A3%E5%86%B3%E6%96%B9%E5%BC%8F"><span class="nav-number">1.2.</span> <span class="nav-text">并发的常见问题和解决方式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8B%E5%8A%A1%E7%9A%84%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB"><span class="nav-number">1.2.1.</span> <span class="nav-text">事务的隔离级别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%84%8F%E8%AF%BB"><span class="nav-number">1.2.2.</span> <span class="nav-text">脏读</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8D%E5%8F%AF%E9%87%8D%E5%A4%8D%E8%AF%BB"><span class="nav-number">1.2.3.</span> <span class="nav-text">不可重复读</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B9%BB%E8%AF%BB"><span class="nav-number">1.2.4.</span> <span class="nav-text">幻读</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E5%BD%93%E5%89%8D%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB"><span class="nav-number">1.2.5.</span> <span class="nav-text">查看当前隔离级别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E5%BD%93%E5%89%8D%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB"><span class="nav-number">1.2.6.</span> <span class="nav-text">修改当前隔离级别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%A8%E5%B1%80%E4%BF%AE%E6%94%B9%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB"><span class="nav-number">1.2.7.</span> <span class="nav-text">全局修改隔离级别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E5%BD%93%E5%89%8D%E4%BC%9A%E8%AF%9D%E5%92%8C%E8%BF%9E%E6%8E%A5%E8%AE%BE%E7%BD%AE%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB"><span class="nav-number">1.2.8.</span> <span class="nav-text">为当前会话和连接设置隔离级别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AD%BB%E9%94%81"><span class="nav-number">1.2.9.</span> <span class="nav-text">死锁</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#SQL%E5%B8%B8%E7%94%A8Api"><span class="nav-number">1.</span> <span class="nav-text">SQL常用Api</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E5%80%BC%E7%B1%BB%E5%87%BD%E6%95%B0"><span class="nav-number">1.1.</span> <span class="nav-text">数值类函数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ROUND"><span class="nav-number">1.1.1.</span> <span class="nav-text">ROUND</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#TRUNCATE"><span class="nav-number">1.1.2.</span> <span class="nav-text">TRUNCATE</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CEILING"><span class="nav-number">1.1.3.</span> <span class="nav-text">CEILING</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%B1%BB%E5%87%BD%E6%95%B0"><span class="nav-number">1.2.</span> <span class="nav-text">字符串类函数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#LENGTH"><span class="nav-number">1.2.1.</span> <span class="nav-text">LENGTH</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#UPPER"><span class="nav-number">1.2.2.</span> <span class="nav-text">UPPER</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#LOWER"><span class="nav-number">1.2.3.</span> <span class="nav-text">LOWER</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#TRIM"><span class="nav-number">1.2.4.</span> <span class="nav-text">TRIM</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#RTRIM"><span class="nav-number">1.2.5.</span> <span class="nav-text">RTRIM</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#LEFT"><span class="nav-number">1.2.6.</span> <span class="nav-text">LEFT</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#RIGHT"><span class="nav-number">1.2.7.</span> <span class="nav-text">RIGHT</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SUBSTRING"><span class="nav-number">1.2.8.</span> <span class="nav-text">SUBSTRING</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#LOCATE"><span class="nav-number">1.2.9.</span> <span class="nav-text">LOCATE</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#REPLACE"><span class="nav-number">1.2.10.</span> <span class="nav-text">REPLACE</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CONCAT"><span class="nav-number">1.2.11.</span> <span class="nav-text">CONCAT</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%97%A5%E6%9C%9F-%E6%97%B6%E9%97%B4"><span class="nav-number">1.3.</span> <span class="nav-text">日期&#x2F;时间</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#NOW"><span class="nav-number">1.3.1.</span> <span class="nav-text">NOW</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CURDATE"><span class="nav-number">1.3.2.</span> <span class="nav-text">CURDATE</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CURDATE-1"><span class="nav-number">1.3.3.</span> <span class="nav-text">CURDATE</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#YEAR-MONTH-DAY"><span class="nav-number">1.3.4.</span> <span class="nav-text">YEAR&#x2F;MONTH&#x2F;DAY</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#HOUR-MINUTE-SECOND"><span class="nav-number">1.3.5.</span> <span class="nav-text">HOUR&#x2F;MINUTE&#x2F;SECOND</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DAYNAME"><span class="nav-number">1.3.6.</span> <span class="nav-text">DAYNAME</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#MONTH"><span class="nav-number">1.3.7.</span> <span class="nav-text">MONTH</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#EXTRACT"><span class="nav-number">1.3.8.</span> <span class="nav-text">EXTRACT</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DATE-FORMAT"><span class="nav-number">1.3.9.</span> <span class="nav-text">DATE_FORMAT</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DATE-ADD"><span class="nav-number">1.3.10.</span> <span class="nav-text">DATE_ADD</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DATE-SUB"><span class="nav-number">1.3.11.</span> <span class="nav-text">DATE_SUB</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DATEDIFF"><span class="nav-number">1.3.12.</span> <span class="nav-text">DATEDIFF</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#TIME-TO-SEC"><span class="nav-number">1.3.13.</span> <span class="nav-text">TIME_TO_SEC</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A9%BA%E5%80%BC%E5%8F%98%E6%8D%A2"><span class="nav-number">1.4.</span> <span class="nav-text">空值变换</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#IFNULL"><span class="nav-number">1.4.1.</span> <span class="nav-text">IFNULL</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#COALESCE"><span class="nav-number">1.4.2.</span> <span class="nav-text">COALESCE</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#IF"><span class="nav-number">1.4.3.</span> <span class="nav-text">IF</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CASE"><span class="nav-number">1.4.4.</span> <span class="nav-text">CASE</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
@@ -707,7 +810,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">16.4k</span>
+    <span title="Site words total count">16.7k</span>
   
 </div>
 
@@ -1262,5 +1365,5 @@
 
   
 
-</body>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 </html>
