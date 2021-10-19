@@ -1,6 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>MySQL安装教程</title>
+    <url>/2021/09/28/00-MySQL%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/</url>
+    <content><![CDATA[<h1 id="MySQL安装教程"><a href="#MySQL安装教程" class="headerlink" title="MySQL安装教程"></a>MySQL安装教程</h1><h2 id="win10-mysql8"><a href="#win10-mysql8" class="headerlink" title="win10 mysql8"></a>win10 mysql8</h2><h3 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h3><p><a href="https://dev.mysql.com/downloads/mysql/">https://dev.mysql.com/downloads/mysql/</a></p>
+<h3 id="文件配置"><a href="#文件配置" class="headerlink" title="文件配置"></a>文件配置</h3><p>解压后,在与bin目录平级的文件夹下建立一个叫做<code>my.ini</code>的文件。</p>
+<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="section">[mysqld]</span></span><br><span class="line"><span class="comment"># 设置3306端口</span></span><br><span class="line"><span class="attr">port</span>=<span class="number">3306</span></span><br><span class="line"><span class="comment"># 设置mysql的安装目录</span></span><br><span class="line"><span class="attr">basedir</span>=D:\environment\mysql8   <span class="comment"># 切记此处一定要用双斜杠\\，单斜杠我这里会出错，不过看别人的教程，有的是单斜杠。自己尝试吧</span></span><br><span class="line"><span class="comment"># 设置mysql数据库的数据的存放目录</span></span><br><span class="line"><span class="attr">datadir</span>=D:\environment\mysql8\\Data   <span class="comment"># 此处同上</span></span><br><span class="line"><span class="comment"># 允许最大连接数</span></span><br><span class="line"><span class="attr">max_connections</span>=<span class="number">200</span></span><br><span class="line"><span class="comment"># 允许连接失败的次数。这是为了防止有人从该主机试图攻击数据库系统</span></span><br><span class="line"><span class="attr">max_connect_errors</span>=<span class="number">10</span></span><br><span class="line"><span class="comment"># 服务端使用的字符集默认为UTF8</span></span><br><span class="line"><span class="attr">character-set-server</span>=utf8</span><br><span class="line"><span class="comment"># 创建新表时将使用的默认存储引擎</span></span><br><span class="line"><span class="attr">default-storage-engine</span>=INNODB</span><br><span class="line"><span class="comment"># 默认使用“mysql_native_password”插件认证</span></span><br><span class="line"><span class="attr">default_authentication_plugin</span>=mysql_native_password</span><br><span class="line"><span class="section">[mysql]</span></span><br><span class="line"><span class="comment"># 设置mysql客户端默认字符集</span></span><br><span class="line"><span class="attr">default-character-set</span>=utf8</span><br><span class="line"><span class="section">[client]</span></span><br><span class="line"><span class="comment"># 设置mysql客户端连接服务端时默认使用的端口</span></span><br><span class="line"><span class="attr">port</span>=<span class="number">3306</span></span><br><span class="line"><span class="attr">default-character-set</span>=utf8</span><br></pre></td></tr></table></figure>
+
+<h3 id="服务启动"><a href="#服务启动" class="headerlink" title="服务启动"></a>服务启动</h3><p>管理员模式打开命令框进入当前文件夹,以此输入下面指令：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#初始化数据库</span><br><span class="line">mysqld --initialize --console</span><br><span class="line">#安装</span><br><span class="line">mysqld install</span><br><span class="line">#启动服务</span><br><span class="line">net start mysql</span><br><span class="line">#停止服务</span><br><span class="line">net stop mysql</span><br><span class="line"># 登录</span><br><span class="line">mysql -uroot -p</span><br><span class="line">注意此处密码是初始化的时候获得的密码,输入后</span><br><span class="line"># 更改密码</span><br><span class="line">ALTER USER &#x27;root&#x27;@&#x27;localhost&#x27; IDENTIFIED WITH mysql_native_password BY &#x27;新密码&#x27;; </span><br><span class="line"># 退出</span><br><span class="line">quit</span><br></pre></td></tr></table></figure>
+
+<h3 id="遇到问题"><a href="#遇到问题" class="headerlink" title="遇到问题"></a>遇到问题</h3><h4 id="服务已经存在"><a href="#服务已经存在" class="headerlink" title="服务已经存在"></a>服务已经存在</h4><p>The service already exists</p>
+<p>表示服务已经存在，之前已经安装过mysql并且没有删除干净使用命令<code>sc delete mysql</code>，删除该mysql.</p>
+<p><code>sc query mysql</code>可以查看MySQL服务。</p>
+<h4 id="忘记密码"><a href="#忘记密码" class="headerlink" title="忘记密码"></a>忘记密码</h4><p>ERROR 1045 (28000): Access denied for user ‘root‘@’localhost’ (using password: YES)。</p>
+<p>或者是</p>
+<p>ERROR 1045 (28000): Access denied for user ‘root‘@’localhost’ (using password: NO)。</p>
+<p>忘记密码不要紧方法一：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">删掉初始化的 datadir 目录，再执行一遍初始化命令，又会重新生成的。</span><br></pre></td></tr></table></figure>
+
+<p>方法二:强制性修改密码</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">https://dev.mysql.com/doc/refman/8.0/en/data-directory-initialization-mysqld.html</span><br></pre></td></tr></table></figure>
+
+<h3 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h3><p>以我的举例子：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">系统变量</span><br><span class="line">名称：MYSQL_HOME 内容为D:\environment\mysql8</span><br><span class="line">Path中加入</span><br><span class="line">%MYSQL_HOME%\bin</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>SQL</category>
+      </categories>
+      <tags>
+        <tag>SQL</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>SQL数据增删改</title>
+    <url>/2021/10/01/02-SQL%E6%95%B0%E6%8D%AE%E5%A2%9E%E5%88%A0%E6%94%B9/</url>
+    <content><![CDATA[<h1 id="SQL数据增删改"><a href="#SQL数据增删改" class="headerlink" title="SQL数据增删改"></a>SQL数据增删改</h1><h2 id="增加数据"><a href="#增加数据" class="headerlink" title="增加数据"></a>增加数据</h2><h3 id="单行插入"><a href="#单行插入" class="headerlink" title="单行插入"></a>单行插入</h3><p>value和values的区别在于:value是插入一条数据,values是插入多条数据,多条数据的插入需要<code>,</code>分隔。</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> `products`(product_id,NAME,quantity_in_stock,unit_price)</span><br><span class="line"><span class="keyword">VALUE</span> (<span class="number">1</span>,<span class="string">&#x27;Pork - Bacon,back Peameal&#x27;</span>,<span class="number">49</span>,<span class="number">4.65</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> `products`(product_id,NAME,quantity_in_stock,unit_price)</span><br><span class="line"><span class="keyword">VALUES</span> (<span class="number">2</span>,<span class="string">&#x27;Foam Dinner Plate&#x27;</span>,<span class="number">70</span>,<span class="number">1.21</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> `products`</span><br><span class="line"><span class="keyword">VALUE</span>(<span class="number">3</span>,<span class="string">&#x27;Brocolinni - Gaylan, Chinese&#x27;</span>,<span class="number">90</span>,<span class="number">4.53</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> `products`</span><br><span class="line"><span class="keyword">VALUES</span> (<span class="number">4</span>,<span class="string">&#x27;Lettuce - Romaine, Heart&#x27;</span>,<span class="number">38</span>,<span class="number">3.35</span>);</span><br></pre></td></tr></table></figure>
+
+<h3 id="多行插入"><a href="#多行插入" class="headerlink" title="多行插入"></a>多行插入</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> `products`</span><br><span class="line"><span class="keyword">VALUES</span></span><br><span class="line">(<span class="number">5</span>,<span class="string">&#x27;Sauce - Ranch Dressing&#x27;</span>,<span class="number">94</span>,<span class="number">1.63</span>),</span><br><span class="line">(<span class="number">6</span>,<span class="string">&#x27;Petit Baguette&#x27;</span>,<span class="number">14</span>,<span class="number">2.39</span>);</span><br></pre></td></tr></table></figure>
+
+<h5 id="分层插入"><a href="#分层插入" class="headerlink" title="分层插入"></a>分层插入</h5><p>有时候在进行操作的时候，我们不仅仅要对一个数据表进行插入操作，还要进行更多的操作。比如我们在进行一笔订单的录入之后，还需要根据订单的条目进行操作。</p>
+<p>此处主要熟悉<code>LAST_INSERT_ID()</code>方法，可以获取最后一次插入的数据的主键id。</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> orders(customer_id,order_date,STATUS)</span><br><span class="line"><span class="keyword">VALUES</span>(<span class="number">6</span>,<span class="string">&#x27;2021-1-1&#x27;</span>,<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> order_items</span><br><span class="line"><span class="keyword">VALUES</span></span><br><span class="line"> (LAST_INSERT_ID(),<span class="number">1</span>,<span class="number">1</span>,<span class="number">2.95</span>);</span><br></pre></td></tr></table></figure>
+
+<h2 id="更新数据"><a href="#更新数据" class="headerlink" title="更新数据"></a>更新数据</h2><h3 id="简单的更新"><a href="#简单的更新" class="headerlink" title="简单的更新"></a>简单的更新</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">UPDATE customers</span><br><span class="line"><span class="keyword">SET</span> </span><br><span class="line">	first_name <span class="operator">=</span> <span class="string">&#x27;张&#x27;</span>,</span><br><span class="line">	last_name <span class="operator">=</span> <span class="string">&#x27;三&#x27;</span></span><br><span class="line"><span class="keyword">WHERE</span> customer_id<span class="operator">=</span><span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+
+<p>注意：正常情况下，我们应该是可以更新所有符合条件的行，但是MySQL会出现一个问题，为了安全性考虑，有的界面应用会有一个限制一次只能更新一行，所以会报错这种的请自行寻找办法。</p>
+<h2 id="删除数据"><a href="#删除数据" class="headerlink" title="删除数据"></a>删除数据</h2><p>删除数据需要使用的是<code>DELETE</code>关键词,同时在这里提醒一下，数据对于每一个软件都是宝贵的，所以我们一般都通过更改状态的方式来假装删除数据，比如当一笔订单被取消，我们并不删除而是更改它的状态为取消。</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">DELETE</span> <span class="keyword">FROM</span> customers</span><br><span class="line"><span class="keyword">WHERE</span> customer_id<span class="operator">=</span><span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+
+
+
+]]></content>
+      <categories>
+        <category>SQL</category>
+      </categories>
+      <tags>
+        <tag>SQL</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>SQL库表级操作</title>
     <url>/2021/09/29/01-SQL%E5%BA%93%E8%A1%A8%E7%BA%A7%E6%93%8D%E4%BD%9C/</url>
     <content><![CDATA[<h1 id="SQL库表级操作"><a href="#SQL库表级操作" class="headerlink" title="SQL库表级操作"></a>SQL库表级操作</h1><h2 id="数据库操作"><a href="#数据库操作" class="headerlink" title="数据库操作"></a>数据库操作</h2><h3 id="创建数据库"><a href="#创建数据库" class="headerlink" title="创建数据库"></a>创建数据库</h3><h4 id="CREATE"><a href="#CREATE" class="headerlink" title="CREATE"></a>CREATE</h4><p><code>CREATE</code>关键词被用来作为创建数据库和数据表的关键词。<code>DATABASE</code>顾名思义就是数据库的意思。</p>
@@ -103,67 +164,6 @@
 <h3 id="数据引擎"><a href="#数据引擎" class="headerlink" title="数据引擎"></a>数据引擎</h3><p>MyISAM 5.5以前很流行不支持事务。</p>
 <p>InnoDB 支持事务,支持外键。</p>
 <p>重构存储引擎大概率要重构数据表。</p>
-]]></content>
-      <categories>
-        <category>SQL</category>
-      </categories>
-      <tags>
-        <tag>SQL</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>MySQL安装教程</title>
-    <url>/2021/09/28/00-MySQL%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/</url>
-    <content><![CDATA[<h1 id="MySQL安装教程"><a href="#MySQL安装教程" class="headerlink" title="MySQL安装教程"></a>MySQL安装教程</h1><h2 id="win10-mysql8"><a href="#win10-mysql8" class="headerlink" title="win10 mysql8"></a>win10 mysql8</h2><h3 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h3><p><a href="https://dev.mysql.com/downloads/mysql/">https://dev.mysql.com/downloads/mysql/</a></p>
-<h3 id="文件配置"><a href="#文件配置" class="headerlink" title="文件配置"></a>文件配置</h3><p>解压后,在与bin目录平级的文件夹下建立一个叫做<code>my.ini</code>的文件。</p>
-<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="section">[mysqld]</span></span><br><span class="line"><span class="comment"># 设置3306端口</span></span><br><span class="line"><span class="attr">port</span>=<span class="number">3306</span></span><br><span class="line"><span class="comment"># 设置mysql的安装目录</span></span><br><span class="line"><span class="attr">basedir</span>=D:\environment\mysql8   <span class="comment"># 切记此处一定要用双斜杠\\，单斜杠我这里会出错，不过看别人的教程，有的是单斜杠。自己尝试吧</span></span><br><span class="line"><span class="comment"># 设置mysql数据库的数据的存放目录</span></span><br><span class="line"><span class="attr">datadir</span>=D:\environment\mysql8\\Data   <span class="comment"># 此处同上</span></span><br><span class="line"><span class="comment"># 允许最大连接数</span></span><br><span class="line"><span class="attr">max_connections</span>=<span class="number">200</span></span><br><span class="line"><span class="comment"># 允许连接失败的次数。这是为了防止有人从该主机试图攻击数据库系统</span></span><br><span class="line"><span class="attr">max_connect_errors</span>=<span class="number">10</span></span><br><span class="line"><span class="comment"># 服务端使用的字符集默认为UTF8</span></span><br><span class="line"><span class="attr">character-set-server</span>=utf8</span><br><span class="line"><span class="comment"># 创建新表时将使用的默认存储引擎</span></span><br><span class="line"><span class="attr">default-storage-engine</span>=INNODB</span><br><span class="line"><span class="comment"># 默认使用“mysql_native_password”插件认证</span></span><br><span class="line"><span class="attr">default_authentication_plugin</span>=mysql_native_password</span><br><span class="line"><span class="section">[mysql]</span></span><br><span class="line"><span class="comment"># 设置mysql客户端默认字符集</span></span><br><span class="line"><span class="attr">default-character-set</span>=utf8</span><br><span class="line"><span class="section">[client]</span></span><br><span class="line"><span class="comment"># 设置mysql客户端连接服务端时默认使用的端口</span></span><br><span class="line"><span class="attr">port</span>=<span class="number">3306</span></span><br><span class="line"><span class="attr">default-character-set</span>=utf8</span><br></pre></td></tr></table></figure>
-
-<h3 id="服务启动"><a href="#服务启动" class="headerlink" title="服务启动"></a>服务启动</h3><p>管理员模式打开命令框进入当前文件夹,以此输入下面指令：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#初始化数据库</span><br><span class="line">mysqld --initialize --console</span><br><span class="line">#安装</span><br><span class="line">mysqld install</span><br><span class="line">#启动服务</span><br><span class="line">net start mysql</span><br><span class="line">#停止服务</span><br><span class="line">net stop mysql</span><br><span class="line"># 登录</span><br><span class="line">mysql -uroot -p</span><br><span class="line">注意此处密码是初始化的时候获得的密码,输入后</span><br><span class="line"># 更改密码</span><br><span class="line">ALTER USER &#x27;root&#x27;@&#x27;localhost&#x27; IDENTIFIED WITH mysql_native_password BY &#x27;新密码&#x27;; </span><br><span class="line"># 退出</span><br><span class="line">quit</span><br></pre></td></tr></table></figure>
-
-<h3 id="遇到问题"><a href="#遇到问题" class="headerlink" title="遇到问题"></a>遇到问题</h3><h4 id="服务已经存在"><a href="#服务已经存在" class="headerlink" title="服务已经存在"></a>服务已经存在</h4><p>The service already exists</p>
-<p>表示服务已经存在，之前已经安装过mysql并且没有删除干净使用命令<code>sc delete mysql</code>，删除该mysql.</p>
-<p><code>sc query mysql</code>可以查看MySQL服务。</p>
-<h4 id="忘记密码"><a href="#忘记密码" class="headerlink" title="忘记密码"></a>忘记密码</h4><p>ERROR 1045 (28000): Access denied for user ‘root‘@’localhost’ (using password: YES)。</p>
-<p>或者是</p>
-<p>ERROR 1045 (28000): Access denied for user ‘root‘@’localhost’ (using password: NO)。</p>
-<p>忘记密码不要紧方法一：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">删掉初始化的 datadir 目录，再执行一遍初始化命令，又会重新生成的。</span><br></pre></td></tr></table></figure>
-
-<p>方法二:强制性修改密码</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">https://dev.mysql.com/doc/refman/8.0/en/data-directory-initialization-mysqld.html</span><br></pre></td></tr></table></figure>
-
-<h3 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h3><p>以我的举例子：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">系统变量</span><br><span class="line">名称：MYSQL_HOME 内容为D:\environment\mysql8</span><br><span class="line">Path中加入</span><br><span class="line">%MYSQL_HOME%\bin</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>SQL</category>
-      </categories>
-      <tags>
-        <tag>SQL</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>SQL数据增删改</title>
-    <url>/2021/10/01/02-SQL%E6%95%B0%E6%8D%AE%E5%A2%9E%E5%88%A0%E6%94%B9/</url>
-    <content><![CDATA[<h1 id="SQL数据增删改"><a href="#SQL数据增删改" class="headerlink" title="SQL数据增删改"></a>SQL数据增删改</h1><h2 id="增加数据"><a href="#增加数据" class="headerlink" title="增加数据"></a>增加数据</h2><h3 id="单行插入"><a href="#单行插入" class="headerlink" title="单行插入"></a>单行插入</h3><p>value和values的区别在于:value是插入一条数据,values是插入多条数据,多条数据的插入需要<code>,</code>分隔。</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> `products`(product_id,NAME,quantity_in_stock,unit_price)</span><br><span class="line"><span class="keyword">VALUE</span> (<span class="number">1</span>,<span class="string">&#x27;Pork - Bacon,back Peameal&#x27;</span>,<span class="number">49</span>,<span class="number">4.65</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> `products`(product_id,NAME,quantity_in_stock,unit_price)</span><br><span class="line"><span class="keyword">VALUES</span> (<span class="number">2</span>,<span class="string">&#x27;Foam Dinner Plate&#x27;</span>,<span class="number">70</span>,<span class="number">1.21</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> `products`</span><br><span class="line"><span class="keyword">VALUE</span>(<span class="number">3</span>,<span class="string">&#x27;Brocolinni - Gaylan, Chinese&#x27;</span>,<span class="number">90</span>,<span class="number">4.53</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> `products`</span><br><span class="line"><span class="keyword">VALUES</span> (<span class="number">4</span>,<span class="string">&#x27;Lettuce - Romaine, Heart&#x27;</span>,<span class="number">38</span>,<span class="number">3.35</span>);</span><br></pre></td></tr></table></figure>
-
-<h3 id="多行插入"><a href="#多行插入" class="headerlink" title="多行插入"></a>多行插入</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> `products`</span><br><span class="line"><span class="keyword">VALUES</span></span><br><span class="line">(<span class="number">5</span>,<span class="string">&#x27;Sauce - Ranch Dressing&#x27;</span>,<span class="number">94</span>,<span class="number">1.63</span>),</span><br><span class="line">(<span class="number">6</span>,<span class="string">&#x27;Petit Baguette&#x27;</span>,<span class="number">14</span>,<span class="number">2.39</span>);</span><br></pre></td></tr></table></figure>
-
-<h5 id="分层插入"><a href="#分层插入" class="headerlink" title="分层插入"></a>分层插入</h5><p>有时候在进行操作的时候，我们不仅仅要对一个数据表进行插入操作，还要进行更多的操作。比如我们在进行一笔订单的录入之后，还需要根据订单的条目进行操作。</p>
-<p>此处主要熟悉<code>LAST_INSERT_ID()</code>方法，可以获取最后一次插入的数据的主键id。</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> orders(customer_id,order_date,STATUS)</span><br><span class="line"><span class="keyword">VALUES</span>(<span class="number">6</span>,<span class="string">&#x27;2021-1-1&#x27;</span>,<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> order_items</span><br><span class="line"><span class="keyword">VALUES</span></span><br><span class="line"> (LAST_INSERT_ID(),<span class="number">1</span>,<span class="number">1</span>,<span class="number">2.95</span>);</span><br></pre></td></tr></table></figure>
-
-<h2 id="更新数据"><a href="#更新数据" class="headerlink" title="更新数据"></a>更新数据</h2><h3 id="简单的更新"><a href="#简单的更新" class="headerlink" title="简单的更新"></a>简单的更新</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">UPDATE customers</span><br><span class="line"><span class="keyword">SET</span> </span><br><span class="line">	first_name <span class="operator">=</span> <span class="string">&#x27;张&#x27;</span>,</span><br><span class="line">	last_name <span class="operator">=</span> <span class="string">&#x27;三&#x27;</span></span><br><span class="line"><span class="keyword">WHERE</span> customer_id<span class="operator">=</span><span class="number">1</span>;</span><br></pre></td></tr></table></figure>
-
-<p>注意：正常情况下，我们应该是可以更新所有符合条件的行，但是MySQL会出现一个问题，为了安全性考虑，有的界面应用会有一个限制一次只能更新一行，所以会报错这种的请自行寻找办法。</p>
-<h2 id="删除数据"><a href="#删除数据" class="headerlink" title="删除数据"></a>删除数据</h2><p>删除数据需要使用的是<code>DELETE</code>关键词,同时在这里提醒一下，数据对于每一个软件都是宝贵的，所以我们一般都通过更改状态的方式来假装删除数据，比如当一笔订单被取消，我们并不删除而是更改它的状态为取消。</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">DELETE</span> <span class="keyword">FROM</span> customers</span><br><span class="line"><span class="keyword">WHERE</span> customer_id<span class="operator">=</span><span class="number">1</span>;</span><br></pre></td></tr></table></figure>
-
-
-
 ]]></content>
       <categories>
         <category>SQL</category>
@@ -918,42 +918,6 @@
       </tags>
   </entry>
   <entry>
-    <title>SQL数据库安全</title>
-    <url>/2021/10/08/10-%E4%BF%9D%E6%8A%A4%E6%95%B0%E6%8D%AE%E5%BA%93/</url>
-    <content><![CDATA[<h1 id="保护数据库"><a href="#保护数据库" class="headerlink" title="保护数据库"></a>保护数据库</h1><p>一般的开发当中数据库一般都会部署在一个服务器上，然后每一个用户都应该有它对应的访问权限。从而保证我们数据库的安全。</p>
-<h2 id="创建用户"><a href="#创建用户" class="headerlink" title="创建用户"></a>创建用户</h2><h3 id="访问权限"><a href="#访问权限" class="headerlink" title="访问权限"></a>访问权限</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment">--根据Ip连接</span></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">USER</span> ZS<span class="variable">@127</span><span class="number">.0</span><span class="number">.0</span><span class="number">.1</span></span><br><span class="line"><span class="comment">--根据计算机名称连接</span></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">USER</span> ZS<span class="variable">@localhost</span></span><br><span class="line"><span class="comment">--可以连接该域的任何计算机但是不可以连接子网的</span></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">USER</span> ZS<span class="variable">@zs</span>.com</span><br><span class="line"><span class="comment">--可以连接该域的任何计算机</span></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">USER</span> ZS@<span class="string">&#x27;%.zs.com&#x27;</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="设定用户密码"><a href="#设定用户密码" class="headerlink" title="设定用户密码"></a>设定用户密码</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">USER</span> ZS IDENTIFIED <span class="keyword">BY</span> <span class="string">&#x27;1234&#x27;</span></span><br></pre></td></tr></table></figure>
-
-<p>当然我们可以一起写：</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">USER</span> li<span class="variable">@127</span><span class="number">.0</span><span class="number">.0</span><span class="number">.1</span> IDENTIFIED <span class="keyword">BY</span> <span class="string">&#x27;1234&#x27;</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="查看服务器用户"><a href="#查看服务器用户" class="headerlink" title="查看服务器用户"></a>查看服务器用户</h2><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> mysql.user;</span><br></pre></td></tr></table></figure>
-
-<h2 id="删除用户"><a href="#删除用户" class="headerlink" title="删除用户"></a>删除用户</h2><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">DROP</span> <span class="keyword">USER</span> LI<span class="variable">@127</span><span class="number">.0</span><span class="number">.0</span><span class="number">.1</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="修改密码"><a href="#修改密码" class="headerlink" title="修改密码"></a>修改密码</h2><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment">--修改当前登录用户密码</span></span><br><span class="line"><span class="keyword">SET</span> PASSWORD <span class="operator">=</span> <span class="string">&#x27;4567&#x27;</span>;</span><br><span class="line"><span class="comment">--删除某个人密码</span></span><br><span class="line"><span class="keyword">SET</span> PASSWORD <span class="keyword">FOR</span> john <span class="operator">=</span> <span class="string">&#x27;4567&#x27;</span>;</span><br></pre></td></tr></table></figure>
-
-<h2 id="授权"><a href="#授权" class="headerlink" title="授权"></a>授权</h2><h3 id="开发者"><a href="#开发者" class="headerlink" title="开发者"></a>开发者</h3><p>仅仅有对数据的修改查询权限。</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">USER</span> wxn IDENTIFIED <span class="keyword">BY</span> <span class="string">&#x27;1234&#x27;</span>;</span><br><span class="line"><span class="keyword">GRANT</span> <span class="keyword">SELECT</span>, <span class="keyword">INSERT</span>,UPDATE,<span class="keyword">DELETE</span>,<span class="keyword">EXECUTE</span></span><br><span class="line"><span class="comment">--开放某一个表</span></span><br><span class="line"><span class="keyword">ON</span> sql_database.sql_table;</span><br><span class="line"><span class="comment">--开放所有的表</span></span><br><span class="line"><span class="keyword">ON</span> sql_database.<span class="operator">*</span></span><br><span class="line"><span class="keyword">TO</span> wxn;</span><br></pre></td></tr></table></figure>
-
-<h3 id="管理员"><a href="#管理员" class="headerlink" title="管理员"></a>管理员</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">USER</span> wxn IDENTIFIED <span class="keyword">BY</span> <span class="string">&#x27;1234&#x27;</span>;</span><br><span class="line"><span class="comment">--赋予所有特权</span></span><br><span class="line"><span class="keyword">GRANT</span> <span class="keyword">ALL</span></span><br><span class="line"><span class="comment">--开放某一个表</span></span><br><span class="line"><span class="keyword">ON</span> sql_database.sql_table;</span><br><span class="line"><span class="comment">--开放所有的表</span></span><br><span class="line"><span class="keyword">ON</span> sql_database.<span class="operator">*</span></span><br><span class="line"><span class="keyword">TO</span> wxn;</span><br></pre></td></tr></table></figure>
-
-<h2 id="查询用户权限"><a href="#查询用户权限" class="headerlink" title="查询用户权限"></a>查询用户权限</h2><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment">--根用户权限</span></span><br><span class="line"><span class="keyword">SHOW</span> GRANTS;</span><br><span class="line"><span class="comment">--某用户权限</span></span><br><span class="line"><span class="keyword">SHOW</span> GRANTS <span class="keyword">FOR</span> wxn;</span><br></pre></td></tr></table></figure>
-
-<h2 id="撤销用户权限"><a href="#撤销用户权限" class="headerlink" title="撤销用户权限"></a>撤销用户权限</h2><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment">--撤销用户创建试图的权限</span></span><br><span class="line"><span class="keyword">REVOKE</span> <span class="keyword">CREATE</span> <span class="keyword">VIEW</span></span><br><span class="line"><span class="keyword">ON</span> sql_database.<span class="operator">*</span></span><br><span class="line"><span class="keyword">FROM</span> wxn;</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>SQL</category>
-      </categories>
-      <tags>
-        <tag>SQL</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>SQL索引</title>
     <url>/2021/10/07/09-%E7%B4%A2%E5%BC%95/</url>
     <content><![CDATA[<h1 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h1><p>本质上是数据库引擎用来快速查找数据的数据结构。</p>
@@ -1028,6 +992,19 @@
       </tags>
   </entry>
   <entry>
+    <title>SQLBug</title>
+    <url>/2021/10/02/11-SQLBug/</url>
+    <content><![CDATA[<h1 id="SQL-Bug"><a href="#SQL-Bug" class="headerlink" title="SQL Bug"></a>SQL Bug</h1><h3 id="Unknown-collation-‘utf8mb4-0900-ai-ci’"><a href="#Unknown-collation-‘utf8mb4-0900-ai-ci’" class="headerlink" title="Unknown collation: ‘utf8mb4_0900_ai_ci’"></a>Unknown collation: ‘utf8mb4_0900_ai_ci’</h3><p><code>mysql5.7</code> 及其以下不识别<code>utf8mb4_0900_ai_ci</code></p>
+<p>应改为<code>utf8mb4_unicode_ci</code>或者<code>utf8mb4_general_ci</code></p>
+]]></content>
+      <categories>
+        <category>SQL</category>
+      </categories>
+      <tags>
+        <tag>SQL</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>SQL数据库设计</title>
     <url>/2021/10/06/08-%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AE%BE%E8%AE%A1/</url>
     <content><![CDATA[<h1 id="数据库设计"><a href="#数据库设计" class="headerlink" title="数据库设计"></a>数据库设计</h1><h2 id="数据建模"><a href="#数据建模" class="headerlink" title="数据建模"></a>数据建模</h2><h3 id="数据建模的过程"><a href="#数据建模的过程" class="headerlink" title="数据建模的过程"></a>数据建模的过程</h3><p>分四步：</p>
@@ -1081,48 +1058,39 @@
       </tags>
   </entry>
   <entry>
-    <title>SQLBug</title>
-    <url>/2021/10/02/11-SQLBug/</url>
-    <content><![CDATA[<h1 id="SQL-Bug"><a href="#SQL-Bug" class="headerlink" title="SQL Bug"></a>SQL Bug</h1><h3 id="Unknown-collation-‘utf8mb4-0900-ai-ci’"><a href="#Unknown-collation-‘utf8mb4-0900-ai-ci’" class="headerlink" title="Unknown collation: ‘utf8mb4_0900_ai_ci’"></a>Unknown collation: ‘utf8mb4_0900_ai_ci’</h3><p><code>mysql5.7</code> 及其以下不识别<code>utf8mb4_0900_ai_ci</code></p>
-<p>应改为<code>utf8mb4_unicode_ci</code>或者<code>utf8mb4_general_ci</code></p>
+    <title>SQL数据库安全</title>
+    <url>/2021/10/08/10-%E4%BF%9D%E6%8A%A4%E6%95%B0%E6%8D%AE%E5%BA%93/</url>
+    <content><![CDATA[<h1 id="保护数据库"><a href="#保护数据库" class="headerlink" title="保护数据库"></a>保护数据库</h1><p>一般的开发当中数据库一般都会部署在一个服务器上，然后每一个用户都应该有它对应的访问权限。从而保证我们数据库的安全。</p>
+<h2 id="创建用户"><a href="#创建用户" class="headerlink" title="创建用户"></a>创建用户</h2><h3 id="访问权限"><a href="#访问权限" class="headerlink" title="访问权限"></a>访问权限</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment">--根据Ip连接</span></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">USER</span> ZS<span class="variable">@127</span><span class="number">.0</span><span class="number">.0</span><span class="number">.1</span></span><br><span class="line"><span class="comment">--根据计算机名称连接</span></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">USER</span> ZS<span class="variable">@localhost</span></span><br><span class="line"><span class="comment">--可以连接该域的任何计算机但是不可以连接子网的</span></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">USER</span> ZS<span class="variable">@zs</span>.com</span><br><span class="line"><span class="comment">--可以连接该域的任何计算机</span></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">USER</span> ZS@<span class="string">&#x27;%.zs.com&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="设定用户密码"><a href="#设定用户密码" class="headerlink" title="设定用户密码"></a>设定用户密码</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">USER</span> ZS IDENTIFIED <span class="keyword">BY</span> <span class="string">&#x27;1234&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>当然我们可以一起写：</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">USER</span> li<span class="variable">@127</span><span class="number">.0</span><span class="number">.0</span><span class="number">.1</span> IDENTIFIED <span class="keyword">BY</span> <span class="string">&#x27;1234&#x27;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="查看服务器用户"><a href="#查看服务器用户" class="headerlink" title="查看服务器用户"></a>查看服务器用户</h2><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> mysql.user;</span><br></pre></td></tr></table></figure>
+
+<h2 id="删除用户"><a href="#删除用户" class="headerlink" title="删除用户"></a>删除用户</h2><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">DROP</span> <span class="keyword">USER</span> LI<span class="variable">@127</span><span class="number">.0</span><span class="number">.0</span><span class="number">.1</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="修改密码"><a href="#修改密码" class="headerlink" title="修改密码"></a>修改密码</h2><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment">--修改当前登录用户密码</span></span><br><span class="line"><span class="keyword">SET</span> PASSWORD <span class="operator">=</span> <span class="string">&#x27;4567&#x27;</span>;</span><br><span class="line"><span class="comment">--删除某个人密码</span></span><br><span class="line"><span class="keyword">SET</span> PASSWORD <span class="keyword">FOR</span> john <span class="operator">=</span> <span class="string">&#x27;4567&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="授权"><a href="#授权" class="headerlink" title="授权"></a>授权</h2><h3 id="开发者"><a href="#开发者" class="headerlink" title="开发者"></a>开发者</h3><p>仅仅有对数据的修改查询权限。</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">USER</span> wxn IDENTIFIED <span class="keyword">BY</span> <span class="string">&#x27;1234&#x27;</span>;</span><br><span class="line"><span class="keyword">GRANT</span> <span class="keyword">SELECT</span>, <span class="keyword">INSERT</span>,UPDATE,<span class="keyword">DELETE</span>,<span class="keyword">EXECUTE</span></span><br><span class="line"><span class="comment">--开放某一个表</span></span><br><span class="line"><span class="keyword">ON</span> sql_database.sql_table;</span><br><span class="line"><span class="comment">--开放所有的表</span></span><br><span class="line"><span class="keyword">ON</span> sql_database.<span class="operator">*</span></span><br><span class="line"><span class="keyword">TO</span> wxn;</span><br></pre></td></tr></table></figure>
+
+<h3 id="管理员"><a href="#管理员" class="headerlink" title="管理员"></a>管理员</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">USER</span> wxn IDENTIFIED <span class="keyword">BY</span> <span class="string">&#x27;1234&#x27;</span>;</span><br><span class="line"><span class="comment">--赋予所有特权</span></span><br><span class="line"><span class="keyword">GRANT</span> <span class="keyword">ALL</span></span><br><span class="line"><span class="comment">--开放某一个表</span></span><br><span class="line"><span class="keyword">ON</span> sql_database.sql_table;</span><br><span class="line"><span class="comment">--开放所有的表</span></span><br><span class="line"><span class="keyword">ON</span> sql_database.<span class="operator">*</span></span><br><span class="line"><span class="keyword">TO</span> wxn;</span><br></pre></td></tr></table></figure>
+
+<h2 id="查询用户权限"><a href="#查询用户权限" class="headerlink" title="查询用户权限"></a>查询用户权限</h2><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment">--根用户权限</span></span><br><span class="line"><span class="keyword">SHOW</span> GRANTS;</span><br><span class="line"><span class="comment">--某用户权限</span></span><br><span class="line"><span class="keyword">SHOW</span> GRANTS <span class="keyword">FOR</span> wxn;</span><br></pre></td></tr></table></figure>
+
+<h2 id="撤销用户权限"><a href="#撤销用户权限" class="headerlink" title="撤销用户权限"></a>撤销用户权限</h2><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment">--撤销用户创建试图的权限</span></span><br><span class="line"><span class="keyword">REVOKE</span> <span class="keyword">CREATE</span> <span class="keyword">VIEW</span></span><br><span class="line"><span class="keyword">ON</span> sql_database.<span class="operator">*</span></span><br><span class="line"><span class="keyword">FROM</span> wxn;</span><br></pre></td></tr></table></figure>
+
 ]]></content>
       <categories>
         <category>SQL</category>
       </categories>
       <tags>
         <tag>SQL</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>ElementUi一些小技巧</title>
-    <url>/2021/10/13/ElementUi%E4%B8%80%E4%BA%9B%E5%B0%8F%E6%8A%80%E5%B7%A7/</url>
-    <content><![CDATA[<h1 id="ElementUi一些小技巧"><a href="#ElementUi一些小技巧" class="headerlink" title="ElementUi一些小技巧"></a>ElementUi一些小技巧</h1><h2 id="表格"><a href="#表格" class="headerlink" title="表格"></a>表格</h2><h3 id="实现数据判断"><a href="#实现数据判断" class="headerlink" title="实现数据判断"></a>实现数据判断</h3><p>使用场景，有时候从后端取过来的状态显示为1,2,3这样的数字，但是我们想要把它变为启用,禁用等，需要操作。</p>
-<p>当前环境：<code>win10,vue2.9,ElementUi2.4.5</code></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;el-table-column</span><br><span class="line">     label=&quot;状态&quot;</span><br><span class="line">     width=&quot;180&quot;&gt;</span><br><span class="line">    &lt;template slot-scope=&quot;scope&quot;&gt;</span><br><span class="line">        &lt;span style=&quot;margin-left: 10px&quot;&gt;&#123;&#123; scope.row.status==1?&#x27;启用&#x27;:&#x27;禁用&#x27; &#125;&#125;&lt;/span&gt;</span><br><span class="line">    &lt;/template&gt;</span><br><span class="line">&lt;/el-table-column&gt;</span><br></pre></td></tr></table></figure>
-
-<h3 id="实现一个表格多个数据"><a href="#实现一个表格多个数据" class="headerlink" title="实现一个表格多个数据"></a>实现一个表格多个数据</h3><p>比如我们在做一个后台系统，需要复制一段数据就可以通过在后边加一个复制按钮的方式实现。</p>
-<p>当前环境：<code>win10,vue2.9,ElementUi2.4.5</code></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;el-table-column  align=&quot;center&quot;</span><br><span class="line">     label=&quot;内容&quot;&gt;</span><br><span class="line">    &lt;template slot-scope=&quot;scope&quot;&gt;</span><br><span class="line">		&lt;span&gt;&#123;&#123; scope.row.note_title &#125;&#125;&lt;/span&gt;</span><br><span class="line">		&lt;el-button icon=&quot;el-icon-document-copy&quot; size=&quot;mini&quot;&gt;&lt;/el-button&gt;</span><br><span class="line">    &lt;/template&gt;</span><br><span class="line">&lt;/el-table-column&gt;</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>WebStyle</category>
-      </categories>
-      <tags>
-        <tag>WebStyle</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Vue2一些小技巧</title>
-    <url>/2021/10/13/Vue2%E4%B8%80%E4%BA%9B%E5%B0%8F%E6%8A%80%E5%B7%A7/</url>
-    <content><![CDATA[<h1 id="Vue2一些小技巧"><a href="#Vue2一些小技巧" class="headerlink" title="Vue2一些小技巧"></a>Vue2一些小技巧</h1><h2 id="VueJS"><a href="#VueJS" class="headerlink" title="VueJS"></a>VueJS</h2><h3 id="复制按钮的实现"><a href="#复制按钮的实现" class="headerlink" title="复制按钮的实现"></a>复制按钮的实现</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">//html:</span><br><span class="line">&lt;el-button icon=&quot;el-icon-document-copy&quot; @click=&quot;copy(scope.row)&quot;&gt;&lt;/el-button&gt;</span><br><span class="line"></span><br><span class="line">//js</span><br><span class="line">copy(row)&#123;</span><br><span class="line">    // js创建一个input输入框</span><br><span class="line">    var input = document.createElement(&quot;input&quot;);   </span><br><span class="line">    // 将需要复制的文本赋值到创建的input输入框中，</span><br><span class="line">    input.value = row.note_title; </span><br><span class="line">    // 将输入框暂时创建到实例里面</span><br><span class="line">    document.body.appendChild(input); </span><br><span class="line">    // 选中输入框中的内容</span><br><span class="line">    input.select();   </span><br><span class="line">    // 执行复制操作</span><br><span class="line">    document.execCommand(&quot;Copy&quot;);   </span><br><span class="line">    // 最后删除实例中临时创建的input输入框，完成复制操作</span><br><span class="line">    document.body.removeChild(input); </span><br><span class="line">    this.$message(&#123;</span><br><span class="line">        message: &#x27;复制成功&#x27;,</span><br><span class="line">        type: &#x27;success&#x27;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>WebVue</category>
-      </categories>
-      <tags>
-        <tag>WebVue</tag>
       </tags>
   </entry>
   <entry>
@@ -1199,7 +1167,28 @@
 <p>我们有时候去npm的外网下载东西会有点慢，中国本土的话是一个淘宝镜像。大概为10分钟拉去官方拉去一次一个是一致的，为了区别我们一般用<code>cnpm</code>来做代替。</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install -g cnpm --registry=https://registry.npm.taobao.or</span><br></pre></td></tr></table></figure>
 
+<h2 id="fs模块"><a href="#fs模块" class="headerlink" title="fs模块"></a>fs模块</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">&#x27;fs&#x27;</span>)</span><br><span class="line"><span class="comment">/* 判断是目录还是文件</span></span><br><span class="line"><span class="comment">fs.stat(&#x27;01http.js&#x27;, (error,stats)=&gt;&#123;</span></span><br><span class="line"><span class="comment">    if(error)&#123;</span></span><br><span class="line"><span class="comment">        console.log(error)</span></span><br><span class="line"><span class="comment">    &#125;else&#123;</span></span><br><span class="line"><span class="comment">        console.log(stats)</span></span><br><span class="line"><span class="comment">        console.log(`文件：$&#123;stats.isFile()&#125;`)</span></span><br><span class="line"><span class="comment">        console.log(`目录：$&#123;stats.isDirectory()&#125;`)</span></span><br><span class="line"><span class="comment">    &#125;</span></span><br><span class="line"><span class="comment">&#125;)</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="comment">/* 创建目录 不能创建多级目录</span></span><br><span class="line"><span class="comment"> fs.mkdir(&#x27;test&#x27;, (error)=&gt;&#123;</span></span><br><span class="line"><span class="comment">     if(error)&#123;</span></span><br><span class="line"><span class="comment">        console.log(error)</span></span><br><span class="line"><span class="comment">     &#125;else&#123;</span></span><br><span class="line"><span class="comment">         console.log(&#x27;test&#x27;)</span></span><br><span class="line"><span class="comment">     &#125;</span></span><br><span class="line"><span class="comment"> &#125;)</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="comment">/* 写入文件</span></span><br><span class="line"><span class="comment">fs.writeFile(&#x27;./test/index.txt&#x27;, &#x27;您好 ~ \n&#x27;, (error) =&gt; &#123;</span></span><br><span class="line"><span class="comment">    if(error) &#123;</span></span><br><span class="line"><span class="comment">        console.log(error)</span></span><br><span class="line"><span class="comment">    &#125; else &#123;</span></span><br><span class="line"><span class="comment">        console.log(&#x27;成功写入文件&#x27;)</span></span><br><span class="line"><span class="comment">    &#125;</span></span><br><span class="line"><span class="comment">&#125;)</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="comment">/* 追加文件</span></span><br><span class="line"><span class="comment">fs.appendFile(&#x27;./test/index.txt&#x27;, &#x27;hello ~ \n&#x27;, (error) =&gt; &#123;</span></span><br><span class="line"><span class="comment">    if(error) &#123;</span></span><br><span class="line"><span class="comment">        console.log(error)</span></span><br><span class="line"><span class="comment">    &#125; else &#123;</span></span><br><span class="line"><span class="comment">        console.log(&#x27;成功写入文件&#x27;)</span></span><br><span class="line"><span class="comment">    &#125;</span></span><br><span class="line"><span class="comment">&#125;)</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="comment">/* 读取文件</span></span><br><span class="line"><span class="comment">fs.readFile(&#x27;./test/index.txt&#x27;, &#x27;utf8&#x27;, (error, data) =&gt;&#123;</span></span><br><span class="line"><span class="comment">    if (error) &#123;</span></span><br><span class="line"><span class="comment">        console.log(error)</span></span><br><span class="line"><span class="comment">    &#125; else &#123;</span></span><br><span class="line"><span class="comment">        console.log(data)</span></span><br><span class="line"><span class="comment">    &#125;</span></span><br><span class="line"><span class="comment">&#125;)</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="comment">/*读取目录下的列表</span></span><br><span class="line"><span class="comment">fs.readdir(&#x27;test&#x27;, (error, files) =&gt; &#123;</span></span><br><span class="line"><span class="comment">    if (error) &#123;</span></span><br><span class="line"><span class="comment">        console.log(error)</span></span><br><span class="line"><span class="comment">    &#125; else &#123;</span></span><br><span class="line"><span class="comment">        console.log(files)</span></span><br><span class="line"><span class="comment">    &#125;</span></span><br><span class="line"><span class="comment">&#125;)</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="comment">/*重命名/移动 文件/文件夹 </span></span><br><span class="line"><span class="comment">fs.rename(&#x27;./test/index.txt&#x27;, &#x27;./test/index1.txt&#x27;, (error) =&gt;&#123;</span></span><br><span class="line"><span class="comment">    if (error) &#123;</span></span><br><span class="line"><span class="comment">        console.log(error)</span></span><br><span class="line"><span class="comment">    &#125; else &#123;</span></span><br><span class="line"><span class="comment">        console.log(&#x27;重命名成功&#x27;)</span></span><br><span class="line"><span class="comment">    &#125;</span></span><br><span class="line"><span class="comment">&#125;)</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="comment">/*删除文件</span></span><br><span class="line"><span class="comment">fs.unlink(&#x27;./test/index1.txt&#x27;, (error) =&gt; &#123;</span></span><br><span class="line"><span class="comment">    if (error) &#123;</span></span><br><span class="line"><span class="comment">        console.log(error)</span></span><br><span class="line"><span class="comment">    &#125; else &#123;</span></span><br><span class="line"><span class="comment">        console.log(`成功的删除了文件:index1.txt`)</span></span><br><span class="line"><span class="comment">    &#125;</span></span><br><span class="line"><span class="comment">&#125;)</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="comment">/* 删除目录</span></span><br><span class="line"><span class="comment">fs.rmdir(&#x27;test&#x27;, (error) =&gt;&#123;</span></span><br><span class="line"><span class="comment">    if (error) &#123;</span></span><br><span class="line"><span class="comment">        console.log(error)</span></span><br><span class="line"><span class="comment">    &#125; else &#123;</span></span><br><span class="line"><span class="comment">        console.log(&#x27;成功的删除了目录：test&#x27;)</span></span><br><span class="line"><span class="comment">    &#125;</span></span><br><span class="line"><span class="comment">&#125;)</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
 
+<p>除了简单操作还有流式操作，流操作分为三类，输入流输出流和管道流</p>
+<p>输入流</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">&#x27;fs&#x27;</span>)</span><br><span class="line"><span class="comment">// 读取文件</span></span><br><span class="line"><span class="keyword">var</span> fileReadStream = fs.createReadStream(<span class="string">&#x27;content.txt&#x27;</span>)</span><br><span class="line"><span class="keyword">let</span> count=<span class="number">0</span>;</span><br><span class="line"><span class="keyword">var</span> str=<span class="string">&#x27;&#x27;</span>;</span><br><span class="line"><span class="comment">// 监听读取数据</span></span><br><span class="line">fileReadStream.on(<span class="string">&#x27;data&#x27;</span>, <span class="function">(<span class="params">chunk</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`<span class="subst">$&#123; ++count &#125;</span> 接收到：<span class="subst">$&#123;chunk.length&#125;</span>`</span>);</span><br><span class="line">    str+=chunk</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// 监听读取结束</span></span><br><span class="line">fileReadStream.on(<span class="string">&#x27;end&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;--- 结束 ---&#x27;</span>);</span><br><span class="line">    <span class="built_in">console</span>.log(count);</span><br><span class="line">    <span class="built_in">console</span>.log(str);</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// 监听读取错误</span></span><br><span class="line">fileReadStream.on(<span class="string">&#x27;error&#x27;</span>, <span class="function">(<span class="params">error</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(error)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>写入流：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">//写入文件</span></span><br><span class="line"><span class="keyword">var</span> data = <span class="string">&#x27;我是从数据库获取的数据，我要保存起来&#x27;</span>;</span><br><span class="line"><span class="comment">// 创建一个可以写入的流，写入到文件 output.txt 中</span></span><br><span class="line"><span class="keyword">var</span> writerStream = fs.createWriteStream(<span class="string">&#x27;output.txt&#x27;</span>);</span><br><span class="line"><span class="comment">// 使用 utf8 编码写入数据</span></span><br><span class="line">writerStream.write(data,<span class="string">&#x27;UTF8&#x27;</span>);</span><br><span class="line"><span class="comment">// 标记文件末尾</span></span><br><span class="line">writerStream.end();</span><br><span class="line"><span class="comment">// 处理流事件 --&gt; finish 事件</span></span><br><span class="line">writerStream.on(<span class="string">&#x27;finish&#x27;</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123; <span class="comment">//finish - 所有数据已被写入到底层系统时触发。</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&quot;写入完成。&quot;</span>);</span><br><span class="line">&#125;);</span><br><span class="line">writerStream.on(<span class="string">&#x27;error&#x27;</span>, <span class="function"><span class="keyword">function</span>(<span class="params">err</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(err.stack);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>管道流：</p>
+<p>管道流的意思就是从一个地方流入另一个地方：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">/ 创建一个可读流</span><br><span class="line"><span class="keyword">var</span> readerStream = fs.createReadStream(<span class="string">&#x27;input.txt&#x27;</span>);</span><br><span class="line"><span class="comment">// 创建一个可写流</span></span><br><span class="line"><span class="keyword">var</span> writerStream = fs.createWriteStream(<span class="string">&#x27;output.txt&#x27;</span>);</span><br><span class="line"><span class="comment">// 管道读写操作</span></span><br><span class="line"><span class="comment">// 读取 input.txt 文件内容，并将内容写入到 output.txt 文件中</span></span><br><span class="line">readerStream.pipe(writerStream);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&quot;程序执行完毕&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h2 id="promise"><a href="#promise" class="headerlink" title="promise"></a>promise</h2><p>promise处理异步获取异步方法中的数据</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> p = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span>(<span class="params">resolve,reject</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">var</span> name = <span class="string">&quot;w&quot;</span></span><br><span class="line">        resolve(name)</span><br><span class="line">    &#125;,<span class="number">1000</span>)  </span><br><span class="line">&#125;)</span><br><span class="line">p.then(<span class="function"><span class="keyword">function</span>(<span class="params">data</span>)</span>&#123;</span><br><span class="line"><span class="built_in">console</span>.log(data)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="async-await"><a href="#async-await" class="headerlink" title="async/await"></a>async/await</h2><p><code>async</code>证明这是一个异步方法，<code>await</code>t 用于等待一个异步方法执行完成</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">testAsync</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="string">&#x27;w&#x27;</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(testAsync())</span><br><span class="line"><span class="comment">//返回值</span></span><br><span class="line"><span class="built_in">Promise</span> &#123; <span class="string">&#x27;w&#x27;</span> &#125;</span><br></pre></td></tr></table></figure>
+
+<p>await 在等待 async 方法执行完毕，其实 await 等待的只是一个表达式，这个表达式在官方文档里说的是 Promise 对象，但是它也可以接受普通值。 注意：await 必须在 async 方法中才可以使用因为 await 访问本身就会造成程序停止堵塞，所以必须在异步方法中才可以使用。</p>
+<p>async 会将其后的函数（函数表达式或 Lambda）的返回值封装成一个 Promise 对象，而<br>await 会等待这个 Promise 完成，并将其 resolve 的结果返回出来。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">unction <span class="function"><span class="title">findData</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="params">resolve</span> =&gt;</span> &#123;</span><br><span class="line">    	<span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> resolve(<span class="string">&quot;long_time_value&quot;</span>), <span class="number">1000</span>);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 ]]></content>
       <categories>
@@ -1207,6 +1196,29 @@
       </categories>
       <tags>
         <tag>WebJS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>ElementUi一些小技巧</title>
+    <url>/2021/10/13/ElementUi%E4%B8%80%E4%BA%9B%E5%B0%8F%E6%8A%80%E5%B7%A7/</url>
+    <content><![CDATA[<h1 id="ElementUi一些小技巧"><a href="#ElementUi一些小技巧" class="headerlink" title="ElementUi一些小技巧"></a>ElementUi一些小技巧</h1><h2 id="表格"><a href="#表格" class="headerlink" title="表格"></a>表格</h2><h3 id="实现数据判断"><a href="#实现数据判断" class="headerlink" title="实现数据判断"></a>实现数据判断</h3><p>使用场景，有时候从后端取过来的状态显示为1,2,3这样的数字，但是我们想要把它变为启用,禁用等，需要操作。</p>
+<p>当前环境：<code>win10,vue2.9,ElementUi2.4.5</code></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;el-table-column</span><br><span class="line">     label=&quot;状态&quot;</span><br><span class="line">     width=&quot;180&quot;&gt;</span><br><span class="line">    &lt;template slot-scope=&quot;scope&quot;&gt;</span><br><span class="line">        &lt;span style=&quot;margin-left: 10px&quot;&gt;&#123;&#123; scope.row.status==1?&#x27;启用&#x27;:&#x27;禁用&#x27; &#125;&#125;&lt;/span&gt;</span><br><span class="line">    &lt;/template&gt;</span><br><span class="line">&lt;/el-table-column&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="实现一个表格多个数据"><a href="#实现一个表格多个数据" class="headerlink" title="实现一个表格多个数据"></a>实现一个表格多个数据</h3><p>比如我们在做一个后台系统，需要复制一段数据就可以通过在后边加一个复制按钮的方式实现。</p>
+<p>当前环境：<code>win10,vue2.9,ElementUi2.4.5</code></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;el-table-column  align=&quot;center&quot;</span><br><span class="line">     label=&quot;内容&quot;&gt;</span><br><span class="line">    &lt;template slot-scope=&quot;scope&quot;&gt;</span><br><span class="line">		&lt;span&gt;&#123;&#123; scope.row.note_title &#125;&#125;&lt;/span&gt;</span><br><span class="line">		&lt;el-button icon=&quot;el-icon-document-copy&quot; size=&quot;mini&quot;&gt;&lt;/el-button&gt;</span><br><span class="line">    &lt;/template&gt;</span><br><span class="line">&lt;/el-table-column&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="表单"><a href="#表单" class="headerlink" title="表单"></a>表单</h2><h3 id="输入框文字对齐"><a href="#输入框文字对齐" class="headerlink" title="输入框文字对齐"></a>输入框文字对齐</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;!-- right右对齐 left左对齐 top顶部对齐 --&gt;</span><br><span class="line">&lt;el-form label-position=&#x27;right&#x27; label-width=&quot;80px&quot; :model=&quot;formLabelAlign&quot;&gt;</span><br><span class="line">    &lt;el-form-item label=&quot;名称&quot;&gt;</span><br><span class="line">        &lt;el-input v-model=&quot;formLabelAlign.name&quot;&gt;&lt;/el-input&gt;</span><br><span class="line">    &lt;/el-form-item&gt;</span><br><span class="line">    &lt;el-form-item label=&quot;活动区域&quot;&gt;</span><br><span class="line">        &lt;el-input v-model=&quot;formLabelAlign.region&quot;&gt;&lt;/el-input&gt;</span><br><span class="line">    &lt;/el-form-item&gt;</span><br><span class="line">    &lt;el-form-item label=&quot;活动形式&quot;&gt;</span><br><span class="line">        &lt;el-input v-model=&quot;formLabelAlign.type&quot;&gt;&lt;/el-input&gt;</span><br><span class="line">    &lt;/el-form-item&gt;</span><br><span class="line">&lt;/el-form&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="单选框内容"><a href="#单选框内容" class="headerlink" title="单选框内容"></a>单选框内容</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;el-radio-group v-model=&quot;radio1&quot;&gt;</span><br><span class="line">    &lt;el-radio-button label=&quot;1&quot;&gt;固定分配&lt;/el-radio-button&gt;</span><br><span class="line">    &lt;el-radio-button label=&quot;2&quot;&gt;百分比分配&lt;/el-radio-button&gt;</span><br><span class="line">&lt;/el-radio-group&gt;</span><br><span class="line">&lt;div&gt;&#123;&#123;radio1&#125;&#125;&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>WebStyle</category>
+      </categories>
+      <tags>
+        <tag>WebStyle</tag>
       </tags>
   </entry>
   <entry>
@@ -1379,6 +1391,19 @@
       </categories>
       <tags>
         <tag>Tool</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Vue2一些小技巧</title>
+    <url>/2021/10/13/Vue2%E4%B8%80%E4%BA%9B%E5%B0%8F%E6%8A%80%E5%B7%A7/</url>
+    <content><![CDATA[<h1 id="Vue2一些小技巧"><a href="#Vue2一些小技巧" class="headerlink" title="Vue2一些小技巧"></a>Vue2一些小技巧</h1><h2 id="VueJS"><a href="#VueJS" class="headerlink" title="VueJS"></a>VueJS</h2><h3 id="复制按钮的实现"><a href="#复制按钮的实现" class="headerlink" title="复制按钮的实现"></a>复制按钮的实现</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">//html:</span><br><span class="line">&lt;el-button icon=&quot;el-icon-document-copy&quot; @click=&quot;copy(scope.row)&quot;&gt;&lt;/el-button&gt;</span><br><span class="line"></span><br><span class="line">//js</span><br><span class="line">copy(row)&#123;</span><br><span class="line">    // js创建一个input输入框</span><br><span class="line">    var input = document.createElement(&quot;input&quot;);   </span><br><span class="line">    // 将需要复制的文本赋值到创建的input输入框中，</span><br><span class="line">    input.value = row.note_title; </span><br><span class="line">    // 将输入框暂时创建到实例里面</span><br><span class="line">    document.body.appendChild(input); </span><br><span class="line">    // 选中输入框中的内容</span><br><span class="line">    input.select();   </span><br><span class="line">    // 执行复制操作</span><br><span class="line">    document.execCommand(&quot;Copy&quot;);   </span><br><span class="line">    // 最后删除实例中临时创建的input输入框，完成复制操作</span><br><span class="line">    document.body.removeChild(input); </span><br><span class="line">    this.$message(&#123;</span><br><span class="line">        message: &#x27;复制成功&#x27;,</span><br><span class="line">        type: &#x27;success&#x27;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>WebVue</category>
+      </categories>
+      <tags>
+        <tag>WebVue</tag>
       </tags>
   </entry>
 </search>
