@@ -87,7 +87,7 @@
 <meta property="og:description" content="Vue2一些小技巧VueJS复制按钮的实现12345678910111213141516171819202122&#x2F;&#x2F;html:&lt;el-button icon&#x3D;&quot;el-icon-document-copy&quot; @click&#x3D;&quot;copy(scope.row)&quot;&gt;&lt;&#x2F;el-button&gt;&#x2F;&#x2F;jscopy(row)&amp;#123;    &#x2F;&#x2F; js">
 <meta property="og:locale">
 <meta property="article:published_time" content="2021-10-13T13:44:34.000Z">
-<meta property="article:modified_time" content="2021-10-13T13:47:14.983Z">
+<meta property="article:modified_time" content="2021-11-01T12:43:04.126Z">
 <meta property="article:author" content="coloredChicken">
 <meta property="article:tag" content="WebVue">
 <meta name="twitter:card" content="summary">
@@ -411,7 +411,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  157
+                  375
                 </span>
               
 
@@ -449,6 +449,12 @@
 
       
         <h1 id="Vue2一些小技巧"><a href="#Vue2一些小技巧" class="headerlink" title="Vue2一些小技巧"></a>Vue2一些小技巧</h1><h2 id="VueJS"><a href="#VueJS" class="headerlink" title="VueJS"></a>VueJS</h2><h3 id="复制按钮的实现"><a href="#复制按钮的实现" class="headerlink" title="复制按钮的实现"></a>复制按钮的实现</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">//html:</span><br><span class="line">&lt;el-button icon=&quot;el-icon-document-copy&quot; @click=&quot;copy(scope.row)&quot;&gt;&lt;/el-button&gt;</span><br><span class="line"></span><br><span class="line">//js</span><br><span class="line">copy(row)&#123;</span><br><span class="line">    // js创建一个input输入框</span><br><span class="line">    var input = document.createElement(&quot;input&quot;);   </span><br><span class="line">    // 将需要复制的文本赋值到创建的input输入框中，</span><br><span class="line">    input.value = row.note_title; </span><br><span class="line">    // 将输入框暂时创建到实例里面</span><br><span class="line">    document.body.appendChild(input); </span><br><span class="line">    // 选中输入框中的内容</span><br><span class="line">    input.select();   </span><br><span class="line">    // 执行复制操作</span><br><span class="line">    document.execCommand(&quot;Copy&quot;);   </span><br><span class="line">    // 最后删除实例中临时创建的input输入框，完成复制操作</span><br><span class="line">    document.body.removeChild(input); </span><br><span class="line">    this.$message(&#123;</span><br><span class="line">        message: &#x27;复制成功&#x27;,</span><br><span class="line">        type: &#x27;success&#x27;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="百度地图的实现"><a href="#百度地图的实现" class="headerlink" title="百度地图的实现"></a>百度地图的实现</h2><p>ui添加依赖<code>vue-baidu-map</code>,或者直接<code>  npm install vue-baidu-map --save</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> BaiduMap <span class="keyword">from</span> <span class="string">&#x27;vue-baidu-map&#x27;</span></span><br><span class="line">Vue.use(BaiduMap, &#123;</span><br><span class="line">  <span class="attr">ak</span>: <span class="string">&#x27;你的密钥&#x27;</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>页面</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">    &lt;baidu-map :center=&quot;center&quot; :zoom=&quot;zoom&quot; @ready=&quot;handler&quot; style=&quot;height:1080px&quot; @click=&quot;getClickInfo&quot; :scroll-wheel-zoom=&#x27;true&#x27;&gt;</span><br><span class="line">    &lt;/baidu-map&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">export default &#123;</span><br><span class="line">  name: &#x27;TestBaiDu&#x27;,</span><br><span class="line">  data () &#123;</span><br><span class="line">    return &#123;</span><br><span class="line">      center: &#123; lng: 109.45744048529967, lat: 36.49771311230842 &#125;,</span><br><span class="line">      zoom: 13</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  methods: &#123;</span><br><span class="line">    handler (&#123; BMap, map &#125;) &#123;</span><br><span class="line">      var point = new BMap.Point(109.49926175379778, 36.60449676862417)</span><br><span class="line">      map.centerAndZoom(point, 13)</span><br><span class="line">      var marker = new BMap.Marker(point) // 创建标注</span><br><span class="line">      map.addOverlay(marker) // 将标注添加到地图中</span><br><span class="line">      var circle = new BMap.Circle(point, 6, &#123; strokeColor: &#x27;Red&#x27;, strokeWeight: 6, strokeOpacity: 1, Color: &#x27;Red&#x27;, fillColor: &#x27;#f03&#x27; &#125;)</span><br><span class="line">      map.addOverlay(circle)</span><br><span class="line">    &#125;,</span><br><span class="line">    getClickInfo (e) &#123;</span><br><span class="line">      console.log(e.point.lng)</span><br><span class="line">      console.log(e.point.lat)</span><br><span class="line">      this.center.lng = e.point.lng</span><br><span class="line">      this.center.lat = e.point.lat</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
 
 
       
@@ -651,7 +657,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Vue2%E4%B8%80%E4%BA%9B%E5%B0%8F%E6%8A%80%E5%B7%A7"><span class="nav-number">1.</span> <span class="nav-text">Vue2一些小技巧</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#VueJS"><span class="nav-number">1.1.</span> <span class="nav-text">VueJS</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%8D%E5%88%B6%E6%8C%89%E9%92%AE%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="nav-number">1.1.1.</span> <span class="nav-text">复制按钮的实现</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Vue2%E4%B8%80%E4%BA%9B%E5%B0%8F%E6%8A%80%E5%B7%A7"><span class="nav-number">1.</span> <span class="nav-text">Vue2一些小技巧</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#VueJS"><span class="nav-number">1.1.</span> <span class="nav-text">VueJS</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%8D%E5%88%B6%E6%8C%89%E9%92%AE%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="nav-number">1.1.1.</span> <span class="nav-text">复制按钮的实现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%99%BE%E5%BA%A6%E5%9C%B0%E5%9B%BE%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="nav-number">1.2.</span> <span class="nav-text">百度地图的实现</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -685,7 +691,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">24.3k</span>
+    <span title="Site words total count">24.6k</span>
   
 </div>
 
